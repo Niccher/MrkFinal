@@ -236,62 +236,72 @@ public class Base extends javax.swing.JFrame {
         PanHome.setBackground(new java.awt.Color(204, 255, 102));
 
         java.awt.GridBagLayout jPanel4Layout = new java.awt.GridBagLayout();
-        jPanel4Layout.columnWidths = new int[] {0, 20, 0, 20, 0, 20, 0, 20, 0};
-        jPanel4Layout.rowHeights = new int[] {0, 50, 0, 50, 0, 50, 0};
+        jPanel4Layout.columnWidths = new int[] {0, 25, 0, 25, 0, 25, 0, 25, 0};
+        jPanel4Layout.rowHeights = new int[] {0, 30, 0, 30, 0, 30, 0};
         jPanel4.setLayout(jPanel4Layout);
 
-        jButton2.setText("New St");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-new-31.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
         jPanel4.add(jButton2, gridBagConstraints);
 
-        jButton3.setText("Stude");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/identity.png"))); // NOI18N
+        jButton3.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
         jPanel4.add(jButton3, gridBagConstraints);
 
-        jButton4.setText("Staf");
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/system-users-4.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
         jPanel4.add(jButton4, gridBagConstraints);
 
-        jButton5.setText("Exam");
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/kate.png"))); // NOI18N
+        jButton5.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
         jPanel4.add(jButton5, gridBagConstraints);
 
-        Perfor.setText("perf");
+        Perfor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/application-vnd.oasis.opendocument.spreadsheet-template.png"))); // NOI18N
+        Perfor.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
         jPanel4.add(Perfor, gridBagConstraints);
 
-        jButton7.setText("report");
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/office-chart-area-stacked1.png"))); // NOI18N
+        jButton7.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
         jPanel4.add(jButton7, gridBagConstraints);
 
         jButton8.setText("jButton7");
@@ -299,8 +309,8 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 40;
         jPanel4.add(jButton8, gridBagConstraints);
 
         jButton9.setText("jButton8");
@@ -308,35 +318,40 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 40;
         jPanel4.add(jButton9, gridBagConstraints);
 
-        Fee.setText("jButton10");
+        Fee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/emblem-money.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
         jPanel4.add(Fee, gridBagConstraints);
 
-        jButton12.setText("msg");
+        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/mail-message.png"))); // NOI18N
+        jButton12.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
         jPanel4.add(jButton12, gridBagConstraints);
 
-        jButton13.setText("admin");
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-info.png"))); // NOI18N
+        jButton13.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 60;
+        gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
         jPanel4.add(jButton13, gridBagConstraints);
 
         jButton14.setText("jButton10");
@@ -344,8 +359,8 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 80;
-        gridBagConstraints.ipady = 100;
+        gridBagConstraints.ipadx = 45;
+        gridBagConstraints.ipady = 40;
         jPanel4.add(jButton14, gridBagConstraints);
 
         javax.swing.GroupLayout PanHomeLayout = new javax.swing.GroupLayout(PanHome);
@@ -361,7 +376,7 @@ public class Base extends javax.swing.JFrame {
         );
         PanHomeLayout.setVerticalGroup(
             PanHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 580, Short.MAX_VALUE)
+            .addGap(0, 696, Short.MAX_VALUE)
             .addGroup(PanHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PanHomeLayout.createSequentialGroup()
                     .addContainerGap()
