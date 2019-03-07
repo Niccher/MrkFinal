@@ -71,17 +71,17 @@ public class Base extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         PanHome = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        Perfor = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        HmNewStudent = new javax.swing.JButton();
+        HmStaff = new javax.swing.JButton();
+        HmStudents = new javax.swing.JButton();
+        HmExam = new javax.swing.JButton();
+        HmResults = new javax.swing.JButton();
+        HmReports = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        Fee = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
+        HmFee = new javax.swing.JButton();
+        HmMails = new javax.swing.JButton();
+        HmAdmin = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
         PanStudents = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -240,7 +240,13 @@ public class Base extends javax.swing.JFrame {
         jPanel4Layout.rowHeights = new int[] {0, 30, 0, 30, 0, 30, 0};
         jPanel4.setLayout(jPanel4Layout);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-new-31.png"))); // NOI18N
+        HmNewStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-new-31.png"))); // NOI18N
+        HmNewStudent.setToolTipText("Admit New Student");
+        HmNewStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HmNewStudentActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -248,10 +254,15 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 45;
         gridBagConstraints.ipady = 60;
         gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
-        jPanel4.add(jButton2, gridBagConstraints);
+        jPanel4.add(HmNewStudent, gridBagConstraints);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/identity.png"))); // NOI18N
-        jButton3.setToolTipText("");
+        HmStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/identity.png"))); // NOI18N
+        HmStaff.setToolTipText("Staff Users");
+        HmStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HmStaffActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -259,9 +270,15 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 45;
         gridBagConstraints.ipady = 60;
         gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
-        jPanel4.add(jButton3, gridBagConstraints);
+        jPanel4.add(HmStaff, gridBagConstraints);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/system-users-4.png"))); // NOI18N
+        HmStudents.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/system-users-4.png"))); // NOI18N
+        HmStudents.setToolTipText("All Students");
+        HmStudents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HmStudentsActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -269,10 +286,15 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 45;
         gridBagConstraints.ipady = 60;
         gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
-        jPanel4.add(jButton4, gridBagConstraints);
+        jPanel4.add(HmStudents, gridBagConstraints);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/kate.png"))); // NOI18N
-        jButton5.setToolTipText("");
+        HmExam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/kate.png"))); // NOI18N
+        HmExam.setToolTipText("Exams");
+        HmExam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HmExamActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -280,10 +302,15 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 45;
         gridBagConstraints.ipady = 60;
         gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
-        jPanel4.add(jButton5, gridBagConstraints);
+        jPanel4.add(HmExam, gridBagConstraints);
 
-        Perfor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/application-vnd.oasis.opendocument.spreadsheet-template.png"))); // NOI18N
-        Perfor.setToolTipText("");
+        HmResults.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/application-vnd.oasis.opendocument.spreadsheet-template.png"))); // NOI18N
+        HmResults.setToolTipText("Exam Results");
+        HmResults.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HmResultsActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -291,10 +318,15 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 45;
         gridBagConstraints.ipady = 60;
         gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
-        jPanel4.add(Perfor, gridBagConstraints);
+        jPanel4.add(HmResults, gridBagConstraints);
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/office-chart-area-stacked1.png"))); // NOI18N
-        jButton7.setToolTipText("");
+        HmReports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/office-chart-area-stacked1.png"))); // NOI18N
+        HmReports.setToolTipText("Reports and Transcripts");
+        HmReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HmReportsActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
@@ -302,7 +334,7 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 45;
         gridBagConstraints.ipady = 60;
         gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
-        jPanel4.add(jButton7, gridBagConstraints);
+        jPanel4.add(HmReports, gridBagConstraints);
 
         jButton8.setText("jButton7");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -322,7 +354,13 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.ipady = 40;
         jPanel4.add(jButton9, gridBagConstraints);
 
-        Fee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/emblem-money.png"))); // NOI18N
+        HmFee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/emblem-money.png"))); // NOI18N
+        HmFee.setToolTipText("Fee");
+        HmFee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HmFeeActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -330,10 +368,15 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 45;
         gridBagConstraints.ipady = 60;
         gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
-        jPanel4.add(Fee, gridBagConstraints);
+        jPanel4.add(HmFee, gridBagConstraints);
 
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/mail-message.png"))); // NOI18N
-        jButton12.setToolTipText("");
+        HmMails.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/mail-message.png"))); // NOI18N
+        HmMails.setToolTipText("Mail and Messaging");
+        HmMails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HmMailsActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -341,10 +384,15 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 45;
         gridBagConstraints.ipady = 60;
         gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
-        jPanel4.add(jButton12, gridBagConstraints);
+        jPanel4.add(HmMails, gridBagConstraints);
 
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/user-info.png"))); // NOI18N
-        jButton13.setToolTipText("");
+        HmAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/system-users-3.png"))); // NOI18N
+        HmAdmin.setToolTipText("Administrator");
+        HmAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HmAdminActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 4;
@@ -352,7 +400,7 @@ public class Base extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 45;
         gridBagConstraints.ipady = 60;
         gridBagConstraints.insets = new java.awt.Insets(1, 0, 1, 0);
-        jPanel4.add(jButton13, gridBagConstraints);
+        jPanel4.add(HmAdmin, gridBagConstraints);
 
         jButton14.setText("jButton10");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -780,6 +828,42 @@ public class Base extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void HmNewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmNewStudentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HmNewStudentActionPerformed
+
+    private void HmStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmStaffActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HmStaffActionPerformed
+
+    private void HmStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmStudentsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HmStudentsActionPerformed
+
+    private void HmExamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmExamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HmExamActionPerformed
+
+    private void HmResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmResultsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HmResultsActionPerformed
+
+    private void HmReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmReportsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HmReportsActionPerformed
+
+    private void HmFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmFeeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HmFeeActionPerformed
+
+    private void HmMailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmMailsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HmMailsActionPerformed
+
+    private void HmAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HmAdminActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -817,8 +901,16 @@ public class Base extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel All;
-    private javax.swing.JButton Fee;
     private javax.swing.JPanel Head;
+    private javax.swing.JButton HmAdmin;
+    private javax.swing.JButton HmExam;
+    private javax.swing.JButton HmFee;
+    private javax.swing.JButton HmMails;
+    private javax.swing.JButton HmNewStudent;
+    private javax.swing.JButton HmReports;
+    private javax.swing.JButton HmResults;
+    private javax.swing.JButton HmStaff;
+    private javax.swing.JButton HmStudents;
     private javax.swing.JPanel PanAdmit;
     private javax.swing.JPanel PanFinance;
     private javax.swing.JPanel PanHome;
@@ -827,17 +919,9 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JPanel PanReports;
     private javax.swing.JPanel PanStaff;
     private javax.swing.JPanel PanStudents;
-    private javax.swing.JButton Perfor;
     private javax.swing.JPanel Tail;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox1;
