@@ -28,7 +28,7 @@ public class Recorda {
                 dbs.execute();
 
                Statement stt = conn.createStatement();
-               //stt.execute("USE Testing2");
+               stt.execute("USE Testing2");
                
                String Std = "CREATE TABLE IF NOT EXISTS `tbl_Students` (`Count` INT AUTO_INCREMENT UNIQUE, `Name` VARCHAR(35) NOT NULL , `Surname` VARCHAR(10) NOT NULL , `Reg_No` INT(6) NOT NULL PRIMARY KEY , `KCPE` INT(4) NOT NULL , `Birth` INT(4) NOT NULL , `Class` VARCHAR(10) NOT NULL , `Stream` VARCHAR(10) NOT NULL , `Dorm` VARCHAR(25) NOT NULL , `Parent` VARCHAR(25) NOT NULL , `Residence` VARCHAR(20) NOT NULL , `Contact` INT(10) NOT NULL , `Avatar` LONGBLOB NOT NULL )";
                PreparedStatement pst1 = conn.prepareStatement(Std);
@@ -99,7 +99,8 @@ public class Recorda {
                 return conn;
 
             }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Database  Error 2");
+                JOptionPane.showMessageDialog(null,"Database  Error 2"+ex);
+                System.out.println(""+ex);
                 return  null;
             }
             //return null;
