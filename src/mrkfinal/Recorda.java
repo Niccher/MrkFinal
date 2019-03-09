@@ -24,13 +24,13 @@ public class Recorda {
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/","root","");
 
-                PreparedStatement dbs = conn.prepareStatement("CREATE DATABASE IF NOT EXISTS `Testing2`");
+                PreparedStatement dbs = conn.prepareStatement("CREATE DATABASE IF NOT EXISTS `Testing3`");
                 dbs.execute();
 
                Statement stt = conn.createStatement();
-               stt.execute("USE Testing2");
-               
-               String Std = "CREATE TABLE IF NOT EXISTS `tbl_Students` (`Count` INT AUTO_INCREMENT UNIQUE, `Name` VARCHAR(35) NOT NULL , `Surname` VARCHAR(10) NOT NULL , `Reg_No` INT(6) NOT NULL PRIMARY KEY , `KCPE` INT(4) NOT NULL , `Birth` INT(4) NOT NULL , `Class` VARCHAR(10) NOT NULL , `Stream` VARCHAR(10) NOT NULL , `Dorm` VARCHAR(25) NOT NULL , `Parent` VARCHAR(25) NOT NULL , `Residence` VARCHAR(20) NOT NULL , `Contact` INT(10) NOT NULL , `Avatar` LONGBLOB NOT NULL )";
+               stt.execute("USE Testing3");
+                              
+               String Std = "CREATE TABLE IF NOT EXISTS `tbl_Students` (`Count` INT AUTO_INCREMENT UNIQUE, `Name` VARCHAR(35) NOT NULL , `Surname` VARCHAR(10) NOT NULL , `Reg_No` INT(6) NOT NULL PRIMARY KEY , `KCPE` INT(4) NOT NULL , `Birth` INT(4) NOT NULL , `Parent` VARCHAR(25) NOT NULL , `Contact` INT(10) NOT NULL , `Residence` VARCHAR(20) NOT NULL , `Class` VARCHAR(10) NOT NULL , `Avatar` LONGBLOB NOT NULL )";
                PreparedStatement pst1 = conn.prepareStatement(Std);
                pst1.execute();
                
@@ -94,6 +94,10 @@ public class Recorda {
                 String Std17="CREATE TABLE IF NOT EXISTS `tbl_Grades` (`Count` INT AUTO_INCREMENT UNIQUE, `Class` VARCHAR(7) NOT NULL ,`Test` VARCHAR(40) NOT NULL ,`Grade` VARCHAR(2) NOT NULL ,`Best` INT NOT NULL DEFAULT '0' ,`Least` INT NOT NULL DEFAULT '0',`Comment` VARCHAR(50) NOT NULL)";
                 PreparedStatement pst17 = conn.prepareStatement(Std17);
                 pst17.execute();
+                
+                String Std18="CREATE TABLE IF NOT EXISTS `tbl_Fees` (`Count` INT AUTO_INCREMENT PRIMARY KEY, `Object_Name` VARCHAR(35) NOT NULL , `Amount` int(5) NOT NULL DEFAULT '0',`Comment` VARCHAR(70) NOT NULL )";
+                PreparedStatement pst18 = conn.prepareStatement(Std18);
+                pst18.execute();
 
                 Statement stmt=conn.createStatement();
                 return conn;
