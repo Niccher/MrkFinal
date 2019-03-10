@@ -218,12 +218,12 @@ public class Base extends javax.swing.JFrame {
     
     private void PopFinace(){
         try {
-            String sql="SELECT Name,Class,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,History,Business,Agriculture FROM  "+fd+" ";
+            String sql="SELECT * FROM  tbl_Fees ";
             pst=(PreparedStatement) Conn.prepareStatement(sql);
             rs=pst.executeQuery();
-            //Tsta.setModel(DbUtils.resultSetToTableModel(rs));
+            tblFeeAll.setModel(DbUtils.resultSetToTableModel(rs));
         }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\nNo Such Table"+"\nPutta Erro");
+            JOptionPane.showMessageDialog(null, e+"\nNo Such Table");
             Toolkit.getDefaultToolkit().beep();
         }
     }
@@ -237,6 +237,34 @@ public class Base extends javax.swing.JFrame {
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e+"\nNo Such Table"+"\nPutta Erro");
             Toolkit.getDefaultToolkit().beep();
+        }
+    }
+    
+    private void PopAdmin(){
+        for (int i = 2019; i < 2025; i++) {
+            String lvv=String.valueOf(i);
+            YBx1.addItem(lvv);
+        }
+        
+        for (int i = 1; i < 30; i++) {
+            String lvv=String.valueOf(i);
+            ClassCatFM1.addItem(lvv);
+            ClassCatPm1.addItem(lvv);
+        }
+        
+        for (int i = 1; i < 70; i++) {
+            String lvv=String.valueOf(i);
+            ClassMidFM1.addItem(lvv);
+            ClassMidPM1.addItem(lvv);
+            
+            ClassEndFM1.addItem(lvv);
+            ClassEndPM1.addItem(lvv);
+        }
+
+        for (int i = 1; i < 100; i++) {
+            String lvv=String.valueOf(i);
+            Hrange.addItem(lvv);
+            Lrange.addItem(lvv);
         }
     }
     
@@ -258,7 +286,7 @@ public class Base extends javax.swing.JFrame {
             File img=new File(Patt);
             FileInputStream fis=new FileInputStream(img);
             int len=(int)img.length();
-            pst= (PreparedStatement) Conn.prepareStatement(Kret);
+            pst=Conn.prepareStatement(Kret);
 
             pst.setString(1, NwFullName.getText().toString());
             pst.setString(2, NwSurName.getText().toString());
@@ -333,6 +361,73 @@ public class Base extends javax.swing.JFrame {
 
         eXA.setEnabled(Boolean.FALSE);
         eXA.setText(lst);
+    }
+    
+    private void FinanceSel(String Cla){
+        String sql="SELECT * FROM  tbl_Fees WHERE `Class`='"+Cla+"' ";
+        try {
+            pst=Conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            tblFeeAll.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e+"\nNo Such Table");
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }
+    
+    private void FeePaid(int piad){
+        String sql="SELECT * FROM  tbl_Fees WHERE `Class`='"+Cla+"' ";
+        try {
+            pst=Conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            tblFeeAll.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e+"\nNo Such Table");
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }
+    
+    private void FeeBalance(int balnce){
+        String sql="SELECT * FROM  tbl_Fees WHERE `Class`='"+Cla+"' ";
+        try {
+            pst=Conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            tblFeeAll.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e+"\nNo Such Table");
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }
+    
+    private void FinanceExpected(String form, String reg){
+        String cops="SELECT * FROM `tbl_Fees` WHERE `Class`='"+form+"' ";
+        int sum=0,paid=0;
+        try {
+            pst=Conn.prepareStatement(cops);
+            rs=pst.executeQuery();
+            while (rs.next()) {
+                sum=sum + rs.getInt("Amount");
+            }
+            
+            PayAmount.setText(String.valueOf(sum));
+        } catch (Exception e) {
+            System.out.println(cops);
+            JOptionPane.showMessageDialog(null, e+"\nSUmm 1.2 Compare");
+        }
+        
+        try {
+            String sql="SELECT * FROM `tbl_Paid`  WHERE `Reg_No`=? ";
+            pst=Conn.prepareStatement(sql);
+            pst.setInt(1, Integer.parseInt(reg));
+            rs=pst.executeQuery();
+            while (rs.next()) {
+                paid=paid + rs.getInt("Amount");
+            }
+            
+            PayPaid.setText(String.valueOf(paid));
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e+"\nAlternate Selection Failed");
+        }
     }
      
     
@@ -1487,6 +1582,7 @@ public class Base extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         All = new javax.swing.JPanel();
         PanLogs = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -1576,12 +1672,43 @@ public class Base extends javax.swing.JFrame {
         PanFinance = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel11 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        tblFeeAll = new javax.swing.JTable();
+        FinanceF1 = new javax.swing.JRadioButton();
+        FinanceF2 = new javax.swing.JRadioButton();
+        FinanceF3 = new javax.swing.JRadioButton();
+        FinanceF4 = new javax.swing.JRadioButton();
+        jLabel12 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel20 = new javax.swing.JLabel();
+        FeeBalance = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        FeePaid = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel13 = new javax.swing.JPanel();
+        jPanel24 = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        PayName = new javax.swing.JTextField();
+        PayReg = new javax.swing.JTextField();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        PayAmount = new javax.swing.JTextField();
+        PayClass = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
+        PayBal = new javax.swing.JTextField();
+        jLabel49 = new javax.swing.JLabel();
+        PayPaid = new javax.swing.JTextField();
+        jLabel50 = new javax.swing.JLabel();
+        FeePayAmount = new javax.swing.JTextField();
+        FeePay = new javax.swing.JButton();
+        FeeFindUser = new javax.swing.JButton();
+        jScrollPane17 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         PanMisc = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         PanAdmit = new javax.swing.JPanel();
@@ -1779,6 +1906,9 @@ public class Base extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane14 = new javax.swing.JScrollPane();
         FeeComment = new javax.swing.JTextArea();
+        FeeObjectDelete = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        FeeClass = new javax.swing.JComboBox<>();
         Head = new javax.swing.JPanel();
         MnAddStd = new javax.swing.JLabel();
         MnStd = new javax.swing.JLabel();
@@ -2492,11 +2622,11 @@ public class Base extends javax.swing.JFrame {
                         .addComponent(jLabel43)
                         .addComponent(ExamSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(FltPrf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel44))
+                    .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Ex2Perf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel84)
-                        .addGroup(jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(FltPrf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel44))))
+                        .addComponent(jLabel84)))
                 .addContainerGap())
         );
 
@@ -2676,49 +2806,161 @@ public class Base extends javax.swing.JFrame {
 
         PanFinance.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel16.setText("Fees Per Class etc");
+        tblFeeAll.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane16.setViewportView(tblFeeAll);
+
+        buttonGroup1.add(FinanceF1);
+        FinanceF1.setText("Form 1");
+        FinanceF1.setToolTipText("Class");
+        FinanceF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinanceF1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(FinanceF2);
+        FinanceF2.setText("Form 2");
+        FinanceF2.setToolTipText("Class");
+        FinanceF2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinanceF2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(FinanceF3);
+        FinanceF3.setText("Form 3");
+        FinanceF3.setToolTipText("Class");
+        FinanceF3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinanceF3ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(FinanceF4);
+        FinanceF4.setText("Form 4");
+        FinanceF4.setToolTipText("Class");
+        FinanceF4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinanceF4ActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Class");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1045, Short.MAX_VALUE)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(796, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addComponent(FinanceF1)
+                .addGap(18, 18, 18)
+                .addComponent(FinanceF2)
+                .addGap(18, 18, 18)
+                .addComponent(FinanceF3)
+                .addGap(18, 18, 18)
+                .addComponent(FinanceF4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addComponent(jLabel16)
-                .addContainerGap(439, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FinanceF1)
+                    .addComponent(FinanceF2)
+                    .addComponent(FinanceF3)
+                    .addComponent(FinanceF4)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("Fee Statement", jPanel11);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder("Search By"));
 
+        jLabel16.setText("Class");
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Form 1", "Form 2", "Form 3", "Form 4" }));
+
+        jLabel20.setText("Balance");
+
+        FeeBalance.setToolTipText("");
+        FeeBalance.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                FeeBalanceKeyTyped(evt);
+            }
+        });
+
+        jLabel21.setText("Paid");
+
+        FeePaid.setToolTipText("");
+        FeePaid.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                FeePaidKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FeeBalance)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 63, Short.MAX_VALUE))
+                    .addComponent(FeePaid))
+                .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(FeeBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(FeePaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(356, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -2731,33 +2973,189 @@ public class Base extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 709, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jScrollPane1)
         );
 
         jTabbedPane3.addTab("Deposits", jPanel12);
+
+        jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder("Search By"));
+
+        jLabel29.setText("Name");
+
+        jLabel33.setText("Reg Number");
+
+        PayName.setToolTipText("");
+        PayName.setEnabled(false);
+
+        PayReg.setToolTipText("");
+        PayReg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PayRegKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                PayRegKeyReleased(evt);
+            }
+        });
+
+        jLabel46.setText("Class");
+
+        jLabel47.setText("Amount");
+
+        PayAmount.setToolTipText("");
+        PayAmount.setEnabled(false);
+
+        PayClass.setToolTipText("");
+        PayClass.setEnabled(false);
+
+        jLabel48.setText("Balance");
+
+        PayBal.setToolTipText("");
+        PayBal.setEnabled(false);
+
+        jLabel49.setText("Paid");
+
+        PayPaid.setToolTipText("");
+        PayPaid.setEnabled(false);
+
+        jLabel50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel50.setText("New Payment");
+
+        FeePayAmount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        FeePayAmount.setToolTipText("");
+        FeePayAmount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                FeePayAmountKeyTyped(evt);
+            }
+        });
+
+        FeePay.setText("Pay");
+        FeePay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeePayActionPerformed(evt);
+            }
+        });
+
+        FeeFindUser.setText("Find");
+        FeeFindUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeeFindUserActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
+        jPanel24.setLayout(jPanel24Layout);
+        jPanel24Layout.setHorizontalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel50, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel24Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FeePayAmount, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel24Layout.createSequentialGroup()
+                                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel33)
+                                    .addComponent(jLabel46)
+                                    .addComponent(jLabel47)
+                                    .addComponent(jLabel48)
+                                    .addComponent(jLabel49)
+                                    .addComponent(jLabel29))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PayName)
+                                    .addComponent(PayPaid)
+                                    .addComponent(PayBal)
+                                    .addComponent(PayAmount)
+                                    .addComponent(PayClass, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel24Layout.createSequentialGroup()
+                                        .addComponent(PayReg, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(FeeFindUser))))))
+                    .addGroup(jPanel24Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(FeePay, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel24Layout.setVerticalGroup(
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel24Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(PayName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(PayReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FeeFindUser))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel46)
+                    .addComponent(PayClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel47)
+                    .addComponent(PayAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel48)
+                    .addComponent(PayBal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel49)
+                    .addComponent(PayPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addComponent(jLabel50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(FeePayAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(FeePay)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane17.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1045, Short.MAX_VALUE)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 553, Short.MAX_VALUE)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jScrollPane17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
         );
 
-        jTabbedPane3.addTab("tab3", jPanel13);
+        jTabbedPane3.addTab("Pay", jPanel13);
 
         javax.swing.GroupLayout PanFinanceLayout = new javax.swing.GroupLayout(PanFinance);
         PanFinance.setLayout(PanFinanceLayout);
@@ -2840,7 +3238,7 @@ public class Base extends javax.swing.JFrame {
             }
         });
 
-        NwStdFrm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Form1", "Form2", "Form3", "Form4" }));
+        NwStdFrm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Form 1", "Form 2", "Form 3", "Form 4" }));
         NwStdFrm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NwStdFrmActionPerformed(evt);
@@ -3084,9 +3482,9 @@ public class Base extends javax.swing.JFrame {
                         .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NwStdReg)
-                    .addComponent(Ext))
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Ext)
+                    .addComponent(NwStdReg))
                 .addContainerGap(114, Short.MAX_VALUE))
         );
 
@@ -3569,7 +3967,7 @@ public class Base extends javax.swing.JFrame {
                         .addComponent(RstCont)
                         .addGap(137, 137, 137)
                         .addComponent(SetCont)))
-                .addContainerGap(541, Short.MAX_VALUE))
+                .addContainerGap(544, Short.MAX_VALUE))
         );
         jPanel43Layout.setVerticalGroup(
             jPanel43Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3810,7 +4208,7 @@ public class Base extends javax.swing.JFrame {
                         .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ClassMidFM1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4088,7 +4486,7 @@ public class Base extends javax.swing.JFrame {
                         .addComponent(SCls, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel36Layout.setVerticalGroup(
@@ -4215,7 +4613,7 @@ public class Base extends javax.swing.JFrame {
         jPanel45.setLayout(jPanel45Layout);
         jPanel45Layout.setHorizontalGroup(
             jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
         );
         jPanel45Layout.setVerticalGroup(
             jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4255,7 +4653,7 @@ public class Base extends javax.swing.JFrame {
                 .addGroup(jPanel41Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel41Layout.createSequentialGroup()
                         .addComponent(GradIt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 316, Short.MAX_VALUE))
+                        .addGap(0, 319, Short.MAX_VALUE))
                     .addComponent(jPanel45, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -4354,26 +4752,44 @@ public class Base extends javax.swing.JFrame {
         FeeComment.setRows(5);
         jScrollPane14.setViewportView(FeeComment);
 
+        FeeObjectDelete.setText("Delete");
+        FeeObjectDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeeObjectDeleteActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Class");
+
+        FeeClass.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Form 1", "Form 2", "Form 3", "Form 4" }));
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(FeeObject)
             .addComponent(FeeAmount)
+            .addComponent(jScrollPane14, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(FeeObjectEdit)
+                                .addGap(18, 18, 18)
+                                .addComponent(FeeObjectAdd)
+                                .addGap(18, 18, 18)
+                                .addComponent(FeeObjectDelete))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(FeeClass, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jScrollPane14)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
-                .addComponent(FeeObjectEdit)
-                .addGap(18, 18, 18)
-                .addComponent(FeeObjectAdd)
-                .addGap(72, 72, 72))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4386,6 +4802,10 @@ public class Base extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(FeeAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(FeeClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -4393,8 +4813,9 @@ public class Base extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FeeObjectAdd)
-                    .addComponent(FeeObjectEdit))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(FeeObjectEdit)
+                    .addComponent(FeeObjectDelete))
+                .addGap(100, 100, 100))
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -4710,6 +5131,7 @@ public class Base extends javax.swing.JFrame {
         // TODO add your handling code here:
         KillAll();
         PopFee();
+        PopAdmin();
         PanAdmin.setVisible(true);
     }//GEN-LAST:event_HmAdminActionPerformed
 
@@ -5751,7 +6173,7 @@ public class Base extends javax.swing.JFrame {
         lr=Integer.parseInt(Lrange.getSelectedItem().toString());
         cmnt=CommBox.getText();
         Greda();
-        String emh="Class ->"+frgd+"  Grade Level ->"+grd+"\nSubject ->"+sbgd+"  Range ->"+hr+"<-->"+lr+"\nComment ->"+cmnt+"\n";
+        String emh="Class ->"+frgd+"\nExam "+lst+"\nGrade Level ->"+grd+"\nSubject ->"+sbgd+"  Range ->"+hr+"<-->"+lr+"\nComment ->"+cmnt+"\n";
         try {
             String sql="INSERT INTO `tbl_Grades` (`Count`,`Class`,`Test`,`Grade`,`Best`,`Least`,`Comment`) VALUES (NULL,'"+frgd+"','"+lst+"','"+grd+"','"+hr+"','"+lr+"','"+cmnt+"')";
             pst = (PreparedStatement) Conn.prepareStatement(sql);
@@ -6271,11 +6693,12 @@ public class Base extends javax.swing.JFrame {
     private void FeeObjectAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeeObjectAddActionPerformed
         // TODO add your handling code here:
         try {
-            String sql="INSERT INTO `tbl_Fees` (Count,Object_Name,Amount,Comment)  VALUES(NULL,?,?,?)";
+            String sql="INSERT INTO `tbl_Fees` (Count,Object_Name,Class,Amount,Comment)  VALUES(NULL,?,?,?,?)";
             pst = Conn.prepareStatement(sql);
             pst.setString(1, FeeObject.getText().toString());
-            pst.setInt(2, Integer.parseInt(FeeAmount.getText().toString()));
-            pst.setString(3, FeeComment.getText().toString());
+            pst.setString(2, FeeClass.getSelectedItem().toString());
+            pst.setInt(3, Integer.parseInt(FeeAmount.getText().toString()));
+            pst.setString(4, FeeComment.getText().toString());
             pst.executeUpdate();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e+"\nObject Insertion Error");
@@ -6289,9 +6712,10 @@ public class Base extends javax.swing.JFrame {
         
         String Obj =FeeObject.getText().toString();
         int amnt =Integer.parseInt(FeeAmount.getText().toString());
+        String Classe=FeeClass.getSelectedItem().toString();
         String Comm =FeeComment.getText().toString();
         
-        lv="UPDATE `tbl_Fees` SET `Object_Name` ='"+Obj+"', `Amount` ="+amnt+", `Comment` ='"+Comm+"' WHERE `Count`='"+reg+"' ";
+        lv="UPDATE `tbl_Fees` SET `Object_Name` ='"+Obj+"',`Class` ='"+Classe+"', `Amount` ="+amnt+", `Comment` ='"+Comm+"' WHERE `Count`='"+reg+"' ";
         try {
             pst=Conn.prepareStatement(lv);
             pst.execute();
@@ -6315,10 +6739,12 @@ public class Base extends javax.swing.JFrame {
         DefaultTableModel tts=(DefaultTableModel) tblFee.getModel();
         
         int reg=Integer.parseInt(tblFee.getValueAt(tblFee.getSelectedRow(), 0).toString());
+        String got=(tblFee.getValueAt(tblFee.getSelectedRow(), 2).toString());
         
         FeeObject.setText((tblFee.getValueAt(tblFee.getSelectedRow(), 1).toString()));
-        FeeAmount.setText((tblFee.getValueAt(tblFee.getSelectedRow(), 2).toString()));
-        FeeComment.setText((tblFee.getValueAt(tblFee.getSelectedRow(), 3).toString()));
+        FeeClass.setSelectedItem(got);
+        FeeAmount.setText((tblFee.getValueAt(tblFee.getSelectedRow(), 3).toString()));
+        FeeComment.setText((tblFee.getValueAt(tblFee.getSelectedRow(), 4).toString()));
     }//GEN-LAST:event_tblFeeMouseClicked
 
     private void StudentFindKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StudentFindKeyTyped
@@ -6347,6 +6773,144 @@ public class Base extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ExamSubjectActionPerformed
 
+    private void FeeObjectDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeeObjectDeleteActionPerformed
+        // TODO add your handling code here:
+        int reg=Integer.parseInt(tblFee.getValueAt(tblFee.getSelectedRow(), 0).toString());
+        try {
+            String sav="DELETE FROM `tbl_Fees` WHERE `Count`= ' "+reg+" '";
+            pst=(PreparedStatement) Conn.prepareStatement(sav);
+            pst.execute();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        PopFee();
+    }//GEN-LAST:event_FeeObjectDeleteActionPerformed
+
+    private void FinanceF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinanceF1ActionPerformed
+        // TODO add your handling code here:
+        if (FinanceF1.isSelected()==true) {
+            FinanceSel("Form 1");
+        }
+    }//GEN-LAST:event_FinanceF1ActionPerformed
+
+    private void FinanceF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinanceF2ActionPerformed
+        // TODO add your handling code here:
+        if (FinanceF2.isSelected()==true) {
+            FinanceSel("Form 2");
+        }
+    }//GEN-LAST:event_FinanceF2ActionPerformed
+
+    private void FinanceF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinanceF3ActionPerformed
+        // TODO add your handling code here:
+        if (FinanceF3.isSelected()==true) {
+            FinanceSel("Form 3");
+        }
+    }//GEN-LAST:event_FinanceF3ActionPerformed
+
+    private void FinanceF4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinanceF4ActionPerformed
+        // TODO add your handling code here:
+        if (FinanceF4.isSelected()==true) {
+            FinanceSel("Form 4");
+        }
+    }//GEN-LAST:event_FinanceF4ActionPerformed
+
+    private void FeeBalanceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FeeBalanceKeyTyped
+        // TODO add your handling code here:
+        char cc=evt.getKeyChar();
+        if(!(Character.isDigit(cc) || cc==KeyEvent.VK_BACK_SPACE || cc==KeyEvent.VK_DELETE )){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_FeeBalanceKeyTyped
+
+    private void FeePaidKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FeePaidKeyTyped
+        // TODO add your handling code here:
+        char cc=evt.getKeyChar();
+        if(!(Character.isDigit(cc) || cc==KeyEvent.VK_BACK_SPACE || cc==KeyEvent.VK_DELETE )){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_FeePaidKeyTyped
+
+    private void FeePayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeePayActionPerformed
+        // TODO add your handling code here:
+        int tot= Integer.parseInt(PayAmount.getText());
+        int paynow= Integer.parseInt(PayPaid.getText());
+        int bal= Integer.parseInt(PayAmount.getText());
+        
+        try {
+            lv="UPDATE `tbl_Paid` SET `Name` =?,`Class` =?, `Total_Fee` =?, `Paid_Fee` =?, `Bal_Fee` =?, WHERE `Reg_No`=? ";
+            pst=Conn.prepareStatement(lv);
+            pst.setString(1, PayName.getText().toString());
+            pst.setString(2, PayClass.getText());
+            pst.setString(3, PayAmount.getText());
+            pst.setString(4, PayPaid.getText());
+            pst.setString(5, PayBal.getText());
+            pst.setInt(6, Integer.parseInt(PayReg.getText().toString()));
+            pst.execute();
+        } catch (Exception e) {
+            System.out.println(e+"\nTried");
+            try {
+                String sql="INSERT INTO `tbl_Paid` (Count,Name,Class,Reg_No,Total_Fee,Paid_Fee,Bal_Fee)  VALUES(NULL,?,?,?,?,?,?)";
+                pst = Conn.prepareStatement(sql);
+                pst.setString(1, PayName.getText().toString());
+                pst.setString(2, PayClass.getText());
+                pst.setString(3, PayAmount.getText());
+                pst.setString(4, PayPaid.getText());
+                pst.setString(5, PayBal.getText());
+                pst.setInt(6, Integer.parseInt(PayReg.getText().toString()));
+                pst.executeUpdate();
+            } catch (Exception ex) {
+                System.out.println(ex+"\nCaught");
+            }
+        }
+    }//GEN-LAST:event_FeePayActionPerformed
+
+    private void FeePayAmountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FeePayAmountKeyTyped
+        // TODO add your handling code here:
+        char cc=evt.getKeyChar();
+        if(!(Character.isDigit(cc) || cc==KeyEvent.VK_BACK_SPACE || cc==KeyEvent.VK_DELETE )){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_FeePayAmountKeyTyped
+
+    private void PayRegKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PayRegKeyTyped
+        // TODO add your handling code here:
+        char cc=evt.getKeyChar();
+        if(!(Character.isDigit(cc) || cc==KeyEvent.VK_BACK_SPACE || cc==KeyEvent.VK_DELETE )){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_PayRegKeyTyped
+
+    private void PayRegKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PayRegKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PayRegKeyReleased
+
+    private void FeeFindUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeeFindUserActionPerformed
+        // TODO add your handling code here:
+        String fin=/*Integer.parseInt*/(PayReg.getText().toString());
+        String cops4= "SELECT * FROM `tbl_Students` WHERE `Reg_No` ='"+Integer.parseInt(fin)+"' ";  
+        
+        if (fin.isEmpty() || fin=="") {
+            System.out.println("Null Byte");
+        } else {
+            try {
+                pst = (Conn.prepareStatement(cops4));
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    PayName.setText(rs.getString("Name"));
+                    PayClass.setText(rs.getString("Class"));
+                }
+                
+                FinanceExpected(PayClass.getText(), fin);
+            } catch (Exception e) {
+                System.out.println(e+"\n"+"int final "+fin+"\n"+cops4);
+            }
+        }
+    }//GEN-LAST:event_FeeFindUserActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -6358,7 +6922,7 @@ public class Base extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -6443,10 +7007,21 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JButton FFEnd;
     private javax.swing.JButton FFMid;
     private javax.swing.JTextField FeeAmount;
+    private javax.swing.JTextField FeeBalance;
+    private javax.swing.JComboBox<String> FeeClass;
     private javax.swing.JTextArea FeeComment;
+    private javax.swing.JButton FeeFindUser;
     private javax.swing.JTextField FeeObject;
     private javax.swing.JButton FeeObjectAdd;
+    private javax.swing.JButton FeeObjectDelete;
     private javax.swing.JButton FeeObjectEdit;
+    private javax.swing.JTextField FeePaid;
+    private javax.swing.JButton FeePay;
+    private javax.swing.JTextField FeePayAmount;
+    private javax.swing.JRadioButton FinanceF1;
+    private javax.swing.JRadioButton FinanceF2;
+    private javax.swing.JRadioButton FinanceF3;
+    private javax.swing.JRadioButton FinanceF4;
     private javax.swing.JComboBox<String> FltPrf;
     private javax.swing.JComboBox<String> FormGrad;
     private javax.swing.JComboBox<String> FrmSenrAdd;
@@ -6510,6 +7085,12 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JPanel PanReports;
     private javax.swing.JPanel PanStudents;
     private javax.swing.JPanel PanTeacher;
+    private javax.swing.JTextField PayAmount;
+    private javax.swing.JTextField PayBal;
+    private javax.swing.JTextField PayClass;
+    private javax.swing.JTextField PayName;
+    private javax.swing.JTextField PayPaid;
+    private javax.swing.JTextField PayReg;
     private javax.swing.JPanel Pg0;
     private javax.swing.JButton RegAsBtn;
     private javax.swing.JComboBox<String> RepoClas;
@@ -6547,13 +7128,16 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JButton WannaBe;
     private javax.swing.JComboBox<String> YBx;
     private javax.swing.JComboBox<String> YBx1;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField eXA;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -6562,16 +7146,20 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
@@ -6585,7 +7173,12 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel56;
@@ -6617,6 +7210,7 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
     private javax.swing.JLabel jLabel86;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -6635,6 +7229,7 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
@@ -6666,6 +7261,8 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
+    private javax.swing.JScrollPane jScrollPane16;
+    private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -6683,6 +7280,7 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JMenu mnHelp;
@@ -6694,6 +7292,7 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTable tblAllStudents;
     private javax.swing.JTable tblExamCompare;
     private javax.swing.JTable tblFee;
+    private javax.swing.JTable tblFeeAll;
     private javax.swing.JTable tbl_Analyse;
     // End of variables declaration//GEN-END:variables
 }
