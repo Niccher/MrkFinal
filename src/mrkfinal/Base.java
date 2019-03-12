@@ -219,11 +219,21 @@ public class Base extends javax.swing.JFrame {
     private void PopFinace(){
         try {
             String sql="SELECT * FROM  tbl_Fees ";
-            pst=(PreparedStatement) Conn.prepareStatement(sql);
+            pst=Conn.prepareStatement(sql);
             rs=pst.executeQuery();
             tblFeeAll.setModel(DbUtils.resultSetToTableModel(rs));
         }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\nNo Such Table");
+            JOptionPane.showMessageDialog(null, e+"\nNo PopFinace 1");
+            Toolkit.getDefaultToolkit().beep();
+        }
+        
+        try {
+            String sql="SELECT * FROM  tbl_Paid ";
+            pst=Conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            tblPaid.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e+"\nNo PopFinace 2");
             Toolkit.getDefaultToolkit().beep();
         }
     }
@@ -375,33 +385,9 @@ public class Base extends javax.swing.JFrame {
         }
     }
     
-    private void FeePaid(int piad){
-        String sql="SELECT * FROM  tbl_Fees WHERE `Class`='"+Cla+"' ";
-        try {
-            pst=Conn.prepareStatement(sql);
-            rs=pst.executeQuery();
-            tblFeeAll.setModel(DbUtils.resultSetToTableModel(rs));
-        }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\nNo Such Table");
-            Toolkit.getDefaultToolkit().beep();
-        }
-    }
-    
-    private void FeeBalance(int balnce){
-        String sql="SELECT * FROM  tbl_Fees WHERE `Class`='"+Cla+"' ";
-        try {
-            pst=Conn.prepareStatement(sql);
-            rs=pst.executeQuery();
-            tblFeeAll.setModel(DbUtils.resultSetToTableModel(rs));
-        }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\nNo Such Table");
-            Toolkit.getDefaultToolkit().beep();
-        }
-    }
-    
     private void FinanceExpected(String form, String reg){
         String cops="SELECT * FROM `tbl_Fees` WHERE `Class`='"+form+"' ";
-        int sum=0,paid=0;
+        int sum=0,paid=0,rem=0;
         try {
             pst=Conn.prepareStatement(cops);
             rs=pst.executeQuery();
@@ -412,7 +398,7 @@ public class Base extends javax.swing.JFrame {
             PayAmount.setText(String.valueOf(sum));
         } catch (Exception e) {
             System.out.println(cops);
-            JOptionPane.showMessageDialog(null, e+"\nSUmm 1.2 Compare");
+            JOptionPane.showMessageDialog(null, e+"\n FinanceExpected 1");
         }
         
         try {
@@ -421,13 +407,60 @@ public class Base extends javax.swing.JFrame {
             pst.setInt(1, Integer.parseInt(reg));
             rs=pst.executeQuery();
             while (rs.next()) {
-                paid=paid + rs.getInt("Amount");
+                paid=paid + rs.getInt("Paid_Fee");
             }
             
             PayPaid.setText(String.valueOf(paid));
         }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\nAlternate Selection Failed");
+            JOptionPane.showMessageDialog(null, e+"\n FinanceExpected 2");
         }
+        
+        rem=sum-paid;
+        PayBal.setText(String.valueOf(rem));
+    }
+    
+    private int FeePaid(int reg){
+        int piad=0;
+        String sql="SELECT * FROM  tbl_Paid WHERE `Reg_No`='"+reg+"' ";
+        try {
+            pst=Conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            while (rs.next()) {                
+                piad=piad+rs.getInt("Paid_Fee");
+            }
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e+"\nNo FeePaid");
+            Toolkit.getDefaultToolkit().beep();
+        }
+        
+        System.out.println("Paid Values "+piad);
+        return piad;
+    }
+    
+    private void FeePay(int reg, int Amoun){
+        int paynow= Integer.parseInt(PayPaid.getText())+Integer.parseInt(FeePayAmount.getText());
+        int bal=(Integer.parseInt(PayBal.getText()))+paynow;
+        
+        String sql="INSERT INTO `tbl_Paid` (Name,Class,Reg_No,Total_Fee,Paid_Fee,Bal_Fee)  VALUES('"+PayName.getText()+"','"+PayClass.getText()+"','"+reg+"','"+Amoun+"',"+paynow+","+bal+")";
+        try {
+            pst = Conn.prepareStatement(sql);
+            pst.executeUpdate();
+            
+            System.out.println("True Inserted \nQuiz\n"+sql);
+        } catch (Exception e) {
+            System.out.println("Quize > "+sql+"\nTried");
+            lv="UPDATE `tbl_Paid` SET `Name` ='"+PayName.getText()+"',`Class` ='"+PayClass.getText()+"', `Total_Fee` ='"+Amoun+"', `Paid_Fee` ="+paynow+", `Bal_Fee` ="+bal+" WHERE `Reg_No`='"+reg+"' ";
+            try {
+                pst=Conn.prepareStatement(lv);
+                pst.execute();
+                
+                System.out.println("False Updated \nQuiz\n"+lv);
+            } catch (Exception ex) {
+                System.out.println(ex+"\nCaught \nQuiz "+lv);
+            }
+        }
+        
+        PopFinace();
     }
      
     
@@ -1708,7 +1741,7 @@ public class Base extends javax.swing.JFrame {
         FeePay = new javax.swing.JButton();
         FeeFindUser = new javax.swing.JButton();
         jScrollPane17 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblPaid = new javax.swing.JTable();
         PanMisc = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         PanAdmit = new javax.swing.JPanel();
@@ -3024,12 +3057,22 @@ public class Base extends javax.swing.JFrame {
 
         PayPaid.setToolTipText("");
         PayPaid.setEnabled(false);
+        PayPaid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PayPaidActionPerformed(evt);
+            }
+        });
 
         jLabel50.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel50.setText("New Payment");
 
         FeePayAmount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         FeePayAmount.setToolTipText("");
+        FeePayAmount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeePayAmountActionPerformed(evt);
+            }
+        });
         FeePayAmount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 FeePayAmountKeyTyped(evt);
@@ -3123,7 +3166,7 @@ public class Base extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblPaid.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -3134,7 +3177,7 @@ public class Base extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane17.setViewportView(jTable3);
+        jScrollPane17.setViewportView(tblPaid);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -6834,36 +6877,7 @@ public class Base extends javax.swing.JFrame {
 
     private void FeePayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeePayActionPerformed
         // TODO add your handling code here:
-        int tot= Integer.parseInt(PayAmount.getText());
-        int paynow= Integer.parseInt(PayPaid.getText());
-        int bal= Integer.parseInt(PayAmount.getText());
-        
-        try {
-            lv="UPDATE `tbl_Paid` SET `Name` =?,`Class` =?, `Total_Fee` =?, `Paid_Fee` =?, `Bal_Fee` =?, WHERE `Reg_No`=? ";
-            pst=Conn.prepareStatement(lv);
-            pst.setString(1, PayName.getText().toString());
-            pst.setString(2, PayClass.getText());
-            pst.setString(3, PayAmount.getText());
-            pst.setString(4, PayPaid.getText());
-            pst.setString(5, PayBal.getText());
-            pst.setInt(6, Integer.parseInt(PayReg.getText().toString()));
-            pst.execute();
-        } catch (Exception e) {
-            System.out.println(e+"\nTried");
-            try {
-                String sql="INSERT INTO `tbl_Paid` (Count,Name,Class,Reg_No,Total_Fee,Paid_Fee,Bal_Fee)  VALUES(NULL,?,?,?,?,?,?)";
-                pst = Conn.prepareStatement(sql);
-                pst.setString(1, PayName.getText().toString());
-                pst.setString(2, PayClass.getText());
-                pst.setString(3, PayAmount.getText());
-                pst.setString(4, PayPaid.getText());
-                pst.setString(5, PayBal.getText());
-                pst.setInt(6, Integer.parseInt(PayReg.getText().toString()));
-                pst.executeUpdate();
-            } catch (Exception ex) {
-                System.out.println(ex+"\nCaught");
-            }
-        }
+        FeePay(Integer.parseInt(PayReg.getText().toString()), Integer.parseInt(PayAmount.getText()));
     }//GEN-LAST:event_FeePayActionPerformed
 
     private void FeePayAmountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FeePayAmountKeyTyped
@@ -6905,11 +6919,21 @@ public class Base extends javax.swing.JFrame {
                 }
                 
                 FinanceExpected(PayClass.getText(), fin);
+                
+                PayPaid.setText(String.valueOf(FeePaid(Integer.parseInt(fin))));
             } catch (Exception e) {
                 System.out.println(e+"\n"+"int final "+fin+"\n"+cops4);
             }
         }
     }//GEN-LAST:event_FeeFindUserActionPerformed
+
+    private void FeePayAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeePayAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FeePayAmountActionPerformed
+
+    private void PayPaidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayPaidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PayPaidActionPerformed
 
     /**
      * @param args the command line arguments
@@ -7280,7 +7304,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JMenu mnHelp;
@@ -7293,6 +7316,7 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTable tblExamCompare;
     private javax.swing.JTable tblFee;
     private javax.swing.JTable tblFeeAll;
+    private javax.swing.JTable tblPaid;
     private javax.swing.JTable tbl_Analyse;
     // End of variables declaration//GEN-END:variables
 }
