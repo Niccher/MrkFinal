@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tabl" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0ee23584-5228-4d89-9e95-c50d966605c7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#D9CFC3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFF3E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFFCF8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="New Dataset 1" uuid="d9065016-1ff9-4827-9f5d-e862c3f0f891">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     2018_CATS_Term3.`Name` AS 2018_CATS_Term3_Name,
+     2018_CATS_Term3.`Class` AS 2018_CATS_Term3_Class,
+     2018_CATS_Term3.`Reg_No` AS 2018_CATS_Term3_Reg_No
+FROM
+     `2018_CATS_Term3` 2018_CATS_Term3]]>
+		</queryString>
+		<field name="2018_CATS_Term3_Name" class="java.lang.String"/>
+		<field name="2018_CATS_Term3_Class" class="java.lang.String"/>
+		<field name="2018_CATS_Term3_Reg_No" class="java.lang.Integer"/>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     2018_CATS_Term3.`Name` AS 2018_CATS_Term3_Name,
+     2018_CATS_Term3.`Class` AS 2018_CATS_Term3_Class,
+     2018_CATS_Term3.`Reg_No` AS 2018_CATS_Term3_Reg_No,
+     2018_CATS_Term3.`Stream` AS 2018_CATS_Term3_Stream
+FROM
+     `2018_CATS_Term3` 2018_CATS_Term3]]>
+	</queryString>
+	<field name="2018_CATS_Term3_Name" class="java.lang.String"/>
+	<field name="2018_CATS_Term3_Class" class="java.lang.String"/>
+	<field name="2018_CATS_Term3_Reg_No" class="java.lang.Integer"/>
+	<field name="2018_CATS_Term3_Stream" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="0" y="0" width="802" height="53" uuid="d0690f12-2be6-4d15-96b7-9761fa84b06e"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 1" uuid="08af4e94-ac91-4b61-a1ae-58ca11038f48">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="238" uuid="d9f02249-51c6-4499-a677-0c9b7307cb3e">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="238" height="30" uuid="be650f04-313f-42b4-af25-dcb5d93d5525"/>
+								<text><![CDATA[2018_CATS_Term3_Name]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="238" height="20" uuid="3786e7db-c996-4dba-a7ba-0d2e39187409"/>
+								<textFieldExpression><![CDATA[$F{2018_CATS_Term3_Name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="279" uuid="43ce2234-930a-45c1-bafb-99f7dad82cbd">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="279" height="30" uuid="517b29f6-2f4b-4374-8ab7-c7df04a39d0c"/>
+								<text><![CDATA[2018_CATS_Term3_Class]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="279" height="20" uuid="6bd7ee8b-68c6-44ca-88ef-ef0294ddbec4"/>
+								<textFieldExpression><![CDATA[$F{2018_CATS_Term3_Class}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="283" uuid="8db41a9a-2b64-443c-9991-5624d7766c5b">
+						<jr:tableHeader style="table 1_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter height="30" rowSpan="1"/>
+						<jr:columnHeader style="table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="283" height="30" uuid="cd5dd743-bee7-4149-b300-0fb827f8e0bb"/>
+								<text><![CDATA[2018_CATS_Term3_Reg_No]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table 1_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="283" height="20" uuid="1edf4d9b-878f-478a-80a2-cbeabd437760"/>
+								<textFieldExpression><![CDATA[$F{2018_CATS_Term3_Reg_No}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
