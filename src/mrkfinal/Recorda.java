@@ -99,7 +99,7 @@ public class Recorda {
                 PreparedStatement pst18 = conn.prepareStatement(Std18);
                 pst18.execute();
                 
-                String Std19="CREATE TABLE IF NOT EXISTS `tbl_Paid` (`Count` INT AUTO_INCREMENT PRIMARY KEY, `Name` VARCHAR(35) NOT NULL , `Class` VARCHAR(7) NOT NULL , `Reg_No` INT(6) NOT NULL , `Total_Fee` int(5) NOT NULL DEFAULT '0',`Paid_Fee` int(5) NOT NULL DEFAULT '0',`Bal_Fee` int(5) NOT NULL DEFAULT '0')";
+                String Std19="CREATE TABLE IF NOT EXISTS `tbl_Paid` (`Count` INT AUTO_INCREMENT UNIQUE, `Name` VARCHAR(35) NOT NULL , `Class` VARCHAR(7) NOT NULL , `Reg_No` INT(6) NOT NULL PRIMARY KEY, `Total_Fee` int(5) NOT NULL DEFAULT '0',`Paid_Fee` int(5) NOT NULL DEFAULT '0',`Bal_Fee` int(5) NOT NULL DEFAULT '0')";
                 PreparedStatement pst19 = conn.prepareStatement(Std19);
                 pst19.execute();
 

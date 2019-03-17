@@ -12,6 +12,10 @@
     </Component>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup5">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup6">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup7">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -1733,13 +1737,13 @@
                         <Component class="javax.swing.JComboBox" name="StudentFindType">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="4">
-                                <StringItem index="0" value="Sort By"/>
-                                <StringItem index="1" value="Class"/>
-                                <StringItem index="2" value="Reg No"/>
-                                <StringItem index="3" value="Stream"/>
+                              <StringArray count="3">
+                                <StringItem index="0" value="Class"/>
+                                <StringItem index="1" value="Reg No"/>
+                                <StringItem index="2" value="Stream"/>
                               </StringArray>
                             </Property>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -2026,17 +2030,29 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="RepoTrm1">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup7"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Term 1"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Terms"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="RepoTrm2">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup7"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Term 2"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Terms"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="RepoTrm3">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup7"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Term 3"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Terms"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="SyncRepo">
@@ -2433,20 +2449,11 @@
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="CritStream" min="-2" pref="100" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="CritLeaImp" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="CritMosImp" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
@@ -2455,6 +2462,14 @@
                                       <Component id="jButton1" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jSeparator1" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2477,10 +2492,8 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="CritMosImp" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="CritLeaImp" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jSeparator2" min="-2" pref="11" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                   <Component id="AnalyseExam" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
@@ -2493,14 +2506,14 @@
                         <Component class="javax.swing.JComboBox" name="CritClass">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="5">
-                                <StringItem index="0" value="Class"/>
-                                <StringItem index="1" value="Form 1"/>
-                                <StringItem index="2" value="Form 2"/>
-                                <StringItem index="3" value="Form 3"/>
-                                <StringItem index="4" value="Form 4"/>
+                              <StringArray count="4">
+                                <StringItem index="0" value="Form 1"/>
+                                <StringItem index="1" value="Form 2"/>
+                                <StringItem index="2" value="Form 3"/>
+                                <StringItem index="3" value="Form 4"/>
                               </StringArray>
                             </Property>
+                            <Property name="toolTipText" type="java.lang.String" value=""/>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CritClassActionPerformed"/>
@@ -2516,6 +2529,7 @@
                                 <StringItem index="0" value="Stream"/>
                               </StringArray>
                             </Property>
+                            <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -2546,12 +2560,20 @@
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="CritAscend">
                           <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroup6"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Ascending"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Criteria"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="CritDesc">
                           <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroup6"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Descending"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Criteria"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="AnalyseExam">
@@ -2562,14 +2584,13 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnalyseExamActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JRadioButton" name="CritLeaImp">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Highest Decrement"/>
-                          </Properties>
-                        </Component>
                         <Component class="javax.swing.JRadioButton" name="CritMosImp">
                           <Properties>
+                            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                              <ComponentRef name="buttonGroup6"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Most Improved"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Criteria"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="jButton1">
@@ -2782,7 +2803,7 @@
                               <Component id="jPanel14" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="567" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -2817,6 +2838,11 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="FeeDepositFind" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -2837,7 +2863,9 @@
                                       <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="FeePaid" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="356" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                  <Component id="FeeDepositFind" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2889,6 +2917,14 @@
                             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FeePaidKeyTyped"/>
                           </Events>
                         </Component>
+                        <Component class="javax.swing.JButton" name="FeeDepositFind">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Search"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FeeDepositFindActionPerformed"/>
+                          </Events>
+                        </Component>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -2898,7 +2934,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTable1">
+                        <Component class="javax.swing.JTable" name="tblFeeSearch">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="0" rowCount="4"/>
@@ -3742,7 +3778,7 @@
                       <Component id="Marks" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
-                      <Component id="Senr" alignment="0" pref="618" max="32767" attributes="0"/>
+                      <Component id="Senr" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
                       <Component id="Sett" alignment="0" max="32767" attributes="0"/>

@@ -195,26 +195,30 @@ public class Base extends javax.swing.JFrame {
     }
     
     private void PopExam(){
+        Nm();
         try {
             String sql="SELECT * FROM  "+lst+" ";
             pst=Conn.prepareStatement(sql);
             rs=pst.executeQuery();
             tblExamCompare.setModel(DbUtils.resultSetToTableModel(rs));
         }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\nNo Such Table"+"\nPutta Erro");
+            System.out.println(e+" PopExam 1");
             Toolkit.getDefaultToolkit().beep();
         }
         
         try {
-            String fch="SELECT * FROM `tbl_Tests` WHERE `Count`= >1 ";
+            String fch="SELECT * FROM `tbl_Tests` ";
             pst=Conn.prepareStatement(fch);
             rs=pst.executeQuery();
             if (rs.next()) {
                 String exs=rs.getString("Test");
                 Ex1Perf.addItem(exs);
-                Ex1Perf.addItem(exs);
+                Ex1Perf.setEnabled(Boolean.FALSE);
+                Ex2Perf.addItem(exs);
             }
-        } catch (Exception e) {
+        } catch (Exception e){ 
+            System.out.println(e+" PopExam 2");
+            Toolkit.getDefaultToolkit().beep();
         }
     }
     
@@ -230,7 +234,7 @@ public class Base extends javax.swing.JFrame {
         }
         
         try {
-            String sql="SELECT * FROM  tbl_Paid ";
+            String sql="SELECT Name,Class,Reg_No,Total_Fee,Paid_Fee,Bal_Fee FROM  tbl_Paid ";
             pst=Conn.prepareStatement(sql);
             rs=pst.executeQuery();
             tblPaid.setModel(DbUtils.resultSetToTableModel(rs));
@@ -243,6 +247,7 @@ public class Base extends javax.swing.JFrame {
     private void PopTeacher(){
         Nm();
         jComboBox3.addItem( lst);
+        ExamBay.addItem( lst);
         try {
             String sql="SELECT Name,Class,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,History,Business,Agriculture FROM  "+fd+" ";
             pst=(PreparedStatement) Conn.prepareStatement(sql);
@@ -442,9 +447,9 @@ public class Base extends javax.swing.JFrame {
     
     private void FeePay(int reg, int Amoun){
         int paynow= Integer.parseInt(PayPaid.getText())+Integer.parseInt(FeePayAmount.getText());
-        int bal=(Integer.parseInt(PayBal.getText()))+paynow;
+        int bal=(Integer.parseInt(PayAmount.getText()))-paynow;
         
-        String sql="INSERT INTO `tbl_Paid` (Name,Class,Reg_No,Total_Fee,Paid_Fee,Bal_Fee)  VALUES('"+PayName.getText()+"','"+PayClass.getText()+"','"+reg+"','"+Amoun+"',"+paynow+","+bal+")";
+        String sql="INSERT INTO `tbl_Paid` (Name,Class,Reg_No,Total_Fee,Paid_Fee,Bal_Fee)  VALUES('"+PayName.getText()+"','"+PayClass.getText()+"',"+reg+","+Amoun+","+paynow+","+bal+")";
         try {
             pst = Conn.prepareStatement(sql);
             pst.executeUpdate();
@@ -452,7 +457,7 @@ public class Base extends javax.swing.JFrame {
             System.out.println("True Inserted \nQuiz\n"+sql);
         } catch (Exception e) {
             System.out.println("Quize > "+sql+"\nTried");
-            lv="UPDATE `tbl_Paid` SET `Name` ='"+PayName.getText()+"',`Class` ='"+PayClass.getText()+"', `Total_Fee` ='"+Amoun+"', `Paid_Fee` ="+paynow+", `Bal_Fee` ="+bal+" WHERE `Reg_No`='"+reg+"' ";
+            lv="UPDATE `tbl_Paid` SET `Name` ='"+PayName.getText()+"',`Class` ='"+PayClass.getText()+"', `Total_Fee` ="+Amoun+", `Paid_Fee` ="+paynow+", `Bal_Fee` ="+bal+" WHERE `Reg_No`="+reg+" ";
             try {
                 pst=Conn.prepareStatement(lv);
                 pst.execute();
@@ -464,6 +469,30 @@ public class Base extends javax.swing.JFrame {
         }
         
         PopFinace();
+    }
+    
+    private void FeeFindUser(){
+        String fin=/*Integer.parseInt*/(PayReg.getText().toString());
+        String cops4= "SELECT * FROM `tbl_Students` WHERE `Reg_No` ='"+Integer.parseInt(fin)+"' ";  
+        
+        if (fin.isEmpty() || fin=="") {
+            System.out.println("Null Byte");
+        } else {
+            try {
+                pst = (Conn.prepareStatement(cops4));
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    PayName.setText(rs.getString("Name"));
+                    PayClass.setText(rs.getString("Class"));
+                }
+                
+                FinanceExpected(PayClass.getText(), fin);
+                
+                PayPaid.setText(String.valueOf(FeePaid(Integer.parseInt(fin))));
+            } catch (Exception e) {
+                System.out.println(e+"\n"+"int final "+fin+"\n"+cops4);
+            }
+        }
     }
     
     private void Filla(){
@@ -1289,35 +1318,6 @@ public class Base extends javax.swing.JFrame {
             }
     }
     
-    private void StrPerf(){
-        int Nr,St,Ws,Es;
-        try {
-                String sql="SELECT * FROM `tbl_ClassList` WHERE `Class`='"+ClStr+"' ";
-                pst=(PreparedStatement) Conn.prepareStatement(sql);
-                rs=pst.executeQuery();
-                while (rs.next()) {
-                    Nr=rs.getInt("North");
-                    St=rs.getInt("South");
-                    Ws=rs.getInt("West");
-                    Es=rs.getInt("East");
-                    if(Nr ==1){
-                        StrPerf.addItem("North");
-                    }
-                    if(St ==1){
-                        StrPerf.addItem("South");
-                    }
-                    if(Ws ==1){
-                        StrPerf.addItem("West");
-                    }
-                    if(Es ==1){
-                        StrPerf.addItem("East");
-                    }   
-                }
-            }catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nStr Error 3");
-            }
-    }
-    
     private void Chus(){
         int Nr,St,Ws,Es;
             try {
@@ -1357,21 +1357,21 @@ public class Base extends javax.swing.JFrame {
             fdsa="Form4";
         }
         try {
-                String cops="SELECT Chemistry,Biology,Physics,Geography,CRE,Business,Agriculture FROM `tbl_Placer` WHERE `Class`='"+fdsa+"' ";
-                pst=(PreparedStatement) Conn.prepareStatement(cops);
-                rs=pst.executeQuery();
-                if (rs.next()) {
-                    int c1,b2,p3,g4,cr5,b6,a7;
-                    c1=rs.getInt("Chemistry");
-                    b2=rs.getInt("Biology");
-                    p3=rs.getInt("Physics");
-                    g4=rs.getInt("Geography");
-                    cr5=rs.getInt("CRE");
-                    JOptionPane.showMessageDialog(null, "Chemistry"+c1+"\nBiology"+b2+"\nPhysics"+p3+"\nGeography"+g4+"\nCRE"+cr5);
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nMade Error");
+            String cops="SELECT Chemistry,Biology,Physics,Geography,CRE,Business,Agriculture FROM `tbl_Placer` WHERE `Class`='"+fdsa+"' ";
+            pst=Conn.prepareStatement(cops);
+            rs=pst.executeQuery();
+            if (rs.next()) {
+                int c1,b2,p3,g4,cr5,b6,a7;
+                c1=rs.getInt("Chemistry");
+                b2=rs.getInt("Biology");
+                p3=rs.getInt("Physics");
+                g4=rs.getInt("Geography");
+                cr5=rs.getInt("CRE");
+                JOptionPane.showMessageDialog(null, "Chemistry"+c1+"\nBiology"+b2+"\nPhysics"+p3+"\nGeography"+g4+"\nCRE"+cr5);
             }
+        } catch (Exception e) {
+            System.out.println(e+"\n Makeit");
+        }
     }
     
     private void Summ(int stdjmpreg, int stdjmpcls){
@@ -1540,6 +1540,8 @@ public class Base extends javax.swing.JFrame {
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
         buttonGroup5 = new javax.swing.ButtonGroup();
+        buttonGroup6 = new javax.swing.ButtonGroup();
+        buttonGroup7 = new javax.swing.ButtonGroup();
         All = new javax.swing.JPanel();
         PanLogs = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -1619,7 +1621,6 @@ public class Base extends javax.swing.JFrame {
         CritAscend = new javax.swing.JRadioButton();
         CritDesc = new javax.swing.JRadioButton();
         AnalyseExam = new javax.swing.JButton();
-        CritLeaImp = new javax.swing.JRadioButton();
         CritMosImp = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -1644,8 +1645,9 @@ public class Base extends javax.swing.JFrame {
         FeeBalance = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         FeePaid = new javax.swing.JTextField();
+        FeeDepositFind = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblFeeSearch = new javax.swing.JTable();
         jPanel13 = new javax.swing.JPanel();
         jPanel24 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -2201,7 +2203,8 @@ public class Base extends javax.swing.JFrame {
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Search By"));
 
-        StudentFindType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sort By", "Class", "Reg No", "Stream" }));
+        StudentFindType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Class", "Reg No", "Stream" }));
+        StudentFindType.setToolTipText("");
 
         StudentFind.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -2349,11 +2352,17 @@ public class Base extends javax.swing.JFrame {
 
         jLabel68.setText("Exam Type");
 
+        buttonGroup7.add(RepoTrm1);
         RepoTrm1.setText("Term 1");
+        RepoTrm1.setToolTipText("Terms");
 
+        buttonGroup7.add(RepoTrm2);
         RepoTrm2.setText("Term 2");
+        RepoTrm2.setToolTipText("Terms");
 
+        buttonGroup7.add(RepoTrm3);
         RepoTrm3.setText("Term 3");
+        RepoTrm3.setToolTipText("Terms");
 
         SyncRepo.setText("Sync");
         SyncRepo.addActionListener(new java.awt.event.ActionListener() {
@@ -2618,7 +2627,8 @@ public class Base extends javax.swing.JFrame {
 
         jPanel48.setBorder(javax.swing.BorderFactory.createTitledBorder("Criteria"));
 
-        CritClass.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Class", "Form 1", "Form 2", "Form 3", "Form 4" }));
+        CritClass.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Form 1", "Form 2", "Form 3", "Form 4" }));
+        CritClass.setToolTipText("");
         CritClass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CritClassActionPerformed(evt);
@@ -2626,12 +2636,17 @@ public class Base extends javax.swing.JFrame {
         });
 
         CritStream.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Stream" }));
+        CritStream.setEnabled(false);
 
         CritSubject.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Subjects", "Mathematics", "English", "Kiswahili", "Chemistry", "BIology", "Physics", "Geography", "CRE", "History", "Agriculture", "Business Studies" }));
 
+        buttonGroup6.add(CritAscend);
         CritAscend.setText("Ascending");
+        CritAscend.setToolTipText("Criteria");
 
+        buttonGroup6.add(CritDesc);
         CritDesc.setText("Descending");
+        CritDesc.setToolTipText("Criteria");
 
         AnalyseExam.setText("Process");
         AnalyseExam.addActionListener(new java.awt.event.ActionListener() {
@@ -2640,9 +2655,9 @@ public class Base extends javax.swing.JFrame {
             }
         });
 
-        CritLeaImp.setText("Highest Decrement");
-
+        buttonGroup6.add(CritMosImp);
         CritMosImp.setText("Most Improved");
+        CritMosImp.setToolTipText("Criteria");
 
         jButton1.setText("Print");
 
@@ -2662,21 +2677,20 @@ public class Base extends javax.swing.JFrame {
                                 .addComponent(CritClass, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(CritStream, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(CritLeaImp)
                             .addComponent(CritMosImp))
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel48Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator2)
-                    .addComponent(jSeparator1))
-                .addContainerGap())
             .addGroup(jPanel48Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(AnalyseExam, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel48Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         jPanel48Layout.setVerticalGroup(
             jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2696,10 +2710,8 @@ public class Base extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CritMosImp)
                 .addGap(18, 18, 18)
-                .addComponent(CritLeaImp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(AnalyseExam)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
@@ -2862,6 +2874,13 @@ public class Base extends javax.swing.JFrame {
             }
         });
 
+        FeeDepositFind.setText("Search");
+        FeeDepositFind.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeeDepositFindActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -2880,6 +2899,10 @@ public class Base extends javax.swing.JFrame {
                         .addGap(0, 63, Short.MAX_VALUE))
                     .addComponent(FeePaid))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(FeeDepositFind)
+                .addGap(85, 85, 85))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2896,10 +2919,12 @@ public class Base extends javax.swing.JFrame {
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(FeePaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(FeeDepositFind)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblFeeSearch.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -2910,7 +2935,7 @@ public class Base extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblFeeSearch);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -2928,7 +2953,7 @@ public class Base extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
         );
 
         jTabbedPane3.addTab("Deposits", jPanel12);
@@ -3639,7 +3664,7 @@ public class Base extends javax.swing.JFrame {
                                 .addComponent(jLabel82)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(ExamBay, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(225, Short.MAX_VALUE))
+                        .addContainerGap(142, Short.MAX_VALUE))
                     .addGroup(SenrLayout.createSequentialGroup()
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -3788,7 +3813,7 @@ public class Base extends javax.swing.JFrame {
             .addGroup(PanTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Marks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(Senr, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE))
+                .addComponent(Senr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Sett, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -5226,9 +5251,10 @@ public class Base extends javax.swing.JFrame {
 
     private void GraphBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraphBarActionPerformed
         // TODO add your handling code here:
+        String gg=RepoClas.getSelectedItem().toString();
         try {
             //String Etha="SELECT `Name`,`Mathematics`,`English`,`Kiswahili` FROM "+lst+" WHERE `Class`='Form1' ";
-            String Etha="SELECT `Name`,`Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Agriculture`,`Business` FROM "+lst+" WHERE `Class`='Form1' ";
+            String Etha="SELECT `Name`,`Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Agriculture`,`Business` FROM "+lst+" WHERE `Class`='"+gg+"' ";
             JDBCCategoryDataset jcd=new JDBCCategoryDataset(Recorda.InitDb(),Etha);
             JFreeChart cht=ChartFactory.createBarChart("Student No, Performance", "Student Name","Y-Axs", jcd, PlotOrientation.VERTICAL, false, true, true);
             BarRenderer rndr=new BarRenderer();
@@ -5251,15 +5277,16 @@ public class Base extends javax.swing.JFrame {
             final File chtfile= new File(lst+"Bar-Std Name.png");
             ChartUtilities.saveChartAsPNG(chtfile, cht, cf.getWidth(), cf.getHeight());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            System.out.println(e+" GraphBarActionPerformed");
         }
     }//GEN-LAST:event_GraphBarActionPerformed
 
     private void GraphLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraphLineActionPerformed
         // TODO add your handling code here:
+        String gg=RepoClas.getSelectedItem().toString();
         try {
             //String Etha="SELECT `"+sbj+"` FROM `"+Todas+"` ";
-            String Etha="SELECT `Name`,`Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Agriculture`,`Business` FROM "+lst+" WHERE `Class`='Form1' ";
+            String Etha="SELECT `Name`,`Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Agriculture`,`Business` FROM "+lst+" WHERE `Class`='"+gg+"' ";
             //pst=(PreparedStatement) conn.prepareStatement(Etha);
             //rs=pst.executeQuery();
             JDBCCategoryDataset jcd=new JDBCCategoryDataset(Recorda.InitDb(),Etha);
@@ -5272,20 +5299,20 @@ public class Base extends javax.swing.JFrame {
             cf.setVisible(true);
             cf.pack();
 
-            /*final CategoryPlot catplot= cht.getCategoryPlot();
+            final CategoryPlot catplot= cht.getCategoryPlot();
             rndr= (BarRenderer)catplot.getRenderer();
             DecimalFormat dcfm=new DecimalFormat("#.#");
             rndr.setItemLabelGenerator(new StandardCategoryItemLabelGenerator("{2}",dcfm));
             catplot.setRenderer(rndr);
             rndr.setBasePositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.HALF_ASCENT_CENTER));
             rndr.setItemLabelsVisible(Boolean.TRUE);
-            cht.getCategoryPlot().setRenderer(rndr);*/
+            cht.getCategoryPlot().setRenderer(rndr);
 
             final ChartRenderingInfo cri=new ChartRenderingInfo(new StandardEntityCollection());
             final File chtfile= new File(lst+"Line-Std Name.png");
             ChartUtilities.saveChartAsPNG(chtfile, cht, cf.getWidth(), cf.getHeight());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            System.out.println(e+" GraphLineActionPerformed");
         }
     }//GEN-LAST:event_GraphLineActionPerformed
 
@@ -5324,30 +5351,9 @@ public class Base extends javax.swing.JFrame {
     private void SyncRepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SyncRepoActionPerformed
         // TODO add your handling code here:
         String et,fll,trm;
-        Calendar cl=new GregorianCalendar();
-        int Y=cl.get(Calendar.YEAR);
-        et=RepoEX.getSelectedItem().toString();
-        fll=RepoClas.getSelectedItem().toString();
-        //2018_CATS_Term2_Form2 CATS, Mid-Term, End-Term
-        /*if (et=="CATS") {
-            mck="CATS";
-        }else if (et=="Mid-Term") {
-            mck="Mid_Term";
-        }else if (et=="End-Term") {
-            mck="End_Term";
-        }
-        if (RepoTrm1.isSelected()) {
-            Tem="Term1";
-        }
-        else if (RepoTrm2.isSelected()) {
-            Tem="Term2";
-            //JOptionPane.showMessageDialog(null, Tem);
-        }
-        else if (RepoTrm3.isSelected()) {
-            Tem="Term3";
-        }
-        Tbll=String.valueOf(Y)+"_"+mck+"_"+Tem+"_"+pc;*/
+        
         Nm();
+        
         Tbll=lst;
         String pc=null;
 
@@ -5385,22 +5391,22 @@ public class Base extends javax.swing.JFrame {
         if (pc=="Form3" || pc=="Form4") {
             try {
                 Makeit();
-                String cops="SELECT Name,Reg_No,Stream,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,Business,Agriculture FROM "+Tbll+" WHERE (`Class`='"+pc+"' )";
-                pst=(PreparedStatement) Conn.prepareStatement(cops);
+                String cops="SELECT Name,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,Business,Agriculture FROM "+Tbll+" WHERE (`Class`='"+pc+"' )";
+                pst=Conn.prepareStatement(cops);
                 rs=pst.executeQuery();
                 RepoTbl.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nAction Not Allowed Please");
+                System.out.println(e+" SyncRepoActionPerformed 1");
             }
 
         }else{
             try {
-                String cops="SELECT Name,Reg_No,Stream,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,Business,Agriculture FROM "+Tbll+" WHERE (`Class`='"+pc+"' )";
-                pst=(PreparedStatement) Conn.prepareStatement(cops);
+                String cops="SELECT Name,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,Business,Agriculture FROM "+Tbll+" WHERE (`Class`='"+pc+"' )";
+                pst=Conn.prepareStatement(cops);
                 rs=pst.executeQuery();
                 RepoTbl.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nAction Not Allowed Please");
+                System.out.println(e+" SyncRepoActionPerformed 2");
             }
         }
     }//GEN-LAST:event_SyncRepoActionPerformed
@@ -5432,7 +5438,7 @@ public class Base extends javax.swing.JFrame {
             exp.setParameter(JRExporterParameter.JASPER_PRINT, jprn);
             exp.exportReport();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\nJasper Error");
+            System.out.println(e+" WannaBe");
         }
     }//GEN-LAST:event_WannaBeActionPerformed
 
@@ -6109,7 +6115,6 @@ public class Base extends javax.swing.JFrame {
 
         }
         else if (SbjSenrChus.getSelectedIndex()>1) {
-            snmstr=StrmSenrAdd.getSelectedItem().toString();
             if (StrmSenrAdd.getSelectedIndex()==0) {
                 try {
                     String sql="SELECT ("+lst+".Name),("+lst+".Class),("+lst+".Reg_No),("+lst+"."+snmsbj+") FROM "+lst+",`tbl_Placer`  WHERE ( "+lst+".Reg_No=`tbl_Placer`.Reg_No AND `tbl_Placer`."+snmsbj+"=1 AND `tbl_Placer`.`Class`='"+snmcls+"' )";
@@ -6121,7 +6126,7 @@ public class Base extends javax.swing.JFrame {
                 }
             } else {
                 try {
-                    String sql="SELECT COALESCE("+lst+".Name) AS Name,COALESCE("+lst+".Class) AS Class,COALESCE("+lst+".Reg_No) AS Reg_No,("+lst+"."+snmsbj+") FROM "+lst+",`tbl_Placer`  WHERE ( "+lst+".Reg_No=`tbl_Placer`.Reg_No AND `tbl_Placer`."+snmsbj+"=1 AND `tbl_Placer`.`Class`= '"+snmcls+"' )";
+                    String sql="SELECT ("+lst+".Name), ("+lst+".Class), ("+lst+".Reg_No), ("+lst+"."+snmsbj+") FROM "+lst+",`tbl_Placer`  WHERE ( "+lst+".Reg_No=`tbl_Placer`.Reg_No AND `tbl_Placer`."+snmsbj+"=1 AND `tbl_Placer`.`Class`= '"+snmcls+"' )";
                     pst=(PreparedStatement) Conn.prepareStatement(sql);
                     rs=pst.executeQuery();
                     tblSnrAdd.setModel(DbUtils.resultSetToTableModel(rs));
@@ -6252,67 +6257,35 @@ public class Base extends javax.swing.JFrame {
         }
 
         if (CritAscend.isSelected()) {
-            if (CritStream.getSelectedItem()=="All") {
-                try {
-                    String sql="SELECT ("+lst+".Name),("+lst+".Reg_No),("+lst+"."+ctsbj+") FROM "+lst+"  WHERE `Class`='"+crclas+"' ORDER BY ("+lst+"."+ctsbj+") ASC";
-                    pst=(PreparedStatement) Conn.prepareStatement(sql);
-                    rs=pst.executeQuery();
-                    tbl_Analyse.setModel(DbUtils.resultSetToTableModel(rs));
-                } catch (Exception e) {
-                }
-            }
-            if (CritStream.getSelectedIndex()>0) {
-                try {
-                    String sql="SELECT ("+lst+".Name),("+lst+".Reg_No),("+lst+"."+ctsbj+") FROM "+lst+"  WHERE (`Class`='"+crclas+"' AND `Stream`='"+CritStream.getSelectedItem().toString()+"') ORDER BY ("+lst+"."+ctsbj+") ASC";
-                    pst=(PreparedStatement) Conn.prepareStatement(sql);
-                    rs=pst.executeQuery();
-                    tbl_Analyse.setModel(DbUtils.resultSetToTableModel(rs));
-                } catch (Exception e) {
-                }
+            try {
+                String sql="SELECT ("+lst+".Name),("+lst+".Reg_No),("+lst+"."+ctsbj+") FROM "+lst+"  WHERE `Class`='"+crclas+"' ORDER BY ("+lst+"."+ctsbj+") ASC";
+                pst=(PreparedStatement) Conn.prepareStatement(sql);
+                rs=pst.executeQuery();
+                tbl_Analyse.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (Exception e) {
+                System.out.println(e+" AnalyseExamActionPerformed Asc");
             }
         }
 
         if (CritDesc.isSelected()) {
-            if (CritStream.getSelectedItem()=="All") {
-                try {
-                    String sql="SELECT ("+lst+".Name),("+lst+".Reg_No),("+lst+"."+ctsbj+") FROM "+lst+"  WHERE `Class`='"+crclas+"' ORDER BY ("+lst+"."+ctsbj+") DESC";
-                    pst=(PreparedStatement) Conn.prepareStatement(sql);
-                    rs=pst.executeQuery();
-                    tbl_Analyse.setModel(DbUtils.resultSetToTableModel(rs));
-                } catch (Exception e) {
-                }
-            }
-            if (CritStream.getSelectedIndex()>0) {
-                try {
-                    String sql="SELECT ("+lst+".Name),("+lst+".Reg_No),("+lst+"."+ctsbj+") FROM "+lst+"  WHERE (`Class`='"+crclas+"' AND `Stream`='"+CritStream.getSelectedItem().toString()+"') ORDER BY ("+lst+"."+ctsbj+") DESC";
-                    pst=(PreparedStatement) Conn.prepareStatement(sql);
-                    rs=pst.executeQuery();
-                    tbl_Analyse.setModel(DbUtils.resultSetToTableModel(rs));
-                } catch (Exception e) {
-                }
+            try {
+                String sql="SELECT ("+lst+".Name),("+lst+".Reg_No),("+lst+"."+ctsbj+") FROM "+lst+"  WHERE `Class`='"+crclas+"' ORDER BY ("+lst+"."+ctsbj+") DESC";
+                pst=(PreparedStatement) Conn.prepareStatement(sql);
+                rs=pst.executeQuery();
+                tbl_Analyse.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (Exception e) {
+                System.out.println(e+" AnalyseExamActionPerformed Desc");
             }
         }
 
         if (CritMosImp.isSelected()) {
-            if (CritStream.getSelectedItem()=="All") {
-                try {
-                    String sql="SELECT ("+lst+".Name),("+lst+".Reg_No),("+lst+"."+ctsbj+"),("+lst2+"."+ctsbj+"),("+lst+"."+ctsbj+")-("+lst+"."+ctsbj+") AS Increment FROM "+lst+","+lst2+"  WHERE ("+lst+".Reg_No="+lst2+".Reg_No AND "+lst+".`Class`='"+crclas+"' AND "+lst2+".`Class`='"+crclas+"' ) ";
-                    pst=(PreparedStatement) Conn.prepareStatement(sql);
-                    rs=pst.executeQuery();
-                    tbl_Analyse.setModel(DbUtils.resultSetToTableModel(rs));
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e+"\n Error");
-                }
-            }
-            if (CritStream.getSelectedIndex()>0) {
-                try {
-                    String sql="SELECT ("+lst+".Name),("+lst+".Reg_No),COALESCE("+lst+"."+ctsbj+") AS Current,COALESCE("+lst2+"."+ctsbj+") AS Past, COALESCE("+lst+"."+ctsbj+"-"+lst+"."+ctsbj+") AS Points FROM "+lst+","+lst2+"  WHERE ("+lst+".Reg_No="+lst2+".Reg_No AND "+lst+".`Class`='"+crclas+"' AND "+lst2+".`Class`='"+crclas+"' AND "+lst+".`Stream`='"+CritStream.getSelectedItem().toString()+"' AND "+lst2+".`Stream`='"+CritStream.getSelectedItem().toString()+"') ";
-                    pst=(PreparedStatement) Conn.prepareStatement(sql);
-                    rs=pst.executeQuery();
-                    tbl_Analyse.setModel(DbUtils.resultSetToTableModel(rs));
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e+"\n Error2");
-                }
+            try {
+                String sql="SELECT ("+lst+".Name),("+lst+".Reg_No),("+lst+"."+ctsbj+"),("+lst2+"."+ctsbj+"),("+lst+"."+ctsbj+")-("+lst+"."+ctsbj+") AS Increment FROM "+lst+","+lst2+"  WHERE ("+lst+".Reg_No="+lst2+".Reg_No AND "+lst+".`Class`='"+crclas+"' AND "+lst2+".`Class`='"+crclas+"' ) ";
+                pst=(PreparedStatement) Conn.prepareStatement(sql);
+                rs=pst.executeQuery();
+                tbl_Analyse.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (Exception e) {
+                System.out.println(e+" AnalyseExamActionPerformed Most Imp");
             }
         }
 
@@ -6327,7 +6300,7 @@ public class Base extends javax.swing.JFrame {
         // TODO add your handling code here:
         Nm();
         
-        String ExamClass,ExamSubject,Exam1,Exam2;
+        String ExamClass="nill",ExamSubject,Exam1,Exam2,nom,nom2;
         
         if (Clss.getSelectedIndex()==0) {
             ExamClass="Form1";
@@ -6345,66 +6318,29 @@ public class Base extends javax.swing.JFrame {
         Exam1=this.Ex1Perf.getSelectedItem().toString();
         Exam2=this.Ex2Perf.getSelectedItem().toString();
         
-        String tcl=null,tsbj=null;
-        tsbj=ExamSubject.getSelectedItem().toString();
-        int kk,ll;
-        String sb=null,nom,nom2,tbx1,tbx2;
-        tbx1=Ex1Perf.getSelectedItem().toString();
-        tbx2=Ex2Perf.getSelectedItem().toString();
-        Ex2Perf.setEnabled(Boolean.TRUE);
-
-        /*String bd = " ";
-        String gd = "_";
-        Pattern pt1 = Pattern.compile(bd);
-        Matcher m1 = pt1.matcher(tbx1);
-        Matcher m2 = pt1.matcher(tbx2);
-        tbx1 = m1.replaceAll(gd);
-        tbx2 = m1.replaceAll(gd);
-        //JOptionPane.showMessageDialog(null, "Table 1 ->"+tbx1+"\nTable 2 ->"+tbx2);*/
-
-        kk=ExamSubject.getSelectedIndex();
-        ll=Clss.getSelectedIndex();
-        if (ll==0) {
-            sb="Form1";
-        }
-        if (ll==1) {
-            sb="Form2";
-        }
-        if (ll==2) {
-            sb="Form3";
-        }
-        if (ll==3) {
-            sb="Form4";
-        }
-
-        nom=tsbj+lst;
-        nom2=tsbj+lst2;
+        nom=ExamSubject+lst; nom2=ExamSubject+lst;
 
         if (FltPrf.getSelectedIndex()==0) {
-
-            //lst=tbx1;lst2=tbx2;
-            //JOptionPane.showMessageDialog(null, "Table 1 ->"+lst+"\nTable 2 ->"+lst2);
-
             try {
                 //String sql="SELECT COALESCE("+lst+".Name) as Name,COALESCE("+lst+".Class) as Class,COALESCE("+lst+".Reg_No) as Reg_No,"+lst+"."+tsbj+","+lst2+"."+tsbj+" FROM "+lst+","+lst2+" WHERE ( "+lst+".Reg_No="+lst2+".Reg_No AND "+lst+".Class='"+sb+"')";
-                String sql="SELECT COALESCE("+lst+".Name) as Name,COALESCE("+lst+".Reg_No) as Reg_No,("+lst+"."+tsbj+")AS "+nom+",("+lst2+"."+tsbj+")AS "+nom2+",("+lst+"."+tsbj+"-"+lst2+"."+tsbj+") AS VAP FROM "+lst+","+lst2+"  WHERE ( "+lst+".Reg_No="+lst2+".Reg_No AND "+lst+".Class='"+sb+"')";
+                String sql="SELECT COALESCE("+lst+".Name) as Name,COALESCE("+lst+".Reg_No) as Reg_No,("+lst+"."+ExamSubject+")AS "+nom+",("+lst2+"."+ExamSubject+")AS "+nom2+",("+lst+"."+ExamSubject+"-"+lst2+"."+ExamSubject+") AS VAP FROM "+lst+","+lst2+"  WHERE ( "+lst+".Reg_No="+lst2+".Reg_No AND "+lst+".Class='"+ExamClass+"')";
                 pst=(PreparedStatement) Conn.prepareStatement(sql);
                 rs=pst.executeQuery();
                 tblExamCompare.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nNigga");
+                System.out.println(e+" FltPrfActionPerformed 1");
             }
         }
 
         if (FltPrf.getSelectedIndex()==1) {
             Ex2Perf.setEnabled(Boolean.FALSE);
             try {
-                String sql="SELECT `Name`,`Reg_No`,`"+tsbj+"` FROM "+tbx1+"  WHERE `Class`='"+sb+"' ORDER BY `"+tsbj+"` DESC";
+                String sql="SELECT `Name`,`Reg_No`,`"+ExamSubject+"` FROM "+Exam1+"  WHERE `Class`='"+ExamClass+"' ORDER BY `"+ExamSubject+"` DESC";
                 pst=(PreparedStatement) Conn.prepareStatement(sql);
                 rs=pst.executeQuery();
                 tblExamCompare.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nNigga");
+                System.out.println(e+" FltPrfActionPerformed 2");
             }
         }
 
@@ -6415,26 +6351,6 @@ public class Base extends javax.swing.JFrame {
 
     private void ClssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClssActionPerformed
         // TODO add your handling code here:
-        if (Clss.getSelectedIndex()==0) {
-            ClStr="Form1";
-            StrPerf.removeAllItems();
-            StrPerf();
-        }
-        if (Clss.getSelectedIndex()==1) {
-            ClStr="Form2";
-            StrPerf.removeAllItems();
-            StrPerf();
-        }
-        if (Clss.getSelectedIndex()==2) {
-            ClStr="Form3";
-            StrPerf.removeAllItems();
-            StrPerf();
-        }
-        if (Clss.getSelectedIndex()==3) {
-            ClStr="Form4";
-            StrPerf.removeAllItems();
-            StrPerf();
-        }
     }//GEN-LAST:event_ClssActionPerformed
 
     private void AdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdaActionPerformed
@@ -6590,17 +6506,17 @@ public class Base extends javax.swing.JFrame {
     private void StudentFindKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StudentFindKeyTyped
         // TODO add your handling code here:
         String Varr="";
-        if (StudentFindType.getSelectedIndex()==1) {
+        if (StudentFindType.getSelectedIndex()==0) {
             Varr="Name";
-        }else if (StudentFindType.getSelectedIndex()==2) {
+        }else if (StudentFindType.getSelectedIndex()==1) {
             Varr="Class";
-        }else if (StudentFindType.getSelectedIndex()==3) {
+        }else if (StudentFindType.getSelectedIndex()==2) {
             Varr="Reg_No";
         }
 
         String vl=StudentFind.getText().toString();
         try {               
-            String Lv="SELECT  *  FROM `tbl_Students`  WHERE `"+Varr+"` LIKE '%"+vl+"%' ";
+            String Lv="SELECT  `Name` ,`Surname` ,`Reg_No` ,`KCPE` ,`Birth` ,`Parent` ,`Contact` ,`Residence` ,`Class`  FROM `tbl_Students`  WHERE `"+Varr+"` LIKE '%"+vl+"%' ";
             pst=Conn.prepareStatement(Lv);
             rs=pst.executeQuery();
             tblAllStd.setModel(DbUtils.resultSetToTableModel(rs));  
@@ -6676,6 +6592,7 @@ public class Base extends javax.swing.JFrame {
     private void FeePayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeePayActionPerformed
         // TODO add your handling code here:
         FeePay(Integer.parseInt(PayReg.getText().toString()), Integer.parseInt(PayAmount.getText()));
+        FeeFindUser();
     }//GEN-LAST:event_FeePayActionPerformed
 
     private void FeePayAmountKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FeePayAmountKeyTyped
@@ -6702,27 +6619,7 @@ public class Base extends javax.swing.JFrame {
 
     private void FeeFindUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeeFindUserActionPerformed
         // TODO add your handling code here:
-        String fin=/*Integer.parseInt*/(PayReg.getText().toString());
-        String cops4= "SELECT * FROM `tbl_Students` WHERE `Reg_No` ='"+Integer.parseInt(fin)+"' ";  
-        
-        if (fin.isEmpty() || fin=="") {
-            System.out.println("Null Byte");
-        } else {
-            try {
-                pst = (Conn.prepareStatement(cops4));
-                rs = pst.executeQuery();
-                while (rs.next()) {
-                    PayName.setText(rs.getString("Name"));
-                    PayClass.setText(rs.getString("Class"));
-                }
-                
-                FinanceExpected(PayClass.getText(), fin);
-                
-                PayPaid.setText(String.valueOf(FeePaid(Integer.parseInt(fin))));
-            } catch (Exception e) {
-                System.out.println(e+"\n"+"int final "+fin+"\n"+cops4);
-            }
-        }
+        FeeFindUser();
     }//GEN-LAST:event_FeeFindUserActionPerformed
 
     private void FeePayAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeePayAmountActionPerformed
@@ -6745,6 +6642,35 @@ public class Base extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_StrNxtActionPerformed
+
+    private void FeeDepositFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeeDepositFindActionPerformed
+        // TODO add your handling code here:   
+        try {
+            if (Integer.parseInt(FeeBalance.getText()) > 0) {
+            String sql="SELECT `Name`,`Class`,`Reg_No`,`Total_Fee`,`Paid_Fee`,`Bal_Fee` FROM `tbl_Paid` WHERE `Bal_Fee`='"+Integer.parseInt(FeeBalance.getText())+"' ";
+            try {
+                pst=Conn.prepareStatement(sql);
+                rs=pst.executeQuery();
+                tblFeeSearch.setModel(DbUtils.resultSetToTableModel(rs));
+            }catch (Exception e) {
+                System.out.println(e+"\nFeeDepositFindActionPerformed 1\n Query"+sql);
+            }
+        }
+        } catch (Exception ex) {
+            System.out.println(ex+" \n FeeDepositFindActionPerformed");
+            if ( Integer.parseInt(FeePaid.getText()) > 0) {
+                String sql="SELECT `Name`,`Class`,`Reg_No`,`Total_Fee`,`Paid_Fee`,`Bal_Fee` FROM `tbl_Paid` WHERE `Paid_Fee`='"+Integer.parseInt(FeePaid.getText())+"' ";
+                try {
+                    pst=Conn.prepareStatement(sql);
+                    rs=pst.executeQuery();
+                    tblFeeSearch.setModel(DbUtils.resultSetToTableModel(rs));
+                }catch (Exception e) {
+                    System.out.println(e+"\nFeeDepositFindActionPerformed 2\n Query"+sql);
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_FeeDepositFindActionPerformed
 
     /**
      * @param args the command line arguments
@@ -6819,7 +6745,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JRadioButton CritAscend;
     private javax.swing.JComboBox<String> CritClass;
     private javax.swing.JRadioButton CritDesc;
-    private javax.swing.JRadioButton CritLeaImp;
     private javax.swing.JRadioButton CritMosImp;
     private javax.swing.JComboBox<String> CritStream;
     private javax.swing.JComboBox<String> CritSubject;
@@ -6839,6 +6764,7 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTextField FeeBalance;
     private javax.swing.JComboBox<String> FeeClass;
     private javax.swing.JTextArea FeeComment;
+    private javax.swing.JButton FeeDepositFind;
     private javax.swing.JButton FeeFindUser;
     private javax.swing.JTextField FeeObject;
     private javax.swing.JButton FeeObjectAdd;
@@ -6955,6 +6881,8 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.ButtonGroup buttonGroup6;
+    private javax.swing.ButtonGroup buttonGroup7;
     private javax.swing.JTextField eXA;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -7104,7 +7032,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTabbedPane jTabbedPane6;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
@@ -7118,6 +7045,7 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTable tblExamCompare;
     private javax.swing.JTable tblFee;
     private javax.swing.JTable tblFeeAll;
+    private javax.swing.JTable tblFeeSearch;
     private javax.swing.JTable tblLowerMarks;
     private javax.swing.JTable tblPaid;
     private javax.swing.JTable tblSenrMarkList;
