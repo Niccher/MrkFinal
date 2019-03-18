@@ -248,14 +248,6 @@ public class Base extends javax.swing.JFrame {
         Nm();
         jComboBox3.addItem( lst);
         ExamBay.addItem( lst);
-        try {
-            String sql="SELECT Name,Class,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,History,Business,Agriculture FROM  "+fd+" ";
-            pst=(PreparedStatement) Conn.prepareStatement(sql);
-            //rs=pst.executeQuery();
-        }catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\n PopTeacher");
-            Toolkit.getDefaultToolkit().beep();
-        }
     }
     
     private void PopAdmin(){
@@ -6046,16 +6038,16 @@ public class Base extends javax.swing.JFrame {
         // TODO add your handling code here:
         String Cls=null;
         if (Cbf1.isSelected()) {
-            Cls="Form1";
+            Cls="Form 1";
         }
         if (Cbf2.isSelected()) {
-            Cls="Form2";
+            Cls="Form 2";
         }
         if (Cbf3.isSelected()) {
-            Cls="Form3";
+            Cls="Form 3";
         }
         if (Cbf4.isSelected()) {
-            Cls="Form4";
+            Cls="Form 4";
         }
           
         if ( !(Cbf3.isSelected() || Cbf4.isSelected() || Cbf1.isSelected() || Cbf2.isSelected() )) {            
@@ -6074,7 +6066,7 @@ public class Base extends javax.swing.JFrame {
                 rs=pst.executeQuery();
                 tblLowerMarks.setModel(DbUtils.resultSetToTableModel(rs));
             }catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\n Teacher Init Error 1");
+                System.out.println(e+"\n Teacher Init Error 1");
                 Toolkit.getDefaultToolkit().beep();
             }
             
@@ -6432,12 +6424,28 @@ public class Base extends javax.swing.JFrame {
 
     private void RshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RshActionPerformed
         // TODO add your handling code here:
-        Putta();
+        String cla=null;
+        
+        if (Cbf1.isSelected()) {
+            cla="Form 1";
+        }
+        if (Cbf2.isSelected()) {
+            cla="Form 2";
+        }
+        
+        String sql="SELECT Name,Class,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,History,Business,Agriculture FROM  "+lst+" WHERE `Class`='"+cla+"' ";
+        try {
+            pst=Conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+        }catch (Exception e) {
+            System.out.println(e+"\n PopTeacher \n Query "+sql);
+            Toolkit.getDefaultToolkit().beep();
+        }
     }//GEN-LAST:event_RshActionPerformed
 
     private void BcerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BcerActionPerformed
         // TODO add your handling code here:
-        Pg0.setVisible(Boolean.FALSE);
+        Marks.setVisible(Boolean.FALSE);
         Sett.setVisible(Boolean.TRUE);
         Senr.setVisible(Boolean.FALSE);
     }//GEN-LAST:event_BcerActionPerformed
@@ -6578,6 +6586,8 @@ public class Base extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();
         }
+        
+        FeePaid.setText(null);
     }//GEN-LAST:event_FeeBalanceKeyTyped
 
     private void FeePaidKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FeePaidKeyTyped
@@ -6587,6 +6597,8 @@ public class Base extends javax.swing.JFrame {
             getToolkit().beep();
             evt.consume();
         }
+        
+        FeeBalance.setText(null);
     }//GEN-LAST:event_FeePaidKeyTyped
 
     private void FeePayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeePayActionPerformed
@@ -6647,7 +6659,7 @@ public class Base extends javax.swing.JFrame {
         // TODO add your handling code here:   
         try {
             if (Integer.parseInt(FeeBalance.getText()) > 0) {
-            String sql="SELECT `Name`,`Class`,`Reg_No`,`Total_Fee`,`Paid_Fee`,`Bal_Fee` FROM `tbl_Paid` WHERE `Bal_Fee`='"+Integer.parseInt(FeeBalance.getText())+"' ";
+            String sql="SELECT `Name`,`Class`,`Reg_No`,`Total_Fee`,`Paid_Fee`,`Bal_Fee` FROM `tbl_Paid` WHERE `Bal_Fee` > '"+Integer.parseInt(FeeBalance.getText())+"' ";
             try {
                 pst=Conn.prepareStatement(sql);
                 rs=pst.executeQuery();
@@ -6657,9 +6669,8 @@ public class Base extends javax.swing.JFrame {
             }
         }
         } catch (Exception ex) {
-            System.out.println(ex+" \n FeeDepositFindActionPerformed");
             if ( Integer.parseInt(FeePaid.getText()) > 0) {
-                String sql="SELECT `Name`,`Class`,`Reg_No`,`Total_Fee`,`Paid_Fee`,`Bal_Fee` FROM `tbl_Paid` WHERE `Paid_Fee`='"+Integer.parseInt(FeePaid.getText())+"' ";
+                String sql="SELECT `Name`,`Class`,`Reg_No`,`Total_Fee`,`Paid_Fee`,`Bal_Fee` FROM `tbl_Paid` WHERE `Paid_Fee` > '"+Integer.parseInt(FeePaid.getText())+"' ";
                 try {
                     pst=Conn.prepareStatement(sql);
                     rs=pst.executeQuery();
