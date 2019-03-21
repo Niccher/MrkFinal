@@ -44,7 +44,6 @@
      2018_CATS_Term3.`Name` AS 2018_CATS_Term3_Name,
      2018_CATS_Term3.`Class` AS 2018_CATS_Term3_Class,
      2018_CATS_Term3.`Reg_No` AS 2018_CATS_Term3_Reg_No,
-     2018_CATS_Term3.`Stream` AS 2018_CATS_Term3_Stream,
      2018_CATS_Term3.`Mathematics` AS 2018_CATS_Term3_Mathematics,
      2018_CATS_Term3.`English` AS 2018_CATS_Term3_English,
      2018_CATS_Term3.`Kiswahili` AS 2018_CATS_Term3_Kiswahili,
@@ -62,7 +61,6 @@ FROM
 	<field name="2018_CATS_Term3_Name" class="java.lang.String"/>
 	<field name="2018_CATS_Term3_Class" class="java.lang.String"/>
 	<field name="2018_CATS_Term3_Reg_No" class="java.lang.Integer"/>
-	<field name="2018_CATS_Term3_Stream" class="java.lang.String"/>
 	<field name="2018_CATS_Term3_Mathematics" class="java.lang.Float"/>
 	<field name="2018_CATS_Term3_English" class="java.lang.Float"/>
 	<field name="2018_CATS_Term3_Kiswahili" class="java.lang.Float"/>
@@ -135,13 +133,6 @@ FROM
 				<text><![CDATA[Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="13" y="147" width="100" height="20" uuid="3739d91c-492b-48ed-8db9-6880be405e04"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Stream]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="13" y="178" width="100" height="20" uuid="61a7e231-deb4-4c62-b576-37bbf3f5ca63"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
@@ -161,11 +152,6 @@ FROM
 				<reportElement x="176" y="109" width="249" height="20" uuid="931e1a4e-6a08-4685-8c5f-a0b6a7ff0d88"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{2018_CATS_Term3_Mathematics}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="176" y="147" width="249" height="20" uuid="c7f0ad35-dd40-42f1-b736-02b296b352a5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{2018_CATS_Term3_Stream}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="176" y="178" width="249" height="20" uuid="83076534-6386-47a4-81da-591e20d35c4f"/>

@@ -255,21 +255,6 @@ public class Base extends javax.swing.JFrame {
             String lvv=String.valueOf(i);
             YBx1.addItem(lvv);
         }
-        
-        for (int i = 1; i < 30; i++) {
-            String lvv=String.valueOf(i);
-            ClassCatFM1.addItem(lvv);
-            ClassCatPm1.addItem(lvv);
-        }
-        
-        for (int i = 1; i < 70; i++) {
-            String lvv=String.valueOf(i);
-            ClassMidFM1.addItem(lvv);
-            ClassMidPM1.addItem(lvv);
-            
-            ClassEndFM1.addItem(lvv);
-            ClassEndPM1.addItem(lvv);
-        }
 
         for (int i = 1; i < 100; i++) {
             String lvv=String.valueOf(i);
@@ -351,14 +336,14 @@ public class Base extends javax.swing.JFrame {
     
     private  void Nm(){
         try {
-            String sql="SELECT `Test` FROM `tbl_Tests` ORDER BY `Count` DESC LIMIT 1";
+            String sql="SELECT * FROM `tbl_Tests` ORDER BY `Count` DESC LIMIT 1";
             pst= (PreparedStatement) Conn.prepareStatement(sql);
             rs=pst.executeQuery();
             if (rs.next()) {
                 lst=rs.getString("Test");
             }
 
-            String sql2="SELECT `Test` FROM `tbl_Tests` WHERE Count=(SELECT MAX(Count)-1 FROM `tbl_Tests`) ";
+            String sql2="SELECT * FROM `tbl_Tests` WHERE Count=(SELECT MAX(Count)-1 FROM `tbl_Tests`) ";
             pst= (PreparedStatement) Conn.prepareStatement(sql2);
             rs=pst.executeQuery();
             if (rs.next()) {
@@ -507,9 +492,6 @@ public class Base extends javax.swing.JFrame {
             if (!(Cbf3.isSelected() || Cbf4.isSelected() || Cbf1.isSelected() || Cbf2.isSelected() )) {
                 //JOptionPane.showMessageDialog(null, "Check A Class AND A Term To Proceed");
             }
-            if (Tr1.isSelected() || Tr2.isSelected() || Tr3.isSelected()) {
-
-            }
             va=false;
         } catch (Exception e) {
             va=true;
@@ -525,15 +507,8 @@ public class Base extends javax.swing.JFrame {
     private void Mk(){
         StrNxt.setEnabled(Boolean.FALSE);
         MarkUp();
-        Droop();
         Inst();
-        Lopa();
         Frez();
-        Desp();
-        Cou();
-        IinCon();
-        Star();
-        Slepa();
     }
     
     private void Hoppa(){
@@ -561,48 +536,6 @@ public class Base extends javax.swing.JFrame {
         }
     }
 
-    private void Cutta(){
-        if (NWstdStChm.isSelected()) {
-            chh=chh+1;
-            slSbj="Chemistry";
-            IkiaP2();
-        }
-        if (NWstdStBio.isSelected()) {
-            bioo=bioo+1;
-            slSbj="Biology ";
-            IkiaP2();
-        }
-        if (NWstdStPhy.isSelected()) {
-            phys=phys+1;
-            slSbj="Physics ";
-            IkiaP2();;
-        }
-        if (NWstdStGeo.isSelected()) {
-            Goeg=Goeg+1;
-            slSbj="Geography ";
-            IkiaP2();
-        }
-        if (NWstdStCRE.isSelected()) {
-            cree=cree+1;
-            slSbj="CRE ";
-            IkiaP2();
-        }
-        if (NWstdStHist.isSelected()) {
-            hsty=hsty+1;
-            slSbj="History ";
-            IkiaP2();
-        }
-        if (NWstdStAgr.isSelected()) {
-            agrc=agrc+1;
-            slSbj="Agriculture ";
-            IkiaP2();
-        }
-        if (NWstdStBus.isSelected()) {
-            busns=busns+1;
-            slSbj="Business";
-            IkiaP2();
-        }
-    }
     
     private void Inst(){
         int tt=cc.get(Calendar.YEAR);
@@ -610,117 +543,13 @@ public class Base extends javax.swing.JFrame {
         for (int i = 2015; i < 2025; i++) {
             lvv=String.valueOf(i);
             //YBx.addItem(lvv);
-            YBx.addItem(String.valueOf(tt));
         }
         
-        YBx.setEnabled(Boolean.FALSE);
         Cbf1.setEnabled(false);
         Cbf2.setEnabled(false);
         Cbf3.setEnabled(false);
         Cbf4.setEnabled(false);
         
-    }
-    
-    private void Star(){
-        Nm();        
-        //2017_End_Term_Term2
-        String Lst1=lst;
-        
-        try {
-            String Gtt="CAT";
-            String Gtt1="Mid";
-            String Gtt2="End";
-
-            String Gtt3="Term1";
-            String Gtt4="Term2";
-            String Gtt5="Term3";
-
-                Pattern r = Pattern.compile(Gtt);
-                Pattern r1 = Pattern.compile(Gtt1);
-                Pattern r2 = Pattern.compile(Gtt2);
-
-                Pattern r3 = Pattern.compile(Gtt3);
-                Pattern r4 = Pattern.compile(Gtt4);
-                Pattern r5 = Pattern.compile(Gtt5);
-
-                Matcher m = r.matcher(Lst1);
-                Matcher m1 = r1.matcher(Lst1);
-                Matcher m2 = r2.matcher(Lst1);
-
-                Matcher m3 = r3.matcher(Lst1);
-                Matcher m4 = r4.matcher(Lst1);
-                Matcher m5 = r5.matcher(Lst1);
-
-                if (m.find( )) {
-                   ExxamTY.setSelectedIndex(0);
-                   RepoEX.setSelectedIndex(0);
-                   RepoEX1.setSelectedIndex(2);
-                } 
-                else if (m1.find( )) {
-                   ExxamTY.setSelectedIndex(1);
-                   RepoEX.setSelectedIndex(1);
-                   RepoEX1.setSelectedIndex(1);
-                }
-                else if (m2.find( )) {
-                   ExxamTY.setSelectedIndex(2);
-                   RepoEX.setSelectedIndex(2);
-                   RepoEX1.setSelectedIndex(2);
-                }
-                else {
-                   ExxamTY.setSelectedIndex(3);
-                }
-
-                if (m3.find( )) {
-                   Tr1.setSelected(Boolean.TRUE);
-                   RepoTrm1.setSelected(true);
-                   RepoTrm4.setSelected(true);
-                } 
-                else if (m4.find( )) {
-                   Tr2.setSelected(Boolean.TRUE);
-                   RepoTrm2.setSelected(true);
-                   RepoTrm5.setSelected(true);
-                }
-                else if (m5.find( )) {
-                   Tr3.setSelected(Boolean.TRUE);
-                   RepoTrm3.setSelected(true);
-                   RepoTrm6.setSelected(true);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "NO Valid Table");
-                }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"Tables Mismatch");
-        }
-            ExxamTY.setEnabled(Boolean.FALSE);
-            Tr1.setEnabled(Boolean.FALSE);
-            Tr2.setEnabled(Boolean.FALSE);
-            Tr3.setEnabled(Boolean.FALSE);
-            RepoTrm3.setEnabled(Boolean.FALSE);
-            RepoTrm2.setEnabled(Boolean.FALSE);
-            RepoTrm1.setEnabled(Boolean.FALSE);
-            RepoTrm4.setEnabled(Boolean.FALSE);
-            RepoTrm5.setEnabled(Boolean.FALSE);
-            RepoTrm6.setEnabled(Boolean.FALSE);
-            RepoEX.setEnabled(false);
-            RepoEX1.setEnabled(false);
-    }
-    
-    private void Maka(){
-        int tt=cc.get(Calendar.YEAR);
-        String yer=String.valueOf(tt);
-        String TY=ExxamTY.getSelectedItem().toString();
-        String tam=null;
-        if (Tr1.isSelected()) {
-            tam="Term1";
-        }
-        if (Tr2.isSelected()) {
-            tam="Term2";
-        }
-        if (Tr3.isSelected()) {
-            tam="Term3";
-        }
-        
-        fd=yer+"_"+TY+"_"+tam;
     }
     
     private  void Setta(Double x,String j,int p){
@@ -749,46 +578,9 @@ public class Base extends javax.swing.JFrame {
         Cbf6.setEnabled(Boolean.FALSE);
         Cbf7.setEnabled(Boolean.FALSE);
         Cbf8.setEnabled(Boolean.FALSE);
-        F1Log.setText(null);
-        F4Log.setText(null);
-        F3Log.setText(null);
-        F2Log.setText(null);
     }
     
-    private void Lasta(){
-        try {
-            String sql="SELECT `Test` FROM `tbl_Tests` ORDER BY `Count` DESC LIMIT 1";
-            pst= (PreparedStatement) Conn.prepareStatement(sql);
-            rs=pst.executeQuery();
-            if (rs.next()) {
-                lst=rs.getString("Test");
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\nCurrent Exam Table Error");
-            Toolkit.getDefaultToolkit().beep();
-        }
-        
-        //cl=Classe.getSelectedItem().toString();
-        cl=ClassLv.getSelectedItem().toString();
-        
-        if (cl=="Form 1") {
-            tbl="Form1";
-        }else if(cl=="Form 2"){
-            tbl="Form2";
-        }else if(cl=="Form 3"){
-            tbl="Form3";
-        }else if(cl=="Form 4"){
-            tbl="Form4";
-        }
-    }
-    
-    private void Frez(){
-        Trmm();
-        Finda();
-        ExamType.setEnabled(Boolean.FALSE);
-        Terma.setEnabled(Boolean.FALSE);
-        
+    private void Frez(){        
         try {
             String sql="SELECT `Test` FROM `tbl_Tests` ";
             pst= (PreparedStatement) Conn.prepareStatement(sql);
@@ -808,52 +600,6 @@ public class Base extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e+"\nCurrent Exam Table Error");
             Toolkit.getDefaultToolkit().beep();
         }
-    }
-    
-    private void Trmm(){
-        int mnt=cc.get(Calendar.MONTH)+1;
-        if(mnt<5){
-            Trrm="Term One";
-            Terma.setSelectedIndex(00);
-        }
-        if(mnt>4 &&mnt<9){
-            Trrm="Term Two";
-            Terma.setSelectedIndex(01);
-        }
-        if(mnt>8 ){
-            Trrm="Term Three";
-            Terma.setSelectedIndex(02);
-        }
-    }
-    
-    private void Finda(){
-        Lasta();
-        String Lst1=lst;
-        String Gtt="CAT";
-        String Gtt1="Mid";
-        String Gtt2="End";
-        
-            Pattern r = Pattern.compile(Gtt);
-            Pattern r1 = Pattern.compile(Gtt1);
-            Pattern r2 = Pattern.compile(Gtt2);
-            
-            Matcher m = r.matcher(Lst1);
-            Matcher m1 = r1.matcher(Lst1);
-            Matcher m2 = r2.matcher(Lst1);
-            
-            if (m.find( )) {
-               ExamType.setSelectedIndex(0);
-            } 
-            else if (m1.find( )) {
-               ExamType.setSelectedIndex(1);
-            }
-            else if (m2.find( )) {
-               ExamType.setSelectedIndex(2);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Corrupted Search");
-            }
-        
     }
     
     private void Comp(){
@@ -880,73 +626,7 @@ public class Base extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e+"\nMarks Parse Error");
             Toolkit.getDefaultToolkit().beep();
-        }
-        Tabler();   
-    }
-    
-    private void Tabler(){
-        int cur=SbjBox.getSelectedIndex();
-        //Mt,En,Kw,Ce,Bl,Ph,Go,Ht,Cr,Al,Bu;
-        if (cur==1) {
-            mrk=Integer.valueOf(Mt);
-        }
-        if (cur==2) {
-            mrk=Integer.valueOf(En);
-        }
-        if (cur==3) {
-            mrk=Integer.valueOf(Kw);
-        }
-        if (cur==4) {
-            mrk=Integer.valueOf(Ce);
-        }
-        if (cur==5) {
-            mrk=Integer.valueOf(Bl);
-        }
-        if (cur==6) {
-            mrk=Integer.valueOf(Ph);
-        }
-        if (cur==7) {
-            mrk=Integer.valueOf(Go);
-        }
-        if (cur==8) {
-            mrk=Integer.valueOf(Ht);
-        }
-        if (cur==9) {
-            mrk=Integer.valueOf(Cr);
-        }
-        if (cur==10) {
-            mrk=Integer.valueOf(Al);
-        }
-        if (cur==11) {
-            mrk=Integer.valueOf(Bu);
-        }
-        //JOptionPane.showMessageDialog(null, Mt+En+Kw+Ce+Bl+Ph+Go+Ht+Cr+Al+Bu+"\n"+mrk);
-        
-    }
-    
-    private void Searc(){
-        if (SrchConst.getSelectedIndex()==0) {
-            Varr="Reg_No";
-        }else if (SrchConst.getSelectedIndex()==1) {
-            Varr="Name";
-        }else if (SrchConst.getSelectedIndex()==2) {
-            Varr="Class";
-        }
-        //String Crt=SrchConst.getSelectedItem().toString();
-        //String Crt=Varr;
-        String vl=ConsBox.getText().toString();
-        try {               
-                String Lv="SELECT  Name,Surname,Reg_No,KCPE,Class,Dorm,Parent,Residence,Contact  FROM `tbl_Students`  WHERE `"+Varr+"` LIKE '%"+vl+"%' ";
-                pst=(PreparedStatement) Conn.prepareStatement(Lv);
-                rs=pst.executeQuery();
-                //while(rs.next()) { 
-                    /*pst=conn.prepareStatement(Lv);
-                    rs=pst.executeQuery();*/
-                    ClVwTY.setModel(DbUtils.resultSetToTableModel(rs));
-            //}   
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\n");
-        }
+        }  
     }
     
     private void Setta(){        
@@ -966,69 +646,10 @@ public class Base extends javax.swing.JFrame {
         spa=Trm+"-"+ths;
     }
     
-    private void Desp(){
-        try {
-                String sql="SELECT `Test` FROM `tbl_Tests` ORDER BY `Count` DESC LIMIT 1 ";
-                pst= (PreparedStatement) Conn.prepareStatement(sql);
-                rs=pst.executeQuery();
-                if (rs.next()) {
-                    lst=rs.getString("Test");
-                    TvwLst.addItem(lst);
-                    GenTbl.addItem(lst);
-                    uPtBL.addItem(lst);
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nCurrent Exam Table Error");
-                Toolkit.getDefaultToolkit().beep();
-            }
-        
-        jLabel3.setEnabled(Boolean.FALSE);
-        OtCom.setEnabled(Boolean.FALSE);
-        //Classe.setEnabled(Boolean.FALSE);
-        OtCom.setText(null);
-        
-        Trm1.setEnabled(Boolean.FALSE);
-        Trm2.setEnabled(Boolean.FALSE);
-        Trm3.setEnabled(Boolean.FALSE);
-        Cts.setEnabled(Boolean.FALSE);
-        Mts.setEnabled(Boolean.FALSE);
-        Ets.setEnabled(Boolean.FALSE);
-        
-        GenTvw.setEnabled(Boolean.FALSE);
-        TvwLst.setEnabled(Boolean.FALSE);
-        ConnecView.setEnabled(false);
-        uPtBL.setEnabled(Boolean.FALSE);
-        GenTbl.setEnabled(Boolean.FALSE);
-        jLabel3.setEnabled(true);
-        RegAsBtn.setEnabled(Boolean.TRUE);
-    }
-    
-    private void IinCon (){
-        Integer ki=ConnecView.getSelectedIndex();
-        new Thread(new Runnable(){
-            public void run(){
-                Socket ss=new Socket();
-                InetSocketAddress add=new InetSocketAddress("www.google.com",80);
-                try {
-                    ss.connect(add,8080);
-                    ConnecView.setSelectedIndex(0);
-                } catch (Exception e) {
-                    ConnecView.setSelectedIndex(1);
-                }
-            }
-        }).start();
-        try {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-        }
-        
-    }
-    
     private void rEDA(){
-        String Tbb=TvwLst.getSelectedItem().toString();
         try {
             FileWriter fw=new FileWriter(lst+".csv");
-            String sql="SELECT * FROM `"+Tbb+"`";
+            String sql="SELECT * FROM `"+lst+"`";
             Statement stmt=(Statement) Conn.createStatement();
             rs=stmt.executeQuery(sql);
             String lista="Count,Name,Class,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,History,CRE,Business,Agriculture";
@@ -1073,35 +694,6 @@ public class Base extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Succesfully Parsed");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e+"\nNigga");
-        }
-    }
-    
-    private void Cou(){
-        for (int i = 0; i < 31; i++) {
-            int fct=i;
-            ClassCatFM1.addItem(String.valueOf(fct));
-            ClassCatPm1.addItem(String.valueOf(fct));
-        }
-        for (int i = 0; i < 101; i++) {
-            int fct=i;
-            ClassMidFM1.addItem(String.valueOf(fct));
-            ClassMidPM1.addItem(String.valueOf(fct));
-            
-            ClassEndFM1.addItem(String.valueOf(fct));
-            ClassEndPM1.addItem(String.valueOf(fct));
-            Hrange.addItem(String.valueOf(i));
-            Lrange.addItem(String.valueOf(i));
-        }
-        //ClassCatPm1
-    }
-     
-    private void Mng(){
-        try {
-            String Kret="UPDATE `tbl_ClassList` SET `"+Str+"`= 1 WHERE `Class`='"+Fm+"'";
-            pst=(PreparedStatement) Conn.prepareStatement(Kret);
-            pst.execute();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex+"\nClass Variables Errors");
         }
     }
     
@@ -1280,34 +872,15 @@ public class Base extends javax.swing.JFrame {
             }
     }
     
-    private void StrNx(){
-        int Nr,St,Ws,Es;
+    private void StrNx( String cl){
         try {
-                String sql="SELECT * FROM `tbl_ClassList` WHERE `Class`='"+ClStr+"' ";
-                pst=(PreparedStatement) Conn.prepareStatement(sql);
-                rs=pst.executeQuery();
-                while (rs.next()) {
-                    Nr=rs.getInt("North");
-                    St=rs.getInt("South");
-                    Ws=rs.getInt("West");
-                    Es=rs.getInt("East");
-                    StrNxt.addItem("All");
-                    if(Nr ==1){
-                        StrNxt.addItem("North");
-                    }
-                    if(St ==1){
-                        StrNxt.addItem("South");
-                    }
-                    if(Ws ==1){
-                        StrNxt.addItem("West");
-                    }
-                    if(Es ==1){
-                        StrNxt.addItem("East");
-                    }   
-                }
-            }catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nStr Error 22");
-            }
+            String sql="SELECT * FROM `"+lst+"` WHERE `Class`='"+cl+"' ";
+            pst=Conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            Leva.setModel(DbUtils.resultSetToTableModel(rs));
+        }catch (Exception e) {
+            System.out.println(e+"\n StrNx");
+        }
     }
     
     private void Chus(){
@@ -1570,8 +1143,6 @@ public class Base extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         PanReports = new javax.swing.JPanel();
         jPanel26 = new javax.swing.JPanel();
-        JrXmGen = new javax.swing.JButton();
-        jLabel52 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
         RepoClas = new javax.swing.JComboBox<>();
         RepoEX = new javax.swing.JComboBox<>();
@@ -1582,11 +1153,7 @@ public class Base extends javax.swing.JFrame {
         RepoTbl = new javax.swing.JTable();
         VwCred = new javax.swing.JButton();
         jLabel68 = new javax.swing.JLabel();
-        RepoTrm1 = new javax.swing.JRadioButton();
-        RepoTrm2 = new javax.swing.JRadioButton();
-        RepoTrm3 = new javax.swing.JRadioButton();
         SyncRepo = new javax.swing.JButton();
-        Mprnt = new javax.swing.JButton();
         WannaBe = new javax.swing.JButton();
         PanExams = new javax.swing.JPanel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
@@ -1763,57 +1330,20 @@ public class Base extends javax.swing.JFrame {
         StrNxt = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         Leva = new javax.swing.JTable();
-        jPanel23 = new javax.swing.JPanel();
-        jPanel25 = new javax.swing.JPanel();
-        ClassMidPM1 = new javax.swing.JComboBox<>();
-        ClassLvMid1 = new javax.swing.JComboBox<>();
-        jLabel56 = new javax.swing.JLabel();
-        jLabel57 = new javax.swing.JLabel();
-        jLabel58 = new javax.swing.JLabel();
-        ClassLvMidSbj1 = new javax.swing.JComboBox<>();
-        jLabel59 = new javax.swing.JLabel();
-        ClassMidFM1 = new javax.swing.JComboBox<>();
-        PP1m = new javax.swing.JCheckBox();
-        PP2m = new javax.swing.JCheckBox();
-        PP3m = new javax.swing.JCheckBox();
-        FFMid = new javax.swing.JButton();
-        jPanel27 = new javax.swing.JPanel();
-        ClassEndPM1 = new javax.swing.JComboBox<>();
-        ClassLvEnd1 = new javax.swing.JComboBox<>();
-        jLabel60 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
-        jLabel62 = new javax.swing.JLabel();
-        ClassLvEndSbj1 = new javax.swing.JComboBox<>();
-        jLabel63 = new javax.swing.JLabel();
-        ClassEndFM1 = new javax.swing.JComboBox<>();
-        PP1e = new javax.swing.JCheckBox();
-        PP2e = new javax.swing.JCheckBox();
-        PP3e = new javax.swing.JCheckBox();
-        FFEnd = new javax.swing.JButton();
-        jPanel28 = new javax.swing.JPanel();
-        ClassCatPm1 = new javax.swing.JComboBox<>();
-        jLabel64 = new javax.swing.JLabel();
-        jLabel65 = new javax.swing.JLabel();
-        ClassLvCatSbj1 = new javax.swing.JComboBox<>();
-        jLabel66 = new javax.swing.JLabel();
-        ClassLvCat1 = new javax.swing.JComboBox<>();
-        jLabel67 = new javax.swing.JLabel();
-        ClassCatFM1 = new javax.swing.JComboBox<>();
-        FFCATS = new javax.swing.JButton();
         jPanel34 = new javax.swing.JPanel();
         jTabbedPane6 = new javax.swing.JTabbedPane();
         jPanel35 = new javax.swing.JPanel();
         jPanel36 = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
-        AddF1 = new javax.swing.JCheckBox();
-        AddF2 = new javax.swing.JCheckBox();
-        AddF3 = new javax.swing.JCheckBox();
-        AddF4 = new javax.swing.JCheckBox();
         SCls = new javax.swing.JButton();
         jScrollPane15 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
         jPanel41 = new javax.swing.JPanel();
         jLabel73 = new javax.swing.JLabel();
         FormGrad = new javax.swing.JComboBox<>();
@@ -2268,20 +1798,11 @@ public class Base extends javax.swing.JFrame {
         jPanel26.setMinimumSize(new java.awt.Dimension(933, 410));
         jPanel26.setName(""); // NOI18N
 
-        JrXmGen.setText("Generate");
-        JrXmGen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JrXmGenActionPerformed(evt);
-            }
-        });
-
-        jLabel52.setText("Exam Of Interest");
-
         jLabel53.setText("Class");
 
         RepoClas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Form 1", "Form 2", "Form 3", "Form 4", "--Null--" }));
 
-        RepoEX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATS", "Mid-Term", "End-Term", "--Null--" }));
+        RepoEX.setEnabled(false);
 
         jPanel46.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -2306,16 +1827,16 @@ public class Base extends javax.swing.JFrame {
             .addGroup(jPanel46Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(GraphBar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(GraphLine)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         jPanel46Layout.setVerticalGroup(
             jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel46Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(GraphBar, javax.swing.GroupLayout.PREFERRED_SIZE, 15, Short.MAX_VALUE)
+                .addGroup(jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GraphBar, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(GraphLine, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -2342,31 +1863,12 @@ public class Base extends javax.swing.JFrame {
             }
         });
 
-        jLabel68.setText("Exam Type");
+        jLabel68.setText("Exam ");
 
-        buttonGroup7.add(RepoTrm1);
-        RepoTrm1.setText("Term 1");
-        RepoTrm1.setToolTipText("Terms");
-
-        buttonGroup7.add(RepoTrm2);
-        RepoTrm2.setText("Term 2");
-        RepoTrm2.setToolTipText("Terms");
-
-        buttonGroup7.add(RepoTrm3);
-        RepoTrm3.setText("Term 3");
-        RepoTrm3.setToolTipText("Terms");
-
-        SyncRepo.setText("Sync");
+        SyncRepo.setText("Load");
         SyncRepo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SyncRepoActionPerformed(evt);
-            }
-        });
-
-        Mprnt.setText("Many Print");
-        Mprnt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MprntActionPerformed(evt);
             }
         });
 
@@ -2382,44 +1884,30 @@ public class Base extends javax.swing.JFrame {
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel52)
-                    .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(RepoEX, 0, 110, Short.MAX_VALUE)
-                    .addComponent(RepoClas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(44, 44, 44)
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel26Layout.createSequentialGroup()
-                        .addComponent(SyncRepo)
-                        .addGap(15, 15, 15)
-                        .addComponent(Mprnt))
+                        .addContainerGap()
+                        .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RepoClas, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(125, 125, 125)
+                        .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel26Layout.createSequentialGroup()
-                        .addComponent(jLabel68, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(RepoTrm1)
-                        .addGap(18, 18, 18)
-                        .addComponent(RepoTrm2)
-                        .addGap(18, 18, 18)
-                        .addComponent(RepoTrm3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                        .addGap(149, 149, 149)
+                        .addComponent(SyncRepo)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
-                        .addComponent(JrXmGen)
-                        .addGap(38, 38, 38)
-                        .addComponent(VwCred, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(RepoEX, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel26Layout.createSequentialGroup()
+                        .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                         .addComponent(WannaBe, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))))
+                        .addGap(69, 69, 69)))
+                .addComponent(VwCred, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
             .addComponent(jScrollPane5)
-            .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel26Layout.createSequentialGroup()
-                    .addGap(547, 547, 547)
-                    .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(379, Short.MAX_VALUE)))
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2429,27 +1917,17 @@ public class Base extends javax.swing.JFrame {
                     .addComponent(jLabel53)
                     .addComponent(RepoClas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel68)
-                    .addComponent(RepoTrm1)
-                    .addComponent(RepoTrm2)
-                    .addComponent(RepoTrm3)
-                    .addComponent(WannaBe))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel52)
-                        .addComponent(RepoEX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(SyncRepo))
-                    .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(JrXmGen)
-                        .addComponent(VwCred)
-                        .addComponent(Mprnt)))
+                    .addComponent(RepoEX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
-            .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel26Layout.createSequentialGroup()
-                    .addGap(55, 55, 55)
-                    .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(517, Short.MAX_VALUE)))
+                .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(VwCred)
+                    .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(WannaBe)
+                        .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SyncRepo)
+                            .addComponent(jPanel46, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PanReportsLayout = new javax.swing.GroupLayout(PanReports);
@@ -4071,275 +3549,6 @@ public class Base extends javax.swing.JFrame {
 
         jTabbedPane4.addTab("Transfers", jPanel21);
 
-        jPanel23.setDoubleBuffered(false);
-        jPanel23.setFocusable(false);
-
-        jPanel25.setBorder(javax.swing.BorderFactory.createTitledBorder("Mid-Term Results"));
-
-        ClassLvMid1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Form 1", "Form 2", "Form 3", "Form 4" }));
-
-        jLabel56.setText("Form");
-
-        jLabel57.setText("Subject");
-
-        jLabel58.setText("Pass Marks");
-
-        ClassLvMidSbj1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Subjects", "Mathematics", "English", "Kiswahili", "Chemistry", "Biology", "Physics", "Geography", "CRE", "History", "Agriculture", "Business" }));
-        ClassLvMidSbj1.setEnabled(false);
-        ClassLvMidSbj1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClassLvMidSbj1ActionPerformed(evt);
-            }
-        });
-
-        jLabel59.setText("Fail Mark");
-
-        PP1m.setText("Paper One");
-
-        PP2m.setText("Paper Two");
-
-        PP3m.setText("Paper Three");
-
-        FFMid.setText("Set");
-        FFMid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FFMidActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel25Layout = new javax.swing.GroupLayout(jPanel25);
-        jPanel25.setLayout(jPanel25Layout);
-        jPanel25Layout.setHorizontalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel25Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel56)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ClassLvMid1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(jLabel57)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addComponent(PP1m)
-                        .addGap(18, 18, 18)
-                        .addComponent(PP2m)
-                        .addGap(18, 18, 18)
-                        .addComponent(PP3m)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(FFMid))
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addComponent(ClassLvMidSbj1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel58)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ClassMidPM1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ClassMidFM1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
-        );
-        jPanel25Layout.setVerticalGroup(
-            jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel25Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ClassMidPM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel58)
-                    .addComponent(ClassLvMidSbj1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel57)
-                    .addComponent(ClassLvMid1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel56)
-                    .addComponent(jLabel59)
-                    .addComponent(ClassMidFM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PP1m)
-                    .addComponent(PP3m)
-                    .addComponent(PP2m)
-                    .addComponent(FFMid))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel27.setBorder(javax.swing.BorderFactory.createTitledBorder("End-Term Results"));
-
-        ClassLvEnd1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Form 1", "Form 2", "Form 3", "Form 4" }));
-
-        jLabel60.setText("Form");
-
-        jLabel61.setText("Subject");
-
-        jLabel62.setText("Pass Marks");
-
-        ClassLvEndSbj1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Subjects", "Mathematics", "English", "Kiswahili", "Chemistry", "Biology", "Physics", "Geography", "CRE", "History", "Agriculture", "Business" }));
-        ClassLvEndSbj1.setEnabled(false);
-        ClassLvEndSbj1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClassLvEndSbj1ActionPerformed(evt);
-            }
-        });
-
-        jLabel63.setText("Fail Mark");
-
-        PP1e.setText("Paper One");
-
-        PP2e.setText("Paper Two");
-
-        PP3e.setText("Paper Three");
-
-        FFEnd.setText("Set");
-        FFEnd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FFEndActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
-        jPanel27.setLayout(jPanel27Layout);
-        jPanel27Layout.setHorizontalGroup(
-            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel27Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel60)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ClassLvEnd1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(jLabel61)
-                .addGap(37, 37, 37)
-                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel27Layout.createSequentialGroup()
-                        .addComponent(ClassLvEndSbj1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel62)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ClassEndPM1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ClassEndFM1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel27Layout.createSequentialGroup()
-                        .addComponent(PP1e)
-                        .addGap(18, 18, 18)
-                        .addComponent(PP2e)
-                        .addGap(18, 18, 18)
-                        .addComponent(PP3e)
-                        .addGap(104, 104, 104)
-                        .addComponent(FFEnd)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel27Layout.setVerticalGroup(
-            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel27Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ClassEndPM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel62)
-                    .addComponent(ClassLvEndSbj1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel61)
-                    .addComponent(ClassLvEnd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel60)
-                    .addComponent(jLabel63)
-                    .addComponent(ClassEndFM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PP2e)
-                    .addComponent(PP3e)
-                    .addComponent(PP1e)
-                    .addComponent(FFEnd)))
-        );
-
-        jPanel28.setBorder(javax.swing.BorderFactory.createTitledBorder("CAT Results"));
-
-        jLabel64.setText("Pass Marks");
-
-        jLabel65.setText("Subject");
-
-        ClassLvCatSbj1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Subjects", "Mathematics", "English", "Kiswahili", "Chemistry", "Biology", "Physics", "Geography", "CRE", "History", "Agriculture", "Business" }));
-        ClassLvCatSbj1.setEnabled(false);
-
-        jLabel66.setText("Form");
-
-        ClassLvCat1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Form1", "Form2", "Form3", "Form4" }));
-
-        jLabel67.setText("Fail Mark");
-
-        FFCATS.setText("Set");
-        FFCATS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FFCATSActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
-        jPanel28.setLayout(jPanel28Layout);
-        jPanel28Layout.setHorizontalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel28Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel66)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ClassLvCat1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel65)
-                .addGap(36, 36, 36)
-                .addComponent(ClassLvCatSbj1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jLabel64)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ClassCatPm1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jLabel67, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ClassCatFM1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(FFCATS)
-                .addGap(141, 141, 141))
-        );
-        jPanel28Layout.setVerticalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel28Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ClassCatPm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel64)
-                    .addComponent(ClassLvCatSbj1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel65)
-                    .addComponent(ClassLvCat1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel66)
-                    .addComponent(jLabel67)
-                    .addComponent(ClassCatFM1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(FFCATS))
-        );
-
-        javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
-        jPanel23.setLayout(jPanel23Layout);
-        jPanel23Layout.setHorizontalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel27, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel23Layout.setVerticalGroup(
-            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel23Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
-        );
-
-        jTabbedPane4.addTab("Setting Marks", null, jPanel23, "");
-
         jPanel34.setEnabled(false);
         jPanel34.setRequestFocusEnabled(false);
         jPanel34.setVerifyInputWhenFocusTarget(false);
@@ -4347,34 +3556,6 @@ public class Base extends javax.swing.JFrame {
         jPanel36.setBorder(javax.swing.BorderFactory.createTitledBorder("Class Streams"));
 
         jLabel45.setText("Add Classes To Interact With");
-
-        AddF1.setText("Form 1");
-        AddF1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddF1ActionPerformed(evt);
-            }
-        });
-
-        AddF2.setText("Form 2");
-        AddF2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddF2ActionPerformed(evt);
-            }
-        });
-
-        AddF3.setText("Form 3");
-        AddF3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddF3ActionPerformed(evt);
-            }
-        });
-
-        AddF4.setText("Form 4");
-        AddF4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddF4ActionPerformed(evt);
-            }
-        });
 
         SCls.setText("Set Classes");
         SCls.addActionListener(new java.awt.event.ActionListener() {
@@ -4398,6 +3579,14 @@ public class Base extends javax.swing.JFrame {
 
         jLabel8.setText("Stream Name");
 
+        jRadioButton1.setText("Form 1");
+
+        jRadioButton2.setText("Form 2");
+
+        jRadioButton3.setText("Form 3");
+
+        jRadioButton4.setText("Form 4");
+
         javax.swing.GroupLayout jPanel36Layout = new javax.swing.GroupLayout(jPanel36);
         jPanel36.setLayout(jPanel36Layout);
         jPanel36Layout.setHorizontalGroup(
@@ -4405,14 +3594,14 @@ public class Base extends javax.swing.JFrame {
             .addGroup(jPanel36Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel45)
+                .addGap(93, 93, 93)
+                .addComponent(jRadioButton1)
                 .addGap(18, 18, 18)
-                .addComponent(AddF1)
-                .addGap(31, 31, 31)
-                .addComponent(AddF2)
+                .addComponent(jRadioButton2)
                 .addGap(18, 18, 18)
-                .addComponent(AddF3)
-                .addGap(31, 31, 31)
-                .addComponent(AddF4)
+                .addComponent(jRadioButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel36Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
@@ -4422,7 +3611,7 @@ public class Base extends javax.swing.JFrame {
                         .addComponent(SCls, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel36Layout.setVerticalGroup(
@@ -4431,10 +3620,10 @@ public class Base extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel36Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
-                    .addComponent(AddF1)
-                    .addComponent(AddF2)
-                    .addComponent(AddF3)
-                    .addComponent(AddF4))
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton4))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(55, 55, 55))
@@ -5237,10 +4426,6 @@ public class Base extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ExtActionPerformed
 
-    private void JrXmGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JrXmGenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JrXmGenActionPerformed
-
     private void GraphBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraphBarActionPerformed
         // TODO add your handling code here:
         String gg=RepoClas.getSelectedItem().toString();
@@ -5328,15 +4513,15 @@ public class Base extends javax.swing.JFrame {
             String locc="/media/niccher/Bookies/Ap/Coding Theory/3/Muruaky3.0/src/v3/ClassAll.jrxml";
             JasperDesign jd=JRXmlLoader.load(locc);
             //lst="Name Class Reg_No Mathematics English Kiswahili Chemistry Biology Physics Geography History CRE Business Agriculture";
-            /*sq="SELECT Name,Class,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,History,CRE,Business,Agriculture FROM "+lst+" WHERE Class="+csa+" ";
+            sq="SELECT Name,Class,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,History,CRE,Business,Agriculture FROM "+lst+" WHERE Class="+csa+" ";
             JRDesignQuery nq=new JRDesignQuery();
             nq.setText(sq);
-            jd.setQuery(nq);*/
+            jd.setQuery(nq);
             JasperReport jas=JasperCompileManager.compileReport(jd);
             JasperPrint jprn=JasperFillManager.fillReport(jas, null, Conn);
             JasperViewer.viewReport(jprn,Boolean.FALSE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\nJasper Error\n"+csa+"\n"+sq);
+            System.out.println(e+" \nVwCredActionPerformed");
         }
     }//GEN-LAST:event_VwCredActionPerformed
 
@@ -5348,6 +4533,7 @@ public class Base extends javax.swing.JFrame {
         
         Tbll=lst;
         String pc=null;
+        RepoEX.addItem(lst);
 
         if (RepoClas.getSelectedIndex()==0) {
             pc="Form1";
@@ -5362,23 +4548,6 @@ public class Base extends javax.swing.JFrame {
             pc="Form4";
         }
 
-        if (RepoEX.getSelectedIndex()==0) {
-            Tem="CATS";
-        }
-        if (RepoEX.getSelectedIndex()==1) {
-            Tem="Mid_Term";
-        }
-        if (RepoEX.getSelectedIndex()==2) {
-            Tem="End_Term";
-        }
-
-        if (RepoTrm1.isSelected()) {
-            mck="Term 1";
-        }else if (RepoTrm2.isSelected()) {
-            mck="Term 2";
-        }else if (RepoTrm3.isSelected()) {
-            mck="Term 3";
-        }
 
         if (pc=="Form3" || pc=="Form4") {
             try {
@@ -5403,10 +4572,6 @@ public class Base extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SyncRepoActionPerformed
 
-    private void MprntActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MprntActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MprntActionPerformed
-
     private void WannaBeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WannaBeActionPerformed
         // TODO add your handling code here:
         DefaultTableModel tts=(DefaultTableModel) RepoTbl.getModel();
@@ -5416,7 +4581,7 @@ public class Base extends javax.swing.JFrame {
             String locc="/media/niccher/Bookies/Ap/Coding Theory/3/MrkFinal/src/mrkfinal/Wannabe.jrxml";
             JasperDesign jd=JRXmlLoader.load(locc);
             //lst="Name,Class,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,History,CRE,Business,Agriculture";
-            String sq="SELECT * FROM "+lst+" WHERE Reg_No="+reg+" ";
+            String sq="SELECT * FROM "+lst+" WHERE `Reg_No`="+reg+" ";
             JRDesignQuery nq=new JRDesignQuery();
             nq.setText(sq);
             jd.setQuery(nq);//
@@ -5436,16 +4601,6 @@ public class Base extends javax.swing.JFrame {
 
     private void RstContActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RstContActionPerformed
         // TODO add your handling code here:
-        //YBx.setSelectedItem(2014);
-        /*Cbf5.setSelected(false);
-        Cbf6.setSelected(false);
-        Cbf7.setSelected(false);
-        Cbf8.setSelected(false);*/
-        F1Log.setText(null);
-        F4Log.setText(null);
-        F3Log.setText(null);
-        F2Log.setText(null);
-        //Conf();
     }//GEN-LAST:event_RstContActionPerformed
 
     private void SetContActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetContActionPerformed
@@ -5505,80 +4660,59 @@ public class Base extends javax.swing.JFrame {
 
     private void ClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClasseActionPerformed
         // TODO add your handling code here:
-        StrNxt.setEnabled(Boolean.TRUE);
+        Nm();
         if (Classe.getSelectedIndex()==0) {
-            ClStr="Form1";
-            StrNxt.removeAllItems();
-            StrNx();
+            StrNx("Form1");
         }
         if (Classe.getSelectedIndex()==1) {
-            ClStr="Form2";
-            StrNxt.removeAllItems();
-            StrNx();
+            StrNx("Form2");
         }
         if (Classe.getSelectedIndex()==2) {
-            ClStr="Form3";
-            StrNxt.removeAllItems();
-            StrNx();
+            StrNx("Form3");
         }
     }//GEN-LAST:event_ClasseActionPerformed
 
     private void ComBinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComBinActionPerformed
         // TODO add your handling code here:
-        int ccl=Classe.getSelectedIndex();
-        //String srm=StrNxt.getSelectedItem().toString();
-        Lasta();
+        Nm();
+        
+        int Mathpass=0,Engpass=0,Kiswapass=0,Chempass=0,Biopass=0,Phypass=0,Histpass=0,Geopass=0,CREpass=0,Agricpass=0,Buspass=0;
+        int Mathfail=0,Engfail=0,Kiswafail=0,Chemfail=0,Biofail=0,Phyfail=0,Histfail=0,Geofail=0,CREfail=0,Agricfail=0,Busfail=0;
+        String TrmSdy=null,EmTy=null;
+        int Yer=cc.get(Calendar.YEAR);
 
-        if (ccl==0) {
+        if (Classe.getSelectedIndex()==0) {
             tbl="Form1";
-        }if(ccl==1){
+        }if(Classe.getSelectedIndex()==1){
             tbl="Form2";
-        }if(ccl==2){
+        }if(Classe.getSelectedIndex()==2){
             tbl="Form3";
-        }if(ccl==3){
+        }if(Classe.getSelectedIndex()==3){
             tbl="Form4";
         }
-        
-        
 
-        if (ComBin.getSelectedIndex()==0 ) {
-            try {
-                String Sq="SELECT Name,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,History,Geography,CRE,Agriculture,Business FROM `"+lst+"` WHERE `Class`='"+tbl+"' ";
-                pst=(PreparedStatement) Conn.prepareStatement(Sq);
-                rs=pst.executeQuery();
-                Leva.setModel(DbUtils.resultSetToTableModel(rs));
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\n ComBinActionPerformed 1"+tbl);
-            }
+        if (eXA.getText().contains("Term1")) {
+            TrmSdy="Term 1";
         }
-        if(ComBin.getSelectedIndex()==1 || ComBin.getSelectedIndex()==2) {
+        if (eXA.getText().contains("Term2")) {
+            TrmSdy="Term 2";
+        }
+        if (eXA.getText().contains("Term3")) {
+            TrmSdy="Term 3";
+        }
+
+        if (eXA.getText().contains("CATS")) {
+            EmTy="CATS";
+        }
+        if (eXA.getText().contains("Mid")) {
+            EmTy="Mid";
+        }
+        if (eXA.getText().contains("End")) {
+            EmTy="End";
+        }
+        
+        if(ComBin.getSelectedIndex()==0) {
             try {
-                /*/*/
-                int Mathpass=0,Engpass=0,Kiswapass=0,Chempass=0,Biopass=0,Phypass=0,Histpass=0,Geopass=0,CREpass=0,Agricpass=0,Buspass=0;
-
-                String TrmSdy=null,EmTy=null;
-                int Yer=cc.get(Calendar.YEAR);
-
-                if (eXA.getText().contains("Term1")) {
-                    TrmSdy="Term 1";
-                }
-                if (eXA.getText().contains("Term2")) {
-                    TrmSdy="Term 2";
-                }
-                if (eXA.getText().contains("Term3")) {
-                    TrmSdy="Term 3";
-                }
-
-                if (eXA.getText().contains("CATS")) {
-                    EmTy="CATS";
-                }
-                if (eXA.getText().contains("Mid")) {
-                    EmTy="Mid";
-                }
-                if (eXA.getText().contains("End")) {
-                    EmTy="End";
-                }
-
                 String sav="SELECT * FROM `tbl_MarkP`  WHERE `Year`= '"+Yer+"' AND `Term`='"+TrmSdy+"' AND `EXAM`= '"+EmTy+"'";
                 pst=(PreparedStatement) Conn.prepareStatement(sav);
                 rs=pst.executeQuery();
@@ -5595,54 +4729,21 @@ public class Base extends javax.swing.JFrame {
                     Agricpass=rs.getInt("Agriculture");
                     Buspass=rs.getInt("Business");
                 }
-                /*/*/
-                if (srm=="All") {
 
-                    String Sq="SELECT * FROM `"+lst+"` WHERE `Class`='"+tbl+"' AND `Mathematics`>='"+Mathpass+"' AND `English`>='"+Engpass+"' AND `Kiswahili`>='"+Kiswapass+"' AND `Chemistry`>='"+Chempass+"' AND `Biology` >='"+Biopass+"' AND `Physics`>='"+Phypass+"' AND `History`>='"+Histpass+"' AND `Geography`>='"+Geopass+"' AND `CRE`>='"+CREpass+"' AND `Agriculture`>='"+Agricpass+"' AND `Business`>='"+Buspass+"' ";
-                    pst=(PreparedStatement) Conn.prepareStatement(Sq);
+                    String Sq="SELECT `Name`,`Reg_No`,`Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`History`,`Geography`,`CRE`,`Agriculture`,`Business` FROM `"+lst+"` WHERE `Class`='"+tbl+"' AND `Mathematics`>='"+Mathpass+"' AND `English`>='"+Engpass+"' AND `Kiswahili`>='"+Kiswapass+"' AND `Chemistry`>='"+Chempass+"' AND `Biology` >='"+Biopass+"' AND `Physics`>='"+Phypass+"' AND `History`>='"+Histpass+"' AND `Geography`>='"+Geopass+"' AND `CRE`>='"+CREpass+"' AND `Agriculture`>='"+Agricpass+"' AND `Business`>='"+Buspass+"' ";
+                    pst=Conn.prepareStatement(Sq);
                     rs=pst.executeQuery();
                     Leva.setModel(DbUtils.resultSetToTableModel(rs));
-                }
-                else{
-                    String Sq="SELECT Name,Reg_No,Stream,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,History,Geography,CRE,Agriculture,Business FROM `"+lst+"` WHERE `Class`='"+tbl+"' AND `Stream`='"+srm+"' ";
-                    pst=(PreparedStatement) Conn.prepareStatement(Sq);
-                    rs=pst.executeQuery();
-                    Leva.setModel(DbUtils.resultSetToTableModel(rs));
-                }
+                    
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nPass level init fail");
+                System.out.println(e+ "\n ComBinActionPerformed 1 Pass  table"+tbl);
             }
         }
-        if(ComBin.getSelectedIndex()==3) {
+        
+        if(ComBin.getSelectedIndex()==1) {
             try {
-
-                int Mathfail=0,Engfail=0,Kiswafail=0,Chemfail=0,Biofail=0,Phyfail=0,Histfail=0,Geofail=0,CREfail=0,Agricfail=0,Busfail=0;
-
-                String TrmSdy=null,EmTy=null;
-                int Yer=cc.get(Calendar.YEAR);
-
-                if (eXA.getText().contains("Term1")) {
-                    TrmSdy="Term 1";
-                }
-                if (eXA.getText().contains("Term2")) {
-                    TrmSdy="Term 2";
-                }
-                if (eXA.getText().contains("Term3")) {
-                    TrmSdy="Term 3";
-                }
-
-                if (eXA.getText().contains("CATS")) {
-                    EmTy="CATS";
-                }
-                if (eXA.getText().contains("Mid")) {
-                    EmTy="Mid";
-                }
-                if (eXA.getText().contains("End")) {
-                    EmTy="End";
-                }
-
                 String sav="SELECT * FROM `tbl_MarkF`  WHERE `Year`= '"+Yer+"' AND `Term`='"+TrmSdy+"' AND `EXAM`= '"+EmTy+"'";
-                pst=(PreparedStatement) Conn.prepareStatement(sav);
+                pst=Conn.prepareStatement(sav);
                 rs=pst.executeQuery();
                 if (rs.next()) {
                     Mathfail=rs.getInt("Mathematics");
@@ -5657,21 +4758,25 @@ public class Base extends javax.swing.JFrame {
                     Agricfail=rs.getInt("Agriculture");
                     Busfail=rs.getInt("Business");
                 }
-                if (srm=="All") {
 
-                    String Sq="SELECT * FROM `"+lst+"` WHERE `Class`='"+tbl+"' AND `Mathematics`<='"+Mathfail+"' AND `English`<='"+Engfail+"' AND `Kiswahili`<='"+Kiswafail+"' AND `Chemistry`<='"+Chemfail+"' AND `Biology` <='"+Biofail+"' AND `Physics`<='"+Phyfail+"' AND `History`<='"+Histfail+"' AND `Geography`<='"+Geofail+"' AND `CRE`<='"+CREfail+"' AND `Agriculture`<='"+Agricfail+"' AND `Business`<='"+Busfail+"' ";
-                    pst=(PreparedStatement) Conn.prepareStatement(Sq);
+                    String Sq="SELECT `Name`,`Reg_No`,`Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`History`,`Geography`,`CRE`,`Agriculture`,`Business` FROM `"+lst+"` WHERE `Class`='"+tbl+"' AND `Mathematics`<='"+Mathfail+"' AND `English`<='"+Engfail+"' AND `Kiswahili`<='"+Kiswafail+"' AND `Chemistry`<='"+Chemfail+"' AND `Biology` <='"+Biofail+"' AND `Physics`<='"+Phyfail+"' AND `History`<='"+Histfail+"' AND `Geography`<='"+Geofail+"' AND `CRE`<='"+CREfail+"' AND `Agriculture`<='"+Agricfail+"' AND `Business`<='"+Busfail+"' ";
+                    pst=Conn.prepareStatement(Sq);
                     rs=pst.executeQuery();
                     Leva.setModel(DbUtils.resultSetToTableModel(rs));
-                }
-                else{
-                    String Sq="SELECT Name,Reg_No,Stream,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,History,Geography,CRE,Agriculture,Business FROM `"+lst+"` WHERE `Class`='"+tbl+"' AND `Stream`='"+srm+"' ";
-                    pst=(PreparedStatement) Conn.prepareStatement(Sq);
-                    rs=pst.executeQuery();
-                    Leva.setModel(DbUtils.resultSetToTableModel(rs));
-                }
+                    
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "\nTable Missing");
+                System.out.println(e+ "\n ComBinActionPerformed 2 Fail  table"+tbl);
+            }
+        }
+        
+        if (ComBin.getSelectedIndex()==3 ) {
+            try {
+                String Sq="SELECT Name,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,History,Geography,CRE,Agriculture,Business FROM `"+lst+"` WHERE `Class`='"+tbl+"' ";
+                pst=Conn.prepareStatement(Sq);
+                rs=pst.executeQuery();
+                Leva.setModel(DbUtils.resultSetToTableModel(rs));
+            } catch (Exception e) {
+                System.out.println(e+ "\n ComBinActionPerformed 3 Passed All  table"+tbl);
             }
         }
     }//GEN-LAST:event_ComBinActionPerformed
@@ -5703,7 +4808,7 @@ public class Base extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, ro[i]+" Students Succesfully Proceeded to "+newcls);
 
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "\nProgression Error"+ e);
+                    System.out.println(e+" \n  TrnClsActionPerformed");
                 }
             }
         }
@@ -5723,293 +4828,8 @@ public class Base extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_TrnClsActionPerformed
 
-    private void ClassLvMidSbj1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClassLvMidSbj1ActionPerformed
-        // TODO add your handling code here:
-        if (ClassLvMidSbj1.getSelectedIndex()==0 ){
-            PP1m.setEnabled(false);
-            PP2m.setEnabled(false);
-            PP3m.setEnabled(false);
-        }else if (ClassLvMidSbj1.getSelectedIndex()>0 ){
-            PP1m.setEnabled(true);
-            PP2m.setEnabled(true);
-            PP3m.setEnabled(true);
-        }
-    }//GEN-LAST:event_ClassLvMidSbj1ActionPerformed
-
-    private void FFMidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FFMidActionPerformed
-        // TODO add your handling code here:
-        ths="Mid";
-        fcll=ClassLvMid1.getSelectedItem().toString();
-        Setta();
-        SBJ=ClassLvMidSbj1.getSelectedItem().toString();
-        sbjPck=(ClassLvMidSbj1.getSelectedIndex());
-        pmp=Integer.parseInt(ClassMidPM1.getSelectedItem().toString());
-        pmf=Integer.parseInt(ClassMidFM1.getSelectedItem().toString());
-        if (sbjPck==0) {
-            try {
-                //String UpdF="UPDATE `tbl_MarkF` SET `Form`='"+fcll+"',`Exam`='"+fcll+"',`Term`='"+Trm+"',`Mathematics`=' "+pmf+" ',`English`=' "+pmf+" ',`Kiswahili`=' "+pmf+" ',`Chemistry`=' "+pmf+" ',`Biology`=' "+pmf+" ',`Physics`=' "+pmf+" ',`Geography`=' "+pmf+" ',`History`=' "+pmf+" ',`CRE`=' "+pmf+" ',`Business`=' "+pmf+" ',`Agriculture`=' "+pmf+" ' WHERE `Code`=' "+spa+" ' ";
-                String Std="INSERT INTO `tbl_MarkF`(`Count`, `Year`, `Form`, `Exam`, `Term`, `Mathematics`, `English`, `Kiswahili`, `Chemistry`, `Biology`, `Physics`, `Geography`, `History`, `CRE`, `Business`, `Agriculture`) VALUES (NULL,' "+ya+" ','"+fcll+"','"+ths+"','"+Trm+"',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ')";
-                PreparedStatement pst1 = (PreparedStatement) Conn.prepareStatement(Std);
-                pst1.execute();
-
-                String Std2="INSERT INTO `tbl_MarkP`(`Count`, `Year`, `Form`, `Exam`, `Term`, `Mathematics`, `English`, `Kiswahili`, `Chemistry`, `Biology`, `Physics`, `Geography`, `History`, `CRE`, `Business`, `Agriculture`) VALUES (NULL,' "+ya+" ','"+fcll+"','"+ths+"','"+Trm+"',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ')";
-                PreparedStatement pst2 = (PreparedStatement) Conn.prepareStatement(Std2);
-                pst2.execute();
-
-                JOptionPane.showMessageDialog(null, "\nSucesfully Done\n"+SBJ+" Range Set Is "+pmp+" <-+->"+pmf+"");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nUpdation Of Margins/Range Of All Subject Errored");
-            }
-        }else if (sbjPck>0) {
-            try {
-                String UpdF="INSERT INTO `tbl_MarkF` (`Count`, `Year`, `Form`, `Exam`, `Term`, `"+SBJ+"`) VALUES (NULL,' "+ya+" ','"+fcll+"','"+ths+"','"+spa+"',' "+pmf+" ' )";
-                PreparedStatement pstf = (PreparedStatement) Conn.prepareStatement(UpdF);
-                pstf.executeUpdate();
-
-                String UpdP="INSERT INTO `tbl_MarkP` (`Count`, `Year`, `Form`, `Exam`, `Term`, `"+SBJ+"`) VALUES (NULL,' "+ya+" ','"+fcll+"','"+ths+"','"+spa+"',' "+pmp+" ' )";
-                PreparedStatement pstp = (PreparedStatement) Conn.prepareStatement(UpdP);
-                pstp.executeUpdate();
-
-                JOptionPane.showMessageDialog(null, "\nSucesfully Done\n"+SBJ+" Range Set Is "+pmp+" <-+->"+pmf+"");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nUpdation Of Margins/Range Of "+SBJ+" Errored");
-            }
-        }
-    }//GEN-LAST:event_FFMidActionPerformed
-
-    private void ClassLvEndSbj1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClassLvEndSbj1ActionPerformed
-        // TODO add your handling code here:
-        if (ClassLvEndSbj1.getSelectedIndex()==0 ){
-            PP1e.setEnabled(false);
-            PP2e.setEnabled(false);
-            PP3e.setEnabled(false);
-        }else if (ClassLvEndSbj1.getSelectedIndex()>0 ){
-            PP1e.setEnabled(true);
-            PP2e.setEnabled(true);
-            PP3e.setEnabled(true);
-        }
-    }//GEN-LAST:event_ClassLvEndSbj1ActionPerformed
-
-    private void FFEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FFEndActionPerformed
-        // TODO add your handling code here:
-        ths="End";
-        Setta();
-        fcll=ClassLvEnd1.getSelectedItem().toString();
-        SBJ=ClassLvEndSbj1.getSelectedItem().toString();
-        sbjPck=(ClassLvEndSbj1.getSelectedIndex());
-        pmp=Integer.parseInt(ClassEndPM1.getSelectedItem().toString());
-        pmf=Integer.parseInt(ClassEndFM1.getSelectedItem().toString());
-        if (sbjPck==0) {
-            try {
-                //String UpdF="UPDATE `tbl_MarkF` SET `Form`='"+fcll+"',`Exam`='"+fcll+"',`Term`='"+Trm+"',`Mathematics`=' "+pmf+" ',`English`=' "+pmf+" ',`Kiswahili`=' "+pmf+" ',`Chemistry`=' "+pmf+" ',`Biology`=' "+pmf+" ',`Physics`=' "+pmf+" ',`Geography`=' "+pmf+" ',`History`=' "+pmf+" ',`CRE`=' "+pmf+" ',`Business`=' "+pmf+" ',`Agriculture`=' "+pmf+" ' WHERE `Code`=' "+spa+" ' ";
-                String Std="INSERT INTO `tbl_MarkF`(`Count`, `Year`, `Form`, `Exam`, `Term`, `Mathematics`, `English`, `Kiswahili`, `Chemistry`, `Biology`, `Physics`, `Geography`, `History`, `CRE`, `Business`, `Agriculture`) VALUES (NULL,' "+ya+" ','"+fcll+"','"+ths+"','"+Trm+"',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ')";
-                PreparedStatement pst1 = (PreparedStatement) Conn.prepareStatement(Std);
-                pst1.execute();
-
-                String Std2="INSERT INTO `tbl_MarkP`(`Count`, `Year`, `Form`, `Exam`, `Term`, `Mathematics`, `English`, `Kiswahili`, `Chemistry`, `Biology`, `Physics`, `Geography`, `History`, `CRE`, `Business`, `Agriculture`) VALUES (NULL,' "+ya+" ','"+fcll+"','"+ths+"','"+Trm+"',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ')";
-                PreparedStatement pst2 = (PreparedStatement) Conn.prepareStatement(Std2);
-                pst2.execute();
-
-                JOptionPane.showMessageDialog(null, "\nSucesfully Done\n"+SBJ+" Range Set Is "+pmp+" <-+->"+pmf+"");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nUpdation Of Margins/Range Of All Subjects Errored"+fcll);
-            }
-        }else if (sbjPck>0) {
-            try {
-                String UpdF="INSERT INTO `tbl_MarkF` (`Count`, `Year`, `Form`, `Exam`, `Term`, `"+SBJ+"`) VALUES (NULL,' "+ya+" ','"+fcll+"','"+ths+"','"+Trm+"',' "+pmf+" ' )";
-                PreparedStatement pstf = (PreparedStatement) Conn.prepareStatement(UpdF);
-                pstf.executeUpdate();
-
-                String UpdP="INSERT INTO `tbl_MarkP` (`Count`, `Year`, `Form`, `Exam`,` `Term`, `"+SBJ+"`) VALUES (NULL,' "+ya+" ','"+fcll+"','"+ths+"','"+Trm+"',' "+pmp+" ' )";
-                PreparedStatement pstp = (PreparedStatement) Conn.prepareStatement(UpdP);
-                pstp.executeUpdate();
-
-                JOptionPane.showMessageDialog(null, "\nSucesfully Done\n"+SBJ+" Range Set Is "+pmp+" <-+->"+pmf+"");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nUpdation Of Margins/Range Of "+SBJ+" Errored");
-            }
-        }
-    }//GEN-LAST:event_FFEndActionPerformed
-
-    private void FFCATSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FFCATSActionPerformed
-        // TODO add your handling code here:
-        ths="CATS";
-        if (mwr<5) {
-            Trm="Term 1";
-            tama="Term1";
-        }
-        if (mwr<9 && mwr>4) {
-            Trm="Term 2";
-            tama="Term2";
-        }
-        if (mwr>8) {
-            Trm="Term 3";
-            tama="Term3";
-        }
-        
-        spa=Trm+"-"+ths;
-        Setta();
-        fcll=ClassLvCat1.getSelectedItem().toString();
-        pmp=Integer.parseInt(ClassCatPm1.getSelectedItem().toString());
-        pmf=Integer.parseInt(ClassCatFM1.getSelectedItem().toString());
-        if (sbjPck==0) {
-            try {
-                //String UpdF="UPDATE `tbl_MarkF` SET `Form`='"+fcll+"',`Exam`='"+fcll+"',`Term`='"+Trm+"',`Mathematics`=' "+pmf+" ',`English`=' "+pmf+" ',`Kiswahili`=' "+pmf+" ',`Chemistry`=' "+pmf+" ',`Biology`=' "+pmf+" ',`Physics`=' "+pmf+" ',`Geography`=' "+pmf+" ',`History`=' "+pmf+" ',`CRE`=' "+pmf+" ',`Business`=' "+pmf+" ',`Agriculture`=' "+pmf+" ' WHERE `Code`=' "+spa+" ' ";
-                String Std="INSERT INTO `tbl_MarkF`(`Count`, `Year`, `Form`, `Exam`,`Term`, `Mathematics`, `English`, `Kiswahili`, `Chemistry`, `Biology`, `Physics`, `Geography`, `History`, `CRE`, `Business`, `Agriculture`) VALUES (NULL,' "+ya+" ',' "+fcll+" ','"+ths+"','"+Trm+"',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ',' "+pmf+" ')";
-                PreparedStatement pst1 = (PreparedStatement) Conn.prepareStatement(Std);
-                pst1.execute();
-
-                String Std2="INSERT INTO `tbl_MarkP`(`Count`, `Year`, `Form`, `Exam`, `Term`, `Mathematics`, `English`, `Kiswahili`, `Chemistry`, `Biology`, `Physics`, `Geography`, `History`, `CRE`, `Business`, `Agriculture`) VALUES (NULL,' "+ya+" ',' "+fcll+" ','"+ths+"','"+Trm+"',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ',' "+pmp+" ')";
-                PreparedStatement pst2 = (PreparedStatement) Conn.prepareStatement(Std2);
-                pst2.execute();
-
-                JOptionPane.showMessageDialog(null, "\nSucesfully Done\n"+SBJ+" Range Set Is "+pmp+" <-+->"+pmf+"");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nUpdation Of Margins/Range Of "+SBJ+" Errored");
-            }
-        }else if (sbjPck>0) {
-            try {
-                String UpdF="INSERT INTO `tbl_MarkF` (`Count`, `Year`, `Form`, `Exam`, `Term`, `"+SBJ+"`) VALUES (NULL,' "+ya+" ','"+fcll+"','"+ths+"','"+Trm+"',' "+pmf+" ' )";
-                PreparedStatement pstf = (PreparedStatement) Conn.prepareStatement(UpdF);
-                pstf.executeUpdate();
-
-                String UpdP="INSERT INTO `tbl_MarkP` (`Count`, `Year`, `Form`, `Exam`, `Term`, `"+SBJ+"`) VALUES (NULL,' "+ya+" ','"+fcll+"','"+ths+"','"+Trm+"',' "+pmp+" ' )";
-                PreparedStatement pstp = (PreparedStatement) Conn.prepareStatement(UpdP);
-                pstp.executeUpdate();
-
-                JOptionPane.showMessageDialog(null, "\nSucesfully Done\n"+SBJ+" Range Set Is "+pmp+" <-+->"+pmf+"");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e+"\nUpdation Of Margins/Range Of "+SBJ+" Errored");
-            }
-        }
-    }//GEN-LAST:event_FFCATSActionPerformed
-
-    private void AddF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddF1ActionPerformed
-        // TODO add your handling code here:
-        Slepa();
-    }//GEN-LAST:event_AddF1ActionPerformed
-
-    private void AddF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddF2ActionPerformed
-        // TODO add your handling code here:
-        Slepa();
-    }//GEN-LAST:event_AddF2ActionPerformed
-
-    private void AddF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddF3ActionPerformed
-        // TODO add your handling code here:
-        Slepa();
-    }//GEN-LAST:event_AddF3ActionPerformed
-
-    private void AddF4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddF4ActionPerformed
-        // TODO add your handling code here:
-        Slepa();
-    }//GEN-LAST:event_AddF4ActionPerformed
-
     private void SClsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SClsActionPerformed
         // TODO add your handling code here:
-
-        if(AddF1.isSelected()){
-            Fm="Form1";
-            Fmm=1;
-            if(AddF1N.isSelected()){
-                F1n=1;
-                Str="North";
-                Mng();
-            }
-            if(AddF1S.isSelected()){
-                F1s=1;
-                Str="South";
-                Mng();
-            }
-            if(AddF1W.isSelected()){
-                F1w=1;
-                Str="West";
-                Mng();
-            }
-            if(AddF1E.isSelected()){
-                F1e=1;
-                Str="East";
-                Mng();
-            }
-            JOptionPane.showMessageDialog(null, "Done Setting For "+Fm);
-        }
-
-        if(AddF2.isSelected()){
-            Fm="Form2";
-            Fmm=2;
-            if(AddF2N.isSelected()){
-                F2n=1;
-                Str="North";
-                Mng();
-            }
-            if(AddF2S.isSelected()){
-                F2s=1;
-                Str="South";
-                Mng();
-            }
-            if(AddF2E.isSelected()){
-                F2e=1;
-                Str="East";
-                Mng();
-            }
-            if(AddF2W.isSelected()){
-                F2w=1;
-                Str="West";
-                Mng();
-            }
-            JOptionPane.showMessageDialog(null, "Done Setting For "+Fm);
-        }
-
-        if(AddF3.isSelected()){
-            Fm="Form3";
-            Fmm=3;
-            if(AddF3N.isSelected()){
-                F3n=1;
-                Str="North";
-                Mng();
-            }
-            if(AddF3S.isSelected()){
-                F3s=1;
-                Str="South";
-                Mng();
-            }
-            if(AddF3E.isSelected()){
-                F3e=1;
-                Str="East";
-                Mng();
-            }
-            if(AddF3W.isSelected()){
-                F3w=1;
-                Str="West";
-                Mng();
-            }
-            JOptionPane.showMessageDialog(null, "Done Setting For "+Fm);
-        }
-
-        if(AddF4.isSelected()){
-            Fm="Form4";
-            Fmm=4;
-            if(AddF4S.isSelected()){
-                F4s=1;
-                Str="South";
-                Mng();
-            }
-            if(AddF4E.isSelected()){
-                F4e=1;
-                Str="East";
-                Mng();
-            }
-            if(AddF4W.isSelected()){
-                F4w=1;
-                Str="West";
-                Mng();
-            }
-            if(AddF4N.isSelected()){
-                F4n=1;
-                Str="North";
-                Mng();
-            }
-            JOptionPane.showMessageDialog(null, "Done Setting For "+Fm);
-        }
     }//GEN-LAST:event_SClsActionPerformed
 
     private void GrdSettActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GrdSettActionPerformed
@@ -6720,10 +5540,6 @@ public class Base extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Ada;
-    private javax.swing.JCheckBox AddF1;
-    private javax.swing.JCheckBox AddF2;
-    private javax.swing.JCheckBox AddF3;
-    private javax.swing.JCheckBox AddF4;
     private javax.swing.JPanel All;
     private javax.swing.JButton AnalyseExam;
     private javax.swing.JButton BacSett;
@@ -6737,18 +5553,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JCheckBox Cbf6;
     private javax.swing.JCheckBox Cbf7;
     private javax.swing.JCheckBox Cbf8;
-    private javax.swing.JComboBox<String> ClassCatFM1;
-    private javax.swing.JComboBox<String> ClassCatPm1;
-    private javax.swing.JComboBox<String> ClassEndFM1;
-    private javax.swing.JComboBox<String> ClassEndPM1;
-    private javax.swing.JComboBox<String> ClassLvCat1;
-    private javax.swing.JComboBox<String> ClassLvCatSbj1;
-    private javax.swing.JComboBox<String> ClassLvEnd1;
-    private javax.swing.JComboBox<String> ClassLvEndSbj1;
-    private javax.swing.JComboBox<String> ClassLvMid1;
-    private javax.swing.JComboBox<String> ClassLvMidSbj1;
-    private javax.swing.JComboBox<String> ClassMidFM1;
-    private javax.swing.JComboBox<String> ClassMidPM1;
     private javax.swing.JComboBox<String> Classe;
     private javax.swing.JComboBox<String> Clss;
     private javax.swing.JComboBox<String> ComBin;
@@ -6768,9 +5572,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JLabel Exitt;
     private javax.swing.JButton Ext;
     private javax.swing.JComboBox<String> ExxamTY1;
-    private javax.swing.JButton FFCATS;
-    private javax.swing.JButton FFEnd;
-    private javax.swing.JButton FFMid;
     private javax.swing.JTextField FeeAmount;
     private javax.swing.JTextField FeeBalance;
     private javax.swing.JComboBox<String> FeeClass;
@@ -6811,7 +5612,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> Hrange;
     private javax.swing.JTextField ImgP;
     private javax.swing.JButton InsrtSenr;
-    private javax.swing.JButton JrXmGen;
     private javax.swing.JTable Leva;
     private javax.swing.JComboBox<String> Lrange;
     private javax.swing.JPanel Marks;
@@ -6820,7 +5620,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JLabel MnExams;
     private javax.swing.JLabel MnGraphs;
     private javax.swing.JLabel MnStd;
-    private javax.swing.JButton Mprnt;
     private javax.swing.JComboBox<String> NwBirthYear;
     private javax.swing.JTextField NwContacts;
     private javax.swing.JTextField NwFrmSch;
@@ -6835,12 +5634,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JButton NwStdReg;
     private javax.swing.JTextField NwSurName;
     private javax.swing.JButton Nxt;
-    private javax.swing.JCheckBox PP1e;
-    private javax.swing.JCheckBox PP1m;
-    private javax.swing.JCheckBox PP2e;
-    private javax.swing.JCheckBox PP2m;
-    private javax.swing.JCheckBox PP3e;
-    private javax.swing.JCheckBox PP3m;
     private javax.swing.JPanel PanAdmin;
     private javax.swing.JPanel PanAdmit;
     private javax.swing.JPanel PanExams;
@@ -6862,9 +5655,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> RepoClas;
     private javax.swing.JComboBox<String> RepoEX;
     private javax.swing.JTable RepoTbl;
-    private javax.swing.JRadioButton RepoTrm1;
-    private javax.swing.JRadioButton RepoTrm2;
-    private javax.swing.JRadioButton RepoTrm3;
     private javax.swing.JButton Rsh;
     private javax.swing.JButton RstCont;
     private javax.swing.JButton SCls;
@@ -6944,21 +5734,8 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
-    private javax.swing.JLabel jLabel66;
-    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel73;
@@ -6993,12 +5770,8 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
-    private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
@@ -7019,6 +5792,10 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
