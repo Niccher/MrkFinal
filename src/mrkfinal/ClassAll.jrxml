@@ -72,26 +72,6 @@ FROM
 	<field name="2018_CATS_Term3_CRE" class="java.lang.Float"/>
 	<field name="2018_CATS_Term3_Business" class="java.lang.Float"/>
 	<field name="2018_CATS_Term3_Agriculture" class="java.lang.Float"/>
-	<background>
-		<band height="555" splitType="Stretch">
-			<line>
-				<reportElement x="201" y="431" width="117" height="1" uuid="564ec2ee-7fcc-4b99-b7fd-9b5b2fef0dcc">
-					<printWhenExpression><![CDATA[Boolean.FALSE]]></printWhenExpression>
-				</reportElement>
-				<graphicElement>
-					<pen lineWidth="3.0" lineStyle="Dotted" lineColor="#996600"/>
-				</graphicElement>
-			</line>
-			<line>
-				<reportElement x="72" y="37" width="204" height="1" uuid="87d93896-5b71-4e04-b5ba-4d15d7292c2c">
-					<printWhenExpression><![CDATA[Boolean.FALSE]]></printWhenExpression>
-				</reportElement>
-				<graphicElement>
-					<pen lineWidth="3.0" lineStyle="Dotted" lineColor="#996600"/>
-				</graphicElement>
-			</line>
-		</band>
-	</background>
 	<title>
 		<band height="82" splitType="Stretch">
 			<staticText>
@@ -99,7 +79,7 @@ FROM
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="44" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Muruaki High School]]></text>
+				<text><![CDATA[Testing High School]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -133,7 +113,7 @@ FROM
 				<text><![CDATA[Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="13" y="178" width="100" height="20" uuid="61a7e231-deb4-4c62-b576-37bbf3f5ca63"/>
+				<reportElement x="13" y="148" width="100" height="20" uuid="61a7e231-deb4-4c62-b576-37bbf3f5ca63"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -141,7 +121,7 @@ FROM
 			</staticText>
 			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
 				<reportElement x="626" y="64" width="166" height="147" uuid="b0e1a729-13cd-4fe3-b806-ec475f3c67fd"/>
-				<imageExpression><![CDATA["/media/niccher/Bookies/Ap/Coding Theory/3/Muruaky3.0/src/Imgy/view-process-users.png"]]></imageExpression>
+				<imageExpression><![CDATA["/media/niccher/Bookies/Ap/Coding Theory/3/MrkFinal/src/imgs/view-process-own.png"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="176" y="69" width="249" height="20" uuid="9ab4d34f-686c-4431-bbc0-c93d90d68dc6"/>
@@ -154,112 +134,105 @@ FROM
 				<textFieldExpression><![CDATA[$F{2018_CATS_Term3_Mathematics}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="176" y="178" width="249" height="20" uuid="83076534-6386-47a4-81da-591e20d35c4f"/>
+				<reportElement x="176" y="148" width="249" height="20" uuid="83076534-6386-47a4-81da-591e20d35c4f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{2018_CATS_Term3_Chemistry}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="6" splitType="Stretch"/>
-	</detail>
-	<columnFooter>
-		<band height="6" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="93bfec8b-b883-4a60-bf71-74663826975d"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-		</band>
-	</columnFooter>
-	<pageFooter>
-		<band height="148" splitType="Stretch">
+		<band height="34" splitType="Stretch">
 			<staticText>
-				<reportElement x="727" y="24" width="75" height="20" uuid="680a6564-a96a-43f0-8f2b-febe578baed3"/>
+				<reportElement x="725" y="0" width="75" height="20" uuid="680a6564-a96a-43f0-8f2b-febe578baed3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Agriculture]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="157" y="24" width="55" height="20" uuid="e3596429-4dd2-4b9f-8cb7-3065151e5219"/>
+				<reportElement x="155" y="0" width="55" height="20" uuid="e3596429-4dd2-4b9f-8cb7-3065151e5219"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[English]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="212" y="24" width="65" height="20" uuid="14a88950-a535-415d-9a5f-5ce668aad18b"/>
+				<reportElement x="210" y="0" width="65" height="20" uuid="14a88950-a535-415d-9a5f-5ce668aad18b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Kiswahili]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="662" y="24" width="65" height="20" uuid="160cb14f-866a-4ae0-abf9-03e2af1061e2"/>
+				<reportElement x="660" y="0" width="65" height="20" uuid="160cb14f-866a-4ae0-abf9-03e2af1061e2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Business]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="24" width="55" height="20" uuid="dab503f7-8f81-42e5-b623-d4dc4e9c1de1"/>
+				<reportElement x="275" y="0" width="55" height="20" uuid="dab503f7-8f81-42e5-b623-d4dc4e9c1de1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Biology]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="332" y="24" width="75" height="20" uuid="2b3bbac6-4bf8-4ae9-b379-723a5d243f49"/>
+				<reportElement x="330" y="0" width="75" height="20" uuid="2b3bbac6-4bf8-4ae9-b379-723a5d243f49"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Chemistry]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="602" y="24" width="60" height="20" uuid="0d8139bc-8485-40c1-a4ab-55fb1796690f"/>
+				<reportElement x="600" y="0" width="60" height="20" uuid="0d8139bc-8485-40c1-a4ab-55fb1796690f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[CRE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="407" y="24" width="55" height="20" uuid="2fd847ad-5732-48cb-b2c1-692de12c6d64"/>
+				<reportElement x="405" y="0" width="55" height="20" uuid="2fd847ad-5732-48cb-b2c1-692de12c6d64"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Physics]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="67" y="24" width="90" height="20" uuid="83ae4b12-9746-4c11-b59a-68415f1f6d48"/>
+				<reportElement x="65" y="0" width="90" height="20" uuid="83ae4b12-9746-4c11-b59a-68415f1f6d48"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Mathematics]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="462" y="24" width="75" height="20" uuid="ea739d1f-1f58-4aa0-96bf-a28073a14aea"/>
+				<reportElement x="460" y="0" width="75" height="20" uuid="ea739d1f-1f58-4aa0-96bf-a28073a14aea"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Geography]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="537" y="24" width="65" height="20" uuid="222af14c-f475-4915-83fc-3446de139bff"/>
+				<reportElement x="535" y="0" width="65" height="20" uuid="222af14c-f475-4915-83fc-3446de139bff"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[History]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="24" width="65" height="20" uuid="a97e6709-47dc-44fd-8339-167c39724cd7"/>
+				<reportElement x="0" y="0" width="65" height="20" uuid="a97e6709-47dc-44fd-8339-167c39724cd7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Reg_No]]></text>
 			</staticText>
 		</band>
+	</detail>
+	<columnFooter>
+		<band height="27" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="28" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
 		<band splitType="Stretch"/>

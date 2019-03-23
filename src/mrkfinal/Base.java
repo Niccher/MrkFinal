@@ -210,12 +210,15 @@ public class Base extends javax.swing.JFrame {
             String fch="SELECT * FROM `tbl_Tests` ";
             pst=Conn.prepareStatement(fch);
             rs=pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 String exs=rs.getString("Test");
                 Ex1Perf.addItem(exs);
                 Ex1Perf.setEnabled(Boolean.FALSE);
                 Ex2Perf.addItem(exs);
+                Ex1Perf.setSelectedItem(lst);
+                Ex2Perf.setSelectedItem(lst2);
             }
+            
         } catch (Exception e){ 
             System.out.println(e+" PopExam 2");
             Toolkit.getDefaultToolkit().beep();
@@ -301,7 +304,7 @@ public class Base extends javax.swing.JFrame {
             ClearStd();
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex+"\nThink Big");
+            JOptionPane.showMessageDialog(null, ex+"\nUnsuccessfull");
             Toolkit.getDefaultToolkit().beep();
         }
     }
@@ -331,7 +334,34 @@ public class Base extends javax.swing.JFrame {
     }
     
     private void ClearStd(){
-        //clear fields  
+        NwFullName.setText(null);
+        NwSurName.setText(null);
+        NwRegNo.setText(null);
+        NwKCPE.setText(null);
+        NwFrmSch.setText(null);
+        ImgP.setText(null);
+        NwBirthYear.setSelectedItem(null);
+        NwGuardian.setText(null);
+        NwContacts.setText(null);
+        NwResidence.setSelectedItem(null);
+        NwStdFrm.setSelectedItem(null);
+        
+        DpImg.setIcon(null);
+    }
+    
+    private void Hoppa(){
+        try {
+            String sql="SELECT `Reg_No` FROM `tbl_Students` ORDER BY `Count` DESC LIMIT 1";
+            pst= (PreparedStatement) Conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            if (rs.next()) {
+                hop=rs.getInt("Reg_No")+1;
+                NwRegNo.setEnabled(Boolean.FALSE);
+                NwRegNo.setText(String.valueOf(hop));
+            }
+        } catch (Exception e) {
+            System.out.println(e+" \n Hoppa Error");
+        }
     }
     
     private  void Nm(){
@@ -509,20 +539,6 @@ public class Base extends javax.swing.JFrame {
         MarkUp();
         Inst();
         Frez();
-    }
-    
-    private void Hoppa(){
-        try {
-            String sql="SELECT `Reg_No` FROM `tbl_Students` ORDER BY `Count` DESC LIMIT 1";
-            pst= (PreparedStatement) Conn.prepareStatement(sql);
-            rs=pst.executeQuery();
-            if (rs.next()) {
-                hop=rs.getInt("Reg_No")+1;
-                NwRegNo.setEnabled(Boolean.FALSE);
-                NwRegNo.setText(String.valueOf(hop));
-            }
-        } catch (Exception e) {
-        }
     }
     
     private void IkiaP2() {
@@ -1800,7 +1816,7 @@ public class Base extends javax.swing.JFrame {
 
         jLabel53.setText("Class");
 
-        RepoClas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Form 1", "Form 2", "Form 3", "Form 4", "--Null--" }));
+        RepoClas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Form 1", "Form 2", "Form 3", "Form 4" }));
 
         RepoEX.setEnabled(false);
 
@@ -1966,7 +1982,7 @@ public class Base extends javax.swing.JFrame {
 
         jLabel44.setText("Filter");
 
-        FltPrf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Compare", "Highest", "Lowest" }));
+        FltPrf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Compare", "Highest" }));
         FltPrf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FltPrfActionPerformed(evt);
@@ -2071,8 +2087,7 @@ public class Base extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel49, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
@@ -2672,14 +2687,14 @@ public class Base extends javax.swing.JFrame {
             DpImgSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DpImgSLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(DpImg, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                .addComponent(DpImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         DpImgSLayout.setVerticalGroup(
             DpImgSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DpImgSLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(DpImg, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                .addComponent(DpImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2706,13 +2721,11 @@ public class Base extends javax.swing.JFrame {
                 .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ImgP)
                             .addGroup(jPanel17Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(DpImgS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 153, Short.MAX_VALUE))
-                            .addGroup(jPanel17Layout.createSequentialGroup()
-                                .addComponent(ImgP)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                                .addComponent(DpImgS)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(NwStdImg, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel17Layout.createSequentialGroup()
                         .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -2728,7 +2741,7 @@ public class Base extends javax.swing.JFrame {
                                 .addComponent(NwStdFrm, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73)
                                 .addComponent(NwStdFrmSrm, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 195, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
@@ -2796,18 +2809,18 @@ public class Base extends javax.swing.JFrame {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(NwGuardian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(NwContacts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(NwResidence, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        Ext.setText("Exit");
+        Ext.setText("View");
         Ext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExtActionPerformed(evt);
@@ -2883,23 +2896,23 @@ public class Base extends javax.swing.JFrame {
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(NwFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
                     .addComponent(NwSurName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(NwFrmSch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
                     .addComponent(NwKCPE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel28)
                     .addComponent(NwBirthYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
@@ -2911,33 +2924,31 @@ public class Base extends javax.swing.JFrame {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(NwStdReg)
-                        .addGap(34, 34, 34)
-                        .addComponent(Ext)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(NwStdReg)
+                .addGap(34, 34, 34)
+                .addComponent(Ext)
+                .addGap(277, 277, 277))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel19Layout.createSequentialGroup()
                         .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Ext)
                     .addComponent(NwStdReg))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout PanAdmitLayout = new javax.swing.GroupLayout(PanAdmit);
@@ -4203,6 +4214,7 @@ public class Base extends javax.swing.JFrame {
         // TODO add your handling code here:
         KillAll();
         PrepNewStd();
+        Hoppa();
         PanAdmit.setVisible(true);
     }//GEN-LAST:event_HmNewStudentActionPerformed
 
@@ -4232,12 +4244,16 @@ public class Base extends javax.swing.JFrame {
         // TODO add your handling code here:
         KillAll();
         PanReports.setVisible(true);
+        Nm();
+        RepoEX.addItem(lst);
     }//GEN-LAST:event_HmResultsActionPerformed
 
     private void HmReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmReportsActionPerformed
         // TODO add your handling code here:
         KillAll();
         PanReports.setVisible(true);
+        Nm();
+        RepoEX.addItem(lst);
     }//GEN-LAST:event_HmReportsActionPerformed
 
     private void HmFeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HmFeeActionPerformed
@@ -4359,20 +4375,6 @@ public class Base extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Null or Invalid 'Image' File");
         }
-        /*try {
-            JFileChooser prip=new JFileChooser();
-            prip.showOpenDialog(null);
-            File f=prip.getSelectedFile();
-            Patt=f.getAbsolutePath();
-            ImgP.setText(Patt);
-
-            ImageIcon stV=new ImageIcon(Patt);
-            Image Sd=stV.getImage().getScaledInstance(DpImg.getWidth(),DpImg.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon im=new ImageIcon(Sd);
-            DpImg.setIcon(im);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Null or Invalid 'Image' File");
-        }*/
     }//GEN-LAST:event_NwStdImgActionPerformed
 
     private void NwStdFrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NwStdFrmActionPerformed
@@ -4424,16 +4426,20 @@ public class Base extends javax.swing.JFrame {
 
     private void ExtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExtActionPerformed
         // TODO add your handling code here:
+        KillAll();
+        PopStd();
+        PanStudents.setVisible(true);
     }//GEN-LAST:event_ExtActionPerformed
 
     private void GraphBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraphBarActionPerformed
         // TODO add your handling code here:
-        String gg=RepoClas.getSelectedItem().toString();
+        DefaultTableModel tts=(DefaultTableModel) RepoTbl.getModel();
+        int reg=Integer.parseInt(RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 1).toString()) ;
+        String nam=RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 0).toString() ;
         try {
-            //String Etha="SELECT `Name`,`Mathematics`,`English`,`Kiswahili` FROM "+lst+" WHERE `Class`='Form1' ";
-            String Etha="SELECT `Name`,`Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Agriculture`,`Business` FROM "+lst+" WHERE `Class`='"+gg+"' ";
+            String Etha="SELECT `Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Business`,`Agriculture` FROM "+lst+" WHERE `Reg_No`='"+reg+"' ";
             JDBCCategoryDataset jcd=new JDBCCategoryDataset(Recorda.InitDb(),Etha);
-            JFreeChart cht=ChartFactory.createBarChart("Student No, Performance", "Student Name","Y-Axs", jcd, PlotOrientation.VERTICAL, false, true, true);
+            JFreeChart cht=ChartFactory.createBarChart("Performance for "+nam+" , Reg "+reg, "Subjects","Marks", jcd, PlotOrientation.VERTICAL, false, true, true);
             BarRenderer rndr=new BarRenderer();
             CategoryPlot cp=null;
             rndr=new BarRenderer();
@@ -4460,18 +4466,16 @@ public class Base extends javax.swing.JFrame {
 
     private void GraphLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraphLineActionPerformed
         // TODO add your handling code here:
-        String gg=RepoClas.getSelectedItem().toString();
+        DefaultTableModel tts=(DefaultTableModel) RepoTbl.getModel();
+        int reg=Integer.parseInt(RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 1).toString()) ;
+        String nam=RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 0).toString() ;
         try {
-            //String Etha="SELECT `"+sbj+"` FROM `"+Todas+"` ";
-            String Etha="SELECT `Name`,`Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Agriculture`,`Business` FROM "+lst+" WHERE `Class`='"+gg+"' ";
-            //pst=(PreparedStatement) conn.prepareStatement(Etha);
-            //rs=pst.executeQuery();
+            String Etha="SELECT `Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Business`,`Agriculture` FROM "+lst+" WHERE `Reg_No`='"+reg+"' ";
             JDBCCategoryDataset jcd=new JDBCCategoryDataset(Recorda.InitDb(),Etha);
-            //JFreeChart cht=ChartFactory.createLineChart("English Performance", "Student Name","English", jcd, PlotOrientation.VERTICAL, false, true, true);
-            JFreeChart cht=ChartFactory.createLineChart("Student Put Here Performance", "Student Name","Y-Ax", jcd, PlotOrientation.VERTICAL, false, true, true);
-            BarRenderer rndr=null;
+            JFreeChart cht=ChartFactory.createLineChart("English Performance", "Student Name","English", jcd, PlotOrientation.VERTICAL, false, true, true);
+            //JFreeChart cht=ChartFactory.createLineChart("Performance for "+nam+" , Reg "+reg, "Subjects","Marks", jcd, PlotOrientation.VERTICAL, false, true, true);
+            BarRenderer rndr=new BarRenderer();
             CategoryPlot cp=null;
-            rndr=new BarRenderer();
             ChartFrame cf=new ChartFrame("Testing F High School", cht);
             cf.setVisible(true);
             cf.pack();
@@ -4496,6 +4500,7 @@ public class Base extends javax.swing.JFrame {
     private void VwCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VwCredActionPerformed
         // TODO add your handling code here:
         //JOptionPane.showMessageDialog(null, lst);
+        Nm();
         String csa=null,sq=null;
         if (RepoClas.getSelectedIndex()==0) {
             csa="Form1";
@@ -4510,7 +4515,7 @@ public class Base extends javax.swing.JFrame {
             csa="Form4";
         }
         try {
-            String locc="/media/niccher/Bookies/Ap/Coding Theory/3/Muruaky3.0/src/v3/ClassAll.jrxml";
+            String locc="/media/niccher/Bookies/Ap/Coding Theory/3/MrkFinal/src/mrkfinal/ClassAll.jrxml";
             JasperDesign jd=JRXmlLoader.load(locc);
             //lst="Name Class Reg_No Mathematics English Kiswahili Chemistry Biology Physics Geography History CRE Business Agriculture";
             sq="SELECT Name,Class,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,History,CRE,Business,Agriculture FROM "+lst+" WHERE Class="+csa+" ";
@@ -4552,7 +4557,7 @@ public class Base extends javax.swing.JFrame {
         if (pc=="Form3" || pc=="Form4") {
             try {
                 Makeit();
-                String cops="SELECT Name,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,Business,Agriculture FROM "+Tbll+" WHERE (`Class`='"+pc+"' )";
+                String cops="SELECT Name,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,History,Business,Agriculture FROM "+Tbll+" WHERE (`Class`='"+pc+"' )";
                 pst=Conn.prepareStatement(cops);
                 rs=pst.executeQuery();
                 RepoTbl.setModel(DbUtils.resultSetToTableModel(rs));
@@ -4562,7 +4567,7 @@ public class Base extends javax.swing.JFrame {
 
         }else{
             try {
-                String cops="SELECT Name,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,Business,Agriculture FROM "+Tbll+" WHERE (`Class`='"+pc+"' )";
+                String cops="SELECT Name,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,History,Business,Agriculture FROM "+Tbll+" WHERE (`Class`='"+pc+"' )";
                 pst=Conn.prepareStatement(cops);
                 rs=pst.executeQuery();
                 RepoTbl.setModel(DbUtils.resultSetToTableModel(rs));
@@ -5154,10 +5159,6 @@ public class Base extends javax.swing.JFrame {
             } catch (Exception e) {
                 System.out.println(e+" FltPrfActionPerformed 2");
             }
-        }
-
-        if (FltPrf.getSelectedIndex()==1) {
-
         }
     }//GEN-LAST:event_FltPrfActionPerformed
 
