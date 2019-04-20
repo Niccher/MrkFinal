@@ -715,16 +715,16 @@ public class Base extends javax.swing.JFrame {
     
     private void Greda(){
         if (FormGrad.getSelectedIndex()==0) {
-            frgd="Form1";
+            frgd="Form 1";
         }
         if (FormGrad.getSelectedIndex()==1) {
-            frgd="Form2";
+            frgd="Form 2";
         }
         if (FormGrad.getSelectedIndex()==2) {
-            frgd="Form3";
+            frgd="Form 3";
         }
         if (FormGrad.getSelectedIndex()==3) {
-            frgd="Form4";
+            frgd="Form 4";
         }
         
         if (SubGrad.getSelectedIndex()==0) {
@@ -814,19 +814,6 @@ public class Base extends javax.swing.JFrame {
             snmcls="Form4";
         }
         
-        /*if (StrmSenrAdd.getSelectedIndex()==0) {
-            snmstr="North";
-        }
-        if (StrmSenrAdd.getSelectedIndex()==1) {
-            snmstr="South";
-        }
-        if (StrmSenrAdd.getSelectedIndex()==2) {
-            snmstr="East";
-        }
-        if (StrmSenrAdd.getSelectedIndex()==3) {
-            snmstr="West";
-        }*/
-        
         if (SbjSenrChus.getSelectedIndex()==1) {
             snmsbj="`Mathematics`,`English`,`Kiswahili`";
         }
@@ -853,9 +840,6 @@ public class Base extends javax.swing.JFrame {
         }
         if (SbjSenrChus.getSelectedIndex()==9) {
             snmsbj="Business";
-        }
-        if (SbjSenrChus.getSelectedIndex()==0) {
-            snmsbj="Null";
         }
     }
     
@@ -1049,29 +1033,15 @@ public class Base extends javax.swing.JFrame {
         
     }
     
-    private void Rugia(){
-        int froma=Classe.getSelectedIndex();
-        if (froma==0) {
-            fromas="Form1";
-            Summ(froma,45);
-        }
-        if (froma==1) {
-            fromas="Form2";
-        }
-        if (froma==2) {
-            fromas="Form3";
-        }
-    }
-    
     private void InsBasic(int stdreg,Double stdscor,String stdsbjs){
         Nm();
         String sqll="UPDATE `"+lst+"` SET "+stdsbjs+"="+stdscor+" WHERE Reg_No="+stdreg+"";
         try {
-            pst=(PreparedStatement) Conn.prepareStatement(sqll);
+            pst=Conn.prepareStatement(sqll);
             pst.execute();
             pst.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex+" Basic Insertion Failed");
+            System.out.println(ex+" InsBasic");
         }
     }
     
@@ -1741,7 +1711,7 @@ public class Base extends javax.swing.JFrame {
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Search By"));
 
-        StudentFindType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Class", "Reg No", "Stream" }));
+        StudentFindType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Name", "Class", "Reg No" }));
         StudentFindType.setToolTipText("");
 
         StudentFind.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -3064,7 +3034,8 @@ public class Base extends javax.swing.JFrame {
 
         jLabel81.setText("Subject");
 
-        SbjSenrChus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Null--", "Math.Eng.Kiswa", "Chemistry", "Biology", "Physics", "Geography", "CRE", "History", "Agriculture", "Business" }));
+        SbjSenrChus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Subject--", "Math.Eng.Kiswa", "Chemistry", "Biology", "Physics", "Geography", "CRE", "History", "Agriculture", "Business" }));
+        SbjSenrChus.setToolTipText("");
         SbjSenrChus.setName(""); // NOI18N
 
         SncSenr.setText("Sync");
@@ -3622,7 +3593,7 @@ public class Base extends javax.swing.JFrame {
                         .addComponent(SCls, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel36Layout.setVerticalGroup(
@@ -4380,34 +4351,25 @@ public class Base extends javax.swing.JFrame {
     private void NwStdFrmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NwStdFrmActionPerformed
         // TODO add your handling code here:
         if (NwStdFrm.getSelectedIndex()==0) {
-            ClStr="Form1";
+            ClStr="Form 1";
             NwStdFrmSrm.removeAllItems();
             Str();
         }
         if (NwStdFrm.getSelectedIndex()==1) {
-            ClStr="Form2";
+            ClStr="Form 2";
             NwStdFrmSrm.removeAllItems();
             Str();
         }
         if (NwStdFrm.getSelectedIndex()==2) {
-            ClStr="Form3";
+            ClStr="Form 3";
             NwStdFrmSrm.removeAllItems();
             Str();
         }
         if (NwStdFrm.getSelectedIndex()==3) {
-            ClStr="Form4";
+            ClStr="Form 4";
             NwStdFrmSrm.removeAllItems();
             Str();
         }
-
-//        if (NwStdFrm.getSelectedIndex()>1) {
-//            Mann.setVisible(Boolean.FALSE);
-//            Conff.setVisible(Boolean.TRUE);
-//        }
-//
-//        NWstdStNm.setText(NwFullName.getText().toString());
-//        NWstdStRg.setText(RgNo.getText().toString());
-//        NWstdStFm.setText(NwStdFrm.getSelectedItem().toString());
     }//GEN-LAST:event_NwStdFrmActionPerformed
 
     private void NwContactsKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NwContactsKeyTyped
@@ -4466,32 +4428,35 @@ public class Base extends javax.swing.JFrame {
 
     private void GraphLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraphLineActionPerformed
         // TODO add your handling code here:
+        Nm();
         DefaultTableModel tts=(DefaultTableModel) RepoTbl.getModel();
         int reg=Integer.parseInt(RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 1).toString()) ;
         String nam=RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 0).toString() ;
         try {
             String Etha="SELECT `Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Business`,`Agriculture` FROM "+lst+" WHERE `Reg_No`='"+reg+"' ";
+            String Etha1="SELECT `Name`,`Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Agriculture`,`Business` FROM "+lst+" WHERE `Class`='Form1' ";
             JDBCCategoryDataset jcd=new JDBCCategoryDataset(Recorda.InitDb(),Etha);
-            JFreeChart cht=ChartFactory.createLineChart("English Performance", "Student Name","English", jcd, PlotOrientation.VERTICAL, false, true, true);
-            //JFreeChart cht=ChartFactory.createLineChart("Performance for "+nam+" , Reg "+reg, "Subjects","Marks", jcd, PlotOrientation.VERTICAL, false, true, true);
-            BarRenderer rndr=new BarRenderer();
+            JFreeChart cht=ChartFactory.createLineChart("Performance for "+nam+" , Reg "+reg, "Subjects","Marks", jcd, PlotOrientation.VERTICAL, false, true, true);     
+            BarRenderer rndr=null;
             CategoryPlot cp=null;
-            ChartFrame cf=new ChartFrame("Testing F High School", cht);
+            rndr=new BarRenderer();
+            ChartFrame cf=new ChartFrame("High School", cht);
             cf.setVisible(true);
             cf.pack();
 
-            final CategoryPlot catplot= cht.getCategoryPlot();
+            /*final CategoryPlot catplot= cht.getCategoryPlot();
             rndr= (BarRenderer)catplot.getRenderer();
             DecimalFormat dcfm=new DecimalFormat("#.#");
             rndr.setItemLabelGenerator(new StandardCategoryItemLabelGenerator("{2}",dcfm));
             catplot.setRenderer(rndr);
             rndr.setBasePositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.HALF_ASCENT_CENTER));
             rndr.setItemLabelsVisible(Boolean.TRUE);
-            cht.getCategoryPlot().setRenderer(rndr);
+            cht.getCategoryPlot().setRenderer(rndr);*/
 
             final ChartRenderingInfo cri=new ChartRenderingInfo(new StandardEntityCollection());
             final File chtfile= new File(lst+"Line-Std Name.png");
             ChartUtilities.saveChartAsPNG(chtfile, cht, cf.getWidth(), cf.getHeight());
+            
         } catch (Exception e) {
             System.out.println(e+" GraphLineActionPerformed");
         }
@@ -4503,16 +4468,16 @@ public class Base extends javax.swing.JFrame {
         Nm();
         String csa=null,sq=null;
         if (RepoClas.getSelectedIndex()==0) {
-            csa="Form1";
+            csa="Form 1";
         }
         if (RepoClas.getSelectedIndex()==1) {
-            csa="Form2";
+            csa="Form 2";
         }
         if (RepoClas.getSelectedIndex()==02) {
-            csa="Form3";
+            csa="Form 3";
         }
         if (RepoClas.getSelectedIndex()==03) {
-            csa="Form4";
+            csa="Form 4";
         }
         try {
             String locc="/media/niccher/Bookies/Ap/Coding Theory/3/MrkFinal/src/mrkfinal/ClassAll.jrxml";
@@ -4541,20 +4506,20 @@ public class Base extends javax.swing.JFrame {
         RepoEX.addItem(lst);
 
         if (RepoClas.getSelectedIndex()==0) {
-            pc="Form1";
+            pc="Form 1";
         }
         if (RepoClas.getSelectedIndex()==1) {
-            pc="Form2";
+            pc="Form 2";
         }
         if (RepoClas.getSelectedIndex()==2) {
-            pc="Form3";
+            pc="Form 3";
         }
         if (RepoClas.getSelectedIndex()==3) {
-            pc="Form4";
+            pc="Form 4";
         }
 
 
-        if (pc=="Form3" || pc=="Form4") {
+        if (pc=="Form 3" || pc=="Form 4") {
             try {
                 Makeit();
                 String cops="SELECT Name,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,CRE,History,Business,Agriculture FROM "+Tbll+" WHERE (`Class`='"+pc+"' )";
@@ -4611,13 +4576,13 @@ public class Base extends javax.swing.JFrame {
     private void SetContActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetContActionPerformed
         // TODO add your handling code here:
         if (Cbf5.isSelected()) {
-            Mats="Form1";
+            Mats="Form 1";
         }else if (Cbf6.isSelected()) {
-            Mats="Form2";
+            Mats="Form 2";
         }else if (Cbf7.isSelected()) {
-            Mats="Form3";
+            Mats="Form 3";
         }else if (Cbf8.isSelected()) {
-            Mats="Form4";
+            Mats="Form 4";
         }
         
         if (Tr4.isSelected()) {
@@ -4667,13 +4632,13 @@ public class Base extends javax.swing.JFrame {
         // TODO add your handling code here:
         Nm();
         if (Classe.getSelectedIndex()==0) {
-            StrNx("Form1");
+            StrNx("Form 1");
         }
         if (Classe.getSelectedIndex()==1) {
-            StrNx("Form2");
+            StrNx("Form 2");
         }
         if (Classe.getSelectedIndex()==2) {
-            StrNx("Form3");
+            StrNx("Form 3");
         }
     }//GEN-LAST:event_ClasseActionPerformed
 
@@ -4687,13 +4652,13 @@ public class Base extends javax.swing.JFrame {
         int Yer=cc.get(Calendar.YEAR);
 
         if (Classe.getSelectedIndex()==0) {
-            tbl="Form1";
+            tbl="Form 1";
         }if(Classe.getSelectedIndex()==1){
-            tbl="Form2";
+            tbl="Form 2";
         }if(Classe.getSelectedIndex()==2){
-            tbl="Form3";
+            tbl="Form 3";
         }if(Classe.getSelectedIndex()==3){
-            tbl="Form4";
+            tbl="Form 4";
         }
 
         if (eXA.getText().contains("Term1")) {
@@ -4791,13 +4756,13 @@ public class Base extends javax.swing.JFrame {
         int aigana=Leva.getSelectedRowCount(),ndari=0,regpass=0;
         String newcls=null;
         if (Classe.getSelectedIndex()==0){
-            newcls="Form2";
+            newcls="Form 2";
         }
         if (Classe.getSelectedIndex()==1){
-            newcls="Form3";
+            newcls="Form 3";
         }
         if (Classe.getSelectedIndex()==2){
-            newcls="Form4";
+            newcls="Form 4";
         }
         if (Leva.getSelectedRowCount()==0) {
             JOptionPane.showMessageDialog(null, "Atleast a Single Selection"+aigana);
@@ -4932,16 +4897,16 @@ public class Base extends javax.swing.JFrame {
 
         }
         else if (SbjSenrChus.getSelectedIndex()>1) {
-            if (StrmSenrAdd.getSelectedIndex()==0) {
+            //if (StrmSenrAdd.getSelectedIndex()==0) {
                 try {
                     String sql="SELECT ("+lst+".Name),("+lst+".Class),("+lst+".Reg_No),("+lst+"."+snmsbj+") FROM "+lst+",`tbl_Placer`  WHERE ( "+lst+".Reg_No=`tbl_Placer`.Reg_No AND `tbl_Placer`."+snmsbj+"=1 AND `tbl_Placer`.`Class`='"+snmcls+"' )";
                     pst=(PreparedStatement) Conn.prepareStatement(sql);
                     rs=pst.executeQuery();
                     tblSnrAdd.setModel(DbUtils.resultSetToTableModel(rs));
                 }catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e+"\nNo Such Table");
+                    System.out.println(e+" SncSenrActionPerformed");
                 }
-            } else {
+            /*} else {
                 try {
                     String sql="SELECT ("+lst+".Name), ("+lst+".Class), ("+lst+".Reg_No), ("+lst+"."+snmsbj+") FROM "+lst+",`tbl_Placer`  WHERE ( "+lst+".Reg_No=`tbl_Placer`.Reg_No AND `tbl_Placer`."+snmsbj+"=1 AND `tbl_Placer`.`Class`= '"+snmcls+"' )";
                     pst=(PreparedStatement) Conn.prepareStatement(sql);
@@ -4950,7 +4915,7 @@ public class Base extends javax.swing.JFrame {
                 }catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e+"\nNo Such Table");
                 }
-            }
+            }*/
         }
         //JOptionPane.showMessageDialog(null, "Class ->"+snmcls+"\n"+"Stream ->"+snmstr+"\n"+"Subjech Choosen ->"+snmsbj);
     }//GEN-LAST:event_SncSenrActionPerformed
@@ -5043,22 +5008,22 @@ public class Base extends javax.swing.JFrame {
     private void CritClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CritClassActionPerformed
         // TODO add your handling code here:
         if (CritClass.getSelectedIndex()==1) {
-            crclas="Form1";
+            crclas="Form 1";
             CritStream.removeAllItems();
             PopAnaly();
         }
         if (CritClass.getSelectedIndex()==2) {
-            crclas="Form2";
+            crclas="Form 2";
             CritStream.removeAllItems();
             PopAnaly();
         }
         if (CritClass.getSelectedIndex()==3) {
-            crclas="Form3";
+            crclas="Form 3";
             CritStream.removeAllItems();
             PopAnaly();
         }
         if (CritClass.getSelectedIndex()==4) {
-            crclas="Form4";
+            crclas="Form 4";
             CritStream.removeAllItems();
             PopAnaly();
         }
@@ -5120,15 +5085,15 @@ public class Base extends javax.swing.JFrame {
         String ExamClass="nill",ExamSubject,Exam1,Exam2,nom,nom2;
         
         if (Clss.getSelectedIndex()==0) {
-            ExamClass="Form1";
+            ExamClass="Form 1";
         } else if (Clss.getSelectedIndex()==0) {
-            ExamClass="Form2";
+            ExamClass="Form 2";
         }
         else if (Clss.getSelectedIndex()==0) {
-            ExamClass="Form3";
+            ExamClass="Form 3";
         }
         else if (Clss.getSelectedIndex()==0) {
-            ExamClass="Form4";
+            ExamClass="Form 4";
         }
         
         ExamSubject=this.ExamSubject.getSelectedItem().toString();

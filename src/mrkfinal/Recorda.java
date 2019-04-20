@@ -5,6 +5,7 @@
  */
 package mrkfinal;
 
+import com.sun.javafx.tk.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -54,26 +55,9 @@ public class Recorda {
                PreparedStatement pst5 = conn.prepareStatement(Std5);
                pst5.execute();
                
-               String Std6 = "CREATE TABLE IF NOT EXISTS `tbl_Placer` ( `Count` INT AUTO_INCREMENT UNIQUE,`Reg_No` INT NOT NULL PRIMARY KEY,`Class` VARCHAR(6) NOT NULL ,`Stream` VARCHAR(6) NOT NULL ,`Chemistry` int NOT NULL DEFAULT '0',`Biology` int NOT NULL DEFAULT '0',`Physics` int NOT NULL DEFAULT '0',`Geography` int NOT NULL DEFAULT '0',`CRE` int NOT NULL DEFAULT '0',`History` int NOT NULL DEFAULT '0',`Business` int NOT NULL DEFAULT '0',`Agriculture` int NOT NULL DEFAULT '0')";
+               String Std6 = "CREATE TABLE IF NOT EXISTS `tbl_Placer` ( `Count` INT AUTO_INCREMENT UNIQUE,`Reg_No` INT NOT NULL PRIMARY KEY,`Class` VARCHAR(6) NOT NULL ,`Chemistry` int NOT NULL DEFAULT '0',`Biology` int NOT NULL DEFAULT '0',`Physics` int NOT NULL DEFAULT '0',`Geography` int NOT NULL DEFAULT '0',`CRE` int NOT NULL DEFAULT '0',`History` int NOT NULL DEFAULT '0',`Business` int NOT NULL DEFAULT '0',`Agriculture` int NOT NULL DEFAULT '0')";
                PreparedStatement pst6 = conn.prepareStatement(Std6);
                pst6.execute();
-               
-               String Std7 = "CREATE TABLE IF NOT EXISTS `tbl_Papers` ( `Count` INT NOT NULL AUTO_INCREMENT UNIQUE,`Subjects` VARCHAR(12) PRIMARY KEY NOT NULL,`Paper_One` int NOT NULL DEFAULT '0',`Paper_Two` int NOT NULL DEFAULT '0',`Paper_Three` int NOT NULL DEFAULT '0')";
-               PreparedStatement pst7 = conn.prepareStatement(Std7);
-               pst7.execute();
-               
-               String Std8="INSERT INTO `tbl_Papers` (`Count`, `Subjects`, `Paper_One`, `Paper_Two`, `Paper_Three`) VALUES (NULL, 'Mathematics', 0, 0, 0) ,"+
-                        "(NULL, 'English', 0, 0, 0)" +
-                        ",(NULL, 'Kiswahili', 0, 0, 0)" +
-                        ",(NULL, 'Chemistry', 0, 0, 0)" +
-                        ",(NULL, 'Biology', 0, 0, 0)" +
-                        ",(NULL, 'Physics', 0, 0, 0)" +
-                        ",(NULL, 'Geography', 0, 0, 0)" +
-                        ",(NULL, 'CRE', 0, 0, 0)" +
-                        ",(NULL, 'Agriculture', 0, 0, 0)" +
-                        ",(NULL, 'Business', 0, 0, 0)" ;
-                PreparedStatement pst8 = conn.prepareStatement(Std8);
-                //pst8.execute();
                 
                 String Std13="CREATE TABLE IF NOT EXISTS `tbl_ClassList` (`Count` int(2) NOT NULL AUTO_INCREMENT, `Class` varchar(10) NOT NULL, `North` int(2) NOT NULL DEFAULT '0', `East` int(2) NOT NULL DEFAULT '0', `West` int(2) NOT NULL DEFAULT '0', `South` int(2) NOT NULL DEFAULT '0' ,PRIMARY KEY (Count))";
                 PreparedStatement pst13 = conn.prepareStatement(Std13);
@@ -107,8 +91,7 @@ public class Recorda {
                 return conn;
 
             }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Database  Error 2"+ex);
-                System.out.println(""+ex);
+                System.out.println(""+ex);                
                 return  null;
             }
             //return null;
