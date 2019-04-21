@@ -3491,7 +3491,7 @@
                           <StringArray count="7">
                             <StringItem index="0" value="Kiambu"/>
                             <StringItem index="1" value="Murang&apos;a"/>
-                            <StringItem index="2" value="Nairoboi"/>
+                            <StringItem index="2" value="Nairobi"/>
                             <StringItem index="3" value="Nyeri"/>
                             <StringItem index="4" value="Nyandarua"/>
                             <StringItem index="5" value="Nakuru"/>
@@ -4421,22 +4421,30 @@
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="Cbf5">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Form 1"/>
+                            <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="Cbf6">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Form 2"/>
+                            <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="Cbf7">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Form 3"/>
+                            <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="Cbf8">
                           <Properties>
+                            <Property name="selected" type="boolean" value="true"/>
                             <Property name="text" type="java.lang.String" value="Form 4"/>
+                            <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="RstCont">
@@ -5397,15 +5405,19 @@
                         <Component class="javax.swing.JComboBox" name="FeeClass">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="5">
+                              <StringArray count="6">
                                 <StringItem index="0" value="Select"/>
                                 <StringItem index="1" value="Form 1"/>
                                 <StringItem index="2" value="Form 2"/>
                                 <StringItem index="3" value="Form 3"/>
                                 <StringItem index="4" value="Form 4"/>
+                                <StringItem index="5" value="All"/>
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FeeClassActionPerformed"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Wannabe" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="88b263a7-6d55-40b2-8b11-1b5a4e268bc0">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="250"/>
+	<property name="ireport.y" value="127"/>
 	<style name="Crosstab Data Text" hAlign="Center"/>
 	<subDataset name="Table Dataset 1" uuid="28b0966a-c058-4528-b179-b21c37b2302a"/>
 	<queryString language="SQL">
@@ -169,6 +169,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="44" width="127" height="20" uuid="96ca1f67-71d2-4ec8-a94e-c942c7c6e360"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -176,6 +183,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="64" width="127" height="20" uuid="d8e178c8-3ce2-44c8-9065-c599b2f6841f"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -183,6 +197,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="84" width="127" height="20" uuid="88d7732c-1d21-4911-90ef-735aadf11f32"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -190,6 +211,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="104" width="127" height="20" uuid="8008c61d-f9ad-4ec2-93fb-4b032e4847dc"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -197,6 +225,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="124" width="127" height="20" uuid="13cf26e2-d322-420f-835f-eaae7b0ca46b"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -204,6 +239,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="144" width="127" height="20" uuid="a9bab6a3-956b-4268-bcab-a310c2305613"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -211,6 +253,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="164" width="127" height="20" uuid="bf4770ff-6e69-4147-b5dc-8360aca03fdd"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -218,6 +267,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="184" width="127" height="20" uuid="532b43b8-2dc8-444b-aacf-c7d287435614"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -225,6 +281,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="204" width="127" height="20" uuid="8a416670-a468-4f70-a293-f4be454241b9"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -232,6 +295,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="224" width="127" height="20" uuid="9c221cdb-6e6f-40ee-b997-b8e2945a0785"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -239,6 +309,13 @@
 			</staticText>
 			<staticText>
 				<reportElement x="10" y="242" width="127" height="20" uuid="614f227b-9392-4a7b-8fd7-6c02bce2c6f1"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isItalic="true"/>
 				</textElement>
@@ -246,6 +323,13 @@
 			</staticText>
 			<textField>
 				<reportElement x="137" y="64" width="101" height="20" uuid="bfe0ec84-1b43-4cc3-8a77-2b82f3a0f0ee"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -253,6 +337,13 @@
 			</textField>
 			<textField>
 				<reportElement x="137" y="124" width="101" height="20" uuid="d3972c45-aeb7-414a-b324-a299fa1f3caa"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -260,6 +351,13 @@
 			</textField>
 			<textField>
 				<reportElement x="137" y="164" width="101" height="20" uuid="867a4a9e-cd93-43c6-93ab-9f85207c31c1"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -267,6 +365,13 @@
 			</textField>
 			<textField>
 				<reportElement x="137" y="144" width="101" height="20" uuid="f8722b10-7193-4aef-9365-7faf728593da"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -274,6 +379,13 @@
 			</textField>
 			<textField>
 				<reportElement x="137" y="204" width="101" height="20" uuid="2df4ed92-3328-49ef-83c3-c781d2a91c6a"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -281,6 +393,13 @@
 			</textField>
 			<textField>
 				<reportElement x="137" y="224" width="101" height="20" uuid="72b546c6-febf-4768-9cf8-239c1df8d0c7"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -288,6 +407,13 @@
 			</textField>
 			<textField>
 				<reportElement x="137" y="44" width="101" height="20" uuid="7527d415-bba4-46f7-8974-92ad54de0516"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -295,6 +421,13 @@
 			</textField>
 			<textField>
 				<reportElement x="137" y="184" width="101" height="20" uuid="302d202d-0056-4ab3-a8a2-9f6933c43cc7"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -302,6 +435,13 @@
 			</textField>
 			<textField>
 				<reportElement x="137" y="84" width="101" height="20" uuid="14404ddb-0501-4f5a-9265-42aa04d06eb5"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -309,6 +449,13 @@
 			</textField>
 			<textField>
 				<reportElement x="137" y="104" width="101" height="20" uuid="cf3534c8-084e-49c9-bd53-6ca92b623f96"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -316,106 +463,253 @@
 			</textField>
 			<textField>
 				<reportElement x="238" y="44" width="127" height="20" uuid="5beff213-3336-4ddf-aa04-2f06b94e0fd9"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="238" y="64" width="127" height="20" uuid="e2375a92-397d-4087-aa57-e924112e15fe"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="238" y="84" width="127" height="20" uuid="cf9f66c8-eeb0-45a6-b169-7a9bf49916c6"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="238" y="123" width="127" height="20" uuid="d2e41e6f-c135-47b5-9698-f4fea7294463"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="238" y="104" width="127" height="20" uuid="39d38bfd-1468-4141-8ed2-2c996cdb5913"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Class}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="238" y="143" width="127" height="20" uuid="38aacf96-b78b-453b-a52b-a730ed16c3e1"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="84" width="190" height="20" uuid="1e4ceb6a-4bfc-440b-8f7e-42976e5e393c"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Kiswahili}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="124" width="190" height="20" uuid="bd1d44dc-ee58-4fb3-815a-e765f2fa06b4"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Biology}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="104" width="190" height="20" uuid="4add2633-752b-4762-bf67-a2dcc5fe0fe1"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Chemistry}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="44" width="190" height="20" uuid="efc3a132-d848-4057-b7ff-ca1175442e28"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Mathematics}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="64" width="190" height="20" uuid="a669c3c2-da5b-48a8-adb6-0758d556f254"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="144" width="190" height="20" uuid="74e1ae31-7793-446b-940a-3c4feaf55211"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Physics}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="238" y="203" width="127" height="20" uuid="c098e3c1-01b5-4fe7-9ca8-e8573b176bf0"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="238" y="183" width="127" height="20" uuid="24180725-c40d-4095-aa3c-47f23b287a7a"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="238" y="163" width="127" height="20" uuid="e79d23c1-caf6-411b-aba2-24967d31b931"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="238" y="223" width="127" height="20" uuid="6d451422-1abf-4af9-9e8b-8351de7c81dc"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="164" width="190" height="20" uuid="dfb5439a-6f17-4596-bdf4-f5b7b4a57400"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Geography}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="184" width="190" height="20" uuid="afe1269b-c555-4502-81d7-9a4509f0f6bd"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{History}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="203" width="190" height="20" uuid="6c9a6869-c738-447d-9490-a401c52f5287"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{CRE}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="223" width="190" height="20" uuid="3eac2a0a-fa31-49ae-9e41-314a0beeaa0a"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Business}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="137" y="242" width="101" height="20" uuid="31be4e36-bf0c-4231-9129-ab5cf7bda310"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -423,16 +717,37 @@
 			</textField>
 			<textField>
 				<reportElement x="238" y="241" width="127" height="20" uuid="80cf4691-3fd8-43b9-a8f1-48514b0669a5"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="365" y="241" width="190" height="20" uuid="df22811d-4f28-4520-9888-9aa71dd27ca4"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Agriculture}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="272" width="127" height="20" uuid="c7e71d58-16ea-4a72-b563-fad3851a675e"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true" isItalic="true" isUnderline="true"/>
 				</textElement>
@@ -440,16 +755,37 @@
 			</staticText>
 			<textField>
 				<reportElement x="238" y="272" width="127" height="20" uuid="b7b5d327-ccb3-4bfb-bdfb-7d00df96db02"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Kiswahili}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="138" y="272" width="100" height="20" uuid="d36b7ef3-20d1-41e1-a872-ef29bee85823"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Class}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="365" y="272" width="190" height="46" uuid="d7584fe3-ac65-4c29-b1c5-02a367e497e0"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
 				<text><![CDATA[Overall Class Teacher Remarks Posted Here For Student To See]]></text>
 			</staticText>
 		</band>

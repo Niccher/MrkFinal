@@ -28,6 +28,8 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -125,7 +127,7 @@ public class Base extends javax.swing.JFrame {
         KillAll();
         Labo(1);
         
-        PanLogs.setVisible(true);       
+        PanLogs.setVisible(true);        
     }
     
     private void KillAll(){
@@ -529,9 +531,21 @@ public class Base extends javax.swing.JFrame {
         
         return va;
     }
+    
+    private void FeeObjectIns(String ha){
+        try {
+            String sql="INSERT INTO `tbl_Fees` (Count,Object_Name,Class,Amount,Comment)  VALUES(NULL,?,?,?,?)";
+            pst = Conn.prepareStatement(sql);
+            pst.setString(1, FeeObject.getText().toString());
+            pst.setString(2, ha);
+            pst.setInt(3, Integer.parseInt(FeeAmount.getText().toString()));
+            pst.setString(4, FeeComment.getText().toString());
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage()+ "\t FeeObjectAddActionPerformed 2");
+        }
+    }
      
-    
-    
      
     //*-*-*-*-*-
     private void Mk(){
@@ -552,7 +566,6 @@ public class Base extends javax.swing.JFrame {
         }
     }
 
-    
     private void Inst(){
         int tt=cc.get(Calendar.YEAR);
         
@@ -808,10 +821,10 @@ public class Base extends javax.swing.JFrame {
     
     private void SenrAd(){
         if (FrmSenrAdd.getSelectedIndex()==0) {
-            snmcls="Form3";
+            snmcls="Form 3";
         }
         if (FrmSenrAdd.getSelectedIndex()==1) {
-            snmcls="Form4";
+            snmcls="Form 4";
         }
         
         if (SbjSenrChus.getSelectedIndex()==1) {
@@ -916,10 +929,10 @@ public class Base extends javax.swing.JFrame {
     private void Makeit(){
         String fdsa=null;
         if (RepoClas.getSelectedIndex()==2) {
-            fdsa="Form3";
+            fdsa="Form 3";
         }
         if (RepoClas.getSelectedIndex()==3) {
-            fdsa="Form4";
+            fdsa="Form 4";
         }
         try {
             String cops="SELECT Chemistry,Biology,Physics,Geography,CRE,Business,Agriculture FROM `tbl_Placer` WHERE `Class`='"+fdsa+"' ";
@@ -2749,7 +2762,7 @@ public class Base extends javax.swing.JFrame {
 
         jLabel19.setText("Residence");
 
-        NwResidence.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kiambu", "Murang'a", "Nairoboi", "Nyeri", "Nyandarua", "Nakuru", "Laikipia" }));
+        NwResidence.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kiambu", "Murang'a", "Nairobi", "Nyeri", "Nyandarua", "Nakuru", "Laikipia" }));
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
@@ -3265,7 +3278,7 @@ public class Base extends javax.swing.JFrame {
             .addGroup(PanTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Marks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(Senr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Senr, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE))
             .addGroup(PanTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Sett, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -3300,13 +3313,21 @@ public class Base extends javax.swing.JFrame {
         Tr6.setText("Term 3");
         Tr6.setToolTipText("Term Of Interest");
 
+        Cbf5.setSelected(true);
         Cbf5.setText("Form 1");
+        Cbf5.setEnabled(false);
 
+        Cbf6.setSelected(true);
         Cbf6.setText("Form 2");
+        Cbf6.setEnabled(false);
 
+        Cbf7.setSelected(true);
         Cbf7.setText("Form 3");
+        Cbf7.setEnabled(false);
 
+        Cbf8.setSelected(true);
         Cbf8.setText("Form 4");
+        Cbf8.setEnabled(false);
 
         RstCont.setText("Reset");
         RstCont.addActionListener(new java.awt.event.ActionListener() {
@@ -3868,7 +3889,12 @@ public class Base extends javax.swing.JFrame {
 
         jLabel9.setText("Class");
 
-        FeeClass.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Form 1", "Form 2", "Form 3", "Form 4" }));
+        FeeClass.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Form 1", "Form 2", "Form 3", "Form 4", "All" }));
+        FeeClass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeeClassActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -4574,17 +4600,7 @@ public class Base extends javax.swing.JFrame {
     }//GEN-LAST:event_RstContActionPerformed
 
     private void SetContActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SetContActionPerformed
-        // TODO add your handling code here:
-        if (Cbf5.isSelected()) {
-            Mats="Form 1";
-        }else if (Cbf6.isSelected()) {
-            Mats="Form 2";
-        }else if (Cbf7.isSelected()) {
-            Mats="Form 3";
-        }else if (Cbf8.isSelected()) {
-            Mats="Form 4";
-        }
-        
+        // TODO add your handling code here:        
         if (Tr4.isSelected()) {
             Tem="Term1";
         }
@@ -4869,12 +4885,12 @@ public class Base extends javax.swing.JFrame {
     private void FrmSenrAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FrmSenrAddActionPerformed
         // TODO add your handling code here:
         if (FrmSenrAdd.getSelectedIndex()==0) {
-            ClStr="Form3";
+            ClStr="Form 3";
             StrmSenrAdd.removeAllItems();
             Chus();
         }
         if (FrmSenrAdd.getSelectedIndex()==1) {
-            ClStr="Form4";
+            ClStr="Form 4";
             StrmSenrAdd.removeAllItems();
             Chus();
         }
@@ -5242,16 +5258,23 @@ public class Base extends javax.swing.JFrame {
 
     private void FeeObjectAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeeObjectAddActionPerformed
         // TODO add your handling code here:
-        try {
-            String sql="INSERT INTO `tbl_Fees` (Count,Object_Name,Class,Amount,Comment)  VALUES(NULL,?,?,?,?)";
-            pst = Conn.prepareStatement(sql);
-            pst.setString(1, FeeObject.getText().toString());
-            pst.setString(2, FeeClass.getSelectedItem().toString());
-            pst.setInt(3, Integer.parseInt(FeeAmount.getText().toString()));
-            pst.setString(4, FeeComment.getText().toString());
-            pst.executeUpdate();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e+"\nObject Insertion Error");
+        if (FeeClass.getSelectedItem().toString()=="All") {
+            FeeObjectIns("Form 1");
+            FeeObjectIns("Form 2");
+            FeeObjectIns("Form 3");
+            FeeObjectIns("Form 4");
+        } else {
+            try {
+                String sql="INSERT INTO `tbl_Fees` (Count,Object_Name,Class,Amount,Comment)  VALUES(NULL,?,?,?,?)";
+                pst = Conn.prepareStatement(sql);
+                pst.setString(1, FeeObject.getText().toString());
+                pst.setString(2, FeeClass.getSelectedItem().toString());
+                pst.setInt(3, Integer.parseInt(FeeAmount.getText().toString()));
+                pst.setString(4, FeeComment.getText().toString());
+                pst.executeUpdate();
+            } catch (Exception e) {
+                System.out.println(e.getMessage()+ "\t FeeObjectAddActionPerformed");
+            }
         }
         PopFee();
     }//GEN-LAST:event_FeeObjectAddActionPerformed
@@ -5468,6 +5491,10 @@ public class Base extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_FeeDepositFindActionPerformed
+
+    private void FeeClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeeClassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FeeClassActionPerformed
 
     /**
      * @param args the command line arguments
