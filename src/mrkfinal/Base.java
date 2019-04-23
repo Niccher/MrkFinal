@@ -107,6 +107,8 @@ public class Base extends javax.swing.JFrame {
     int jmpmathc,jmpengc,jmpkiswac,jmpchemc,jmpbioc,jmpphyc,jmpgeoc,jmpcrec,jmphistc,jmpagrc,jmpbusc;
     String crclas,ctstream,ctsbj,criasc,cridesc;
     int updtstd,Stdupreg;
+    boolean st;
+    String VarUsername;
 
     /**
      * Creates new form Base
@@ -544,6 +546,46 @@ public class Base extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println(e.getMessage()+ "\t FeeObjectAddActionPerformed 2");
         }
+    }
+    
+    private boolean Logme(){
+        
+        String Usr,pwd,lvl;
+        Usr=PanLogUsername.getText().toString();
+        pwd=PanLogUsername.getText().toString();
+        lvl=PanLogLevel.getSelectedItem().toString();
+        
+        st=false;
+        
+        String sav="SELECT * FROM `tbl_Staff` WHERE `Username`= '"+Usr+"' AND `Password`= '"+pwd+"' AND `Level`= '"+lvl+"' ";
+               
+        try {
+            pst= Conn.prepareStatement(sav);
+            rs=pst.executeQuery();
+            if (rs.next()) {
+                VarUsername=Usr;
+                jLabel14.setText("Logged In As "+VarUsername);
+                if (PanLogLevel.getSelectedIndex()==0) {
+                    //Teacher
+                    HmFee.setEnabled(false);
+                    HmAdmin.setEnabled(false);
+                    HmMails.setEnabled(false);
+                }
+                if (PanLogLevel.getSelectedIndex()==1) {
+                    //Admin
+                }
+                st=true;
+            }
+            else{
+                st=false;
+            }
+        } catch (Exception e) {
+            PanLogPassword.setText(null);
+            st=false;
+            JOptionPane.showMessageDialog(null, "\nInvalid Credentials");
+        }
+        
+        return st;
     }
      
      
@@ -1112,10 +1154,10 @@ public class Base extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        PanLogUsername = new javax.swing.JTextField();
+        PanLogPassword = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        PanLogLevel = new javax.swing.JComboBox<>();
         BtnLogin = new javax.swing.JButton();
         PanHome = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -1432,14 +1474,14 @@ public class Base extends javax.swing.JFrame {
         jLabel4.setText("Password");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTextField1.setToolTipText("");
+        PanLogUsername.setToolTipText("");
 
-        jPasswordField1.setToolTipText("");
+        PanLogPassword.setToolTipText("");
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Proceed As");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teacher", "Admin" }));
+        PanLogLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teacher", "Admin" }));
 
         BtnLogin.setText("Login");
         BtnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -1455,14 +1497,14 @@ public class Base extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1)
+                    .addComponent(PanLogPassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PanLogUsername)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PanLogLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 92, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -1476,15 +1518,15 @@ public class Base extends javax.swing.JFrame {
                 .addGap(60, 60, 60)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PanLogUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PanLogPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PanLogLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(BtnLogin)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -3278,7 +3320,7 @@ public class Base extends javax.swing.JFrame {
             .addGroup(PanTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Marks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(Senr, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE))
+                .addComponent(Senr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PanTeacherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Sett, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -4204,6 +4246,8 @@ public class Base extends javax.swing.JFrame {
         KillAll();
         Labo(2);
         PanHome.setVisible(true);
+        
+        //Logme();
 
     }//GEN-LAST:event_BtnLoginActionPerformed
 
@@ -4279,6 +4323,14 @@ public class Base extends javax.swing.JFrame {
         KillAll();
         Labo(1);
         PanLogs.setVisible(true);
+        
+        st=false;
+        
+        VarUsername=null;
+        
+        PanLogUsername.setText(null);
+        PanLogPassword.setText(null);
+        
     }//GEN-LAST:event_ExittMouseClicked
 
     private void HomieMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomieMouseClicked
@@ -5632,6 +5684,9 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JPanel PanExams;
     private javax.swing.JPanel PanFinance;
     private javax.swing.JPanel PanHome;
+    private javax.swing.JComboBox<String> PanLogLevel;
+    private javax.swing.JPasswordField PanLogPassword;
+    private javax.swing.JTextField PanLogUsername;
     private javax.swing.JPanel PanLogs;
     private javax.swing.JPanel PanMisc;
     private javax.swing.JPanel PanReports;
@@ -5680,7 +5735,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTextField eXA;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
@@ -5784,7 +5838,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
@@ -5814,7 +5867,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JMenu mnHelp;
     private javax.swing.JMenu mnMisc;
