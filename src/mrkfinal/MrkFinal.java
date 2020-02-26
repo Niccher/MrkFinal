@@ -16,6 +16,9 @@ public class MrkFinal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Base bas=new Base();
+        bas.setVisible(true);
+        
     }
     
 }
