@@ -427,7 +427,7 @@ public class Base extends javax.swing.JFrame {
         }
     }
     
-    private void FinanceExpected(String form, String reg){
+    private int FinanceBalance(String form, String reg){
         String cops="SELECT * FROM `tbl_Fees` WHERE `Class`='"+form+"' ";
         int sum=0,paid=0,rem=0;
         try {
@@ -439,10 +439,10 @@ public class Base extends javax.swing.JFrame {
             
             feePayAmount.setText(String.valueOf(sum));
             
-            System.out.println(" Expected amount "+sum);
+            System.out.println("Expected amount "+sum+ " Class "+form);
         } catch (Exception e) {
             System.out.println(cops);
-            JOptionPane.showMessageDialog(null, e+"\n FinanceExpected 1");
+            JOptionPane.showMessageDialog(null, e+"\n FinanceBalance 1 error ");
         }
         
         try {
@@ -455,13 +455,17 @@ public class Base extends javax.swing.JFrame {
             }
             
             feePayPaid.setText(String.valueOf(paid));
-            System.out.println(" Expected to pay "+String.valueOf(paid));
+            System.out.println("Paid Amount "+String.valueOf(paid));
         }catch (Exception e) {
             JOptionPane.showMessageDialog(null, e+"\n FinanceExpected 2");
         }
         
         rem=sum-paid;
+        
+        System.out.println("Balance Amount "+String.valueOf(sum-paid));
         feePayBal.setText(String.valueOf(rem));
+        
+        return rem;
     }
     
     private int FeePaid(int reg){
@@ -477,32 +481,38 @@ public class Base extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e+"\nNo FeePaid");
             Toolkit.getDefaultToolkit().beep();
         }
-        
-        System.out.println("Paid Values "+piad);
         return piad;
     }
     
     private void FeePay(int reg, int Amoun){
-        int paynow= Integer.parseInt(feePayPaid.getText())+Integer.parseInt(feePayAmount.getText());
-        int bal=(Integer.parseInt(feePayAmount.getText()))-paynow;
         
-        String sql="INSERT INTO `tbl_Paid` (Name,Class,Reg_No,Total_Fee,Paid_Fee,Bal_Fee)  VALUES('"+feePayName.getText()+"','"+feePayClass.getText()+"',"+reg+","+Amoun+","+paynow+","+bal+")";
-        try {
-            pst = Conn.prepareStatement(sql);
-            pst.executeUpdate();
+        if (Amoun < 1) {
+            JOptionPane.showMessageDialog(this, "Deposits should be over 1 KShs");
+        }else{
             
-            System.out.println("True Inserted Quiz\n"+sql);
-        } catch (Exception e) {
-            System.out.println("Quize > "+sql+"\nTried");
-            lv="UPDATE `tbl_Paid` SET `Name` ='"+feePayName.getText()+"',`Class` ='"+feePayClass.getText()+"', `Total_Fee` ="+Amoun+", `Paid_Fee` ="+paynow+", `Bal_Fee` ="+bal+" WHERE `Reg_No`="+reg+" ";
+            JOptionPane.showConfirmDialog(this, "Proceed with this","Qusey", JOptionPane.YES_NO_OPTION);
+            
+            int paynow= FeePaid(reg)+Integer.parseInt(feePayNew.getText());
+            int bal=FinanceBalance(feePayClass.getText(), String.valueOf(reg));
+            
+            String sql="INSERT INTO `tbl_Paid` (Name,Class,Reg_No,Total_Fee,Paid_Fee,Bal_Fee)  VALUES('"+feePayName.getText()+"','"+feePayClass.getText()+"',"+reg+","+Integer.parseInt(feePayAmount.getText())+","+paynow+","+bal+")";
+            String sql2="UPDATE `tbl_Paid` SET `Name` ='"+feePayName.getText()+"',`Class` ='"+feePayClass.getText()+"', `Total_Fee` ="+Integer.parseInt(feePayAmount.getText())+", `Paid_Fee` ="+paynow+", `Bal_Fee` ="+bal+" WHERE `Reg_No`="+reg+" ";
+
             try {
-                pst=Conn.prepareStatement(lv);
-                pst.execute();
-                
-                System.out.println("True Updated Quiz\n"+lv);
+                pst = Conn.prepareStatement(sql);
+                pst.executeUpdate();
+                System.out.println("True Inserted Quiz\n"+sql);
                 feePayAmount.setText(null);
-            } catch (Exception ex) {
-                System.out.println(ex+"\nCaught error Quiz "+lv);
+            } catch (Exception e) {
+                try {
+                    pst=Conn.prepareStatement(sql2);
+                    pst.execute();
+
+                    System.out.println("True Updated Quiz\n"+sql2);
+                    feePayAmount.setText(null);
+                } catch (Exception ex) {
+                    System.out.println(ex+"\nCaught error Quiz "+lv);
+                }
             }
         }
         
@@ -514,14 +524,23 @@ public class Base extends javax.swing.JFrame {
         try {
             pst = (Conn.prepareStatement(cops4));
             rs = pst.executeQuery();
-            while (rs.next()) {
-                feePayName.setText(rs.getString("Name"));
-                feePayClass.setText(rs.getString("Class"));
+            
+            if (rs.first()==Boolean.FALSE) {
+                JOptionPane.showMessageDialog(this, "No Such user was found within the database");
+                feePayName.setText(null);
+                feePayClass.setText(null);
+                feePayPaid.setText(null);
+            }else{
+                while (rs.next()) {
+                    feePayName.setText(rs.getString("Name"));
+                    feePayClass.setText(rs.getString("Class"));
+                }
+                FinanceBalance(feePayClass.getText(), (feePayReg.getText().toString()));
+                
+                feePayPaid.setText(String.valueOf(FeePaid(Integer.parseInt((feePayReg.getText().toString())))));
             }
-
-            FinanceExpected(feePayClass.getText(), (feePayReg.getText().toString()));
-
-            feePayPaid.setText(String.valueOf(FeePaid(Integer.parseInt((feePayReg.getText().toString())))));
+            
+            
         } catch (Exception e) {
             System.out.println(e+"\n FeeFindUser above");
         }
@@ -1157,6 +1176,38 @@ public class Base extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e+"\nStr Error 22");
             }
     }
+    
+    private void FeeBalFindBy(String name, int reg){
+        String cops4= "SELECT * FROM `tbl_Paid` WHERE `Reg_No` = '"+reg+"' "; 
+        String cops5= "SELECT * FROM `tbl_Paid` WHERE `Name` LIKE '%"+name+"%' "; 
+        
+        if (reg<1) {
+            try {
+                pst=(PreparedStatement) Conn.prepareStatement(cops5);
+                rs=pst.executeQuery();
+                while (true) {
+                    tblFeeArrears.setModel(DbUtils.resultSetToTableModel(rs));
+                    break;
+                }
+
+            } catch (Exception ex) {
+                System.out.println("FeeBalFindByName \n"+ex+"\n***");
+            }
+            
+        }else{
+            try {
+                pst=(PreparedStatement) Conn.prepareStatement(cops4);
+                rs=pst.executeQuery();
+                while (true) {
+                    tblFeeArrears.setModel(DbUtils.resultSetToTableModel(rs));
+                    break;
+                }
+
+            } catch (Exception e) {
+                System.out.println("FeeBalFindByReg \n"+e+"\n***");
+            }
+            }        
+    }
     //*-*-*-*-*-
 
     /**
@@ -1282,10 +1333,10 @@ public class Base extends javax.swing.JFrame {
         jPanel11 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        FinanceArrearsfindbyname = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        FinanceArrearsfindbyreg = new javax.swing.JTextField();
         feePrintArrears = new javax.swing.JButton();
         jScrollPane18 = new javax.swing.JScrollPane();
         tblFeeArrears = new javax.swing.JTable();
@@ -1314,7 +1365,6 @@ public class Base extends javax.swing.JFrame {
         feePayPaid = new javax.swing.JTextField();
         jLabel64 = new javax.swing.JLabel();
         feePayNew = new javax.swing.JTextField();
-        feeFindUser = new javax.swing.JButton();
         feeDepositPay = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -2581,13 +2631,29 @@ public class Base extends javax.swing.JFrame {
 
         jLabel13.setText("Name");
 
-        jTextField1.setToolTipText("");
+        FinanceArrearsfindbyname.setToolTipText("");
+        FinanceArrearsfindbyname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                FinanceArrearsfindbynameKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                FinanceArrearsfindbynameKeyReleased(evt);
+            }
+        });
 
         jLabel18.setText("Class");
 
         jLabel54.setText("Reg No.");
 
-        jTextField2.setToolTipText("");
+        FinanceArrearsfindbyreg.setToolTipText("");
+        FinanceArrearsfindbyreg.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                FinanceArrearsfindbyregKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                FinanceArrearsfindbyregKeyReleased(evt);
+            }
+        });
 
         feePrintArrears.setText("Print Table");
 
@@ -2600,15 +2666,15 @@ public class Base extends javax.swing.JFrame {
                 .addComponent(jLabel18)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(4, 4, 4)
+                .addComponent(FinanceArrearsfindbyname, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel54)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addGap(2, 2, 2)
+                .addComponent(FinanceArrearsfindbyreg, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
                 .addComponent(feePrintArrears)
                 .addGap(27, 27, 27))
         );
@@ -2619,9 +2685,9 @@ public class Base extends javax.swing.JFrame {
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel13)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(FinanceArrearsfindbyname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel54)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(FinanceArrearsfindbyreg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(feePrintArrears))
                     .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2658,8 +2724,8 @@ public class Base extends javax.swing.JFrame {
             .addGroup(feeArrearsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -2712,6 +2778,12 @@ public class Base extends javax.swing.JFrame {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 feePayRegKeyTyped(evt);
             }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                feePayRegKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                feePayRegKeyReleased(evt);
+            }
         });
 
         jLabel60.setText("Class");
@@ -2750,13 +2822,6 @@ public class Base extends javax.swing.JFrame {
             }
         });
 
-        feeFindUser.setText("Find");
-        feeFindUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                feeFindUserActionPerformed(evt);
-            }
-        });
-
         feeDepositPay.setText("Pay");
         feeDepositPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2790,28 +2855,24 @@ public class Base extends javax.swing.JFrame {
                                     .addComponent(feePayBal)
                                     .addComponent(feePayAmount)
                                     .addComponent(feePayClass, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel25Layout.createSequentialGroup()
-                                        .addComponent(feePayReg)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(feeFindUser)))))))
+                                    .addComponent(feePayReg))))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 128, Short.MAX_VALUE)
                 .addComponent(feeDepositPay)
                 .addGap(86, 86, 86))
         );
         jPanel25Layout.setVerticalGroup(
             jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel25Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel57)
                     .addComponent(feePayName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel58)
-                    .addComponent(feePayReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(feeFindUser))
+                    .addComponent(feePayReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel60)
@@ -2888,7 +2949,7 @@ public class Base extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tblFeeSearch.setModel(new javax.swing.table.DefaultTableModel(
@@ -5820,7 +5881,7 @@ public class Base extends javax.swing.JFrame {
                 rs=pst.executeQuery();
                 tblFeeSearch.setModel(DbUtils.resultSetToTableModel(rs));
             }catch (Exception e) {
-                System.out.println(e+"\nFeeDepositFindActionPerformed 1\n Query"+sql);
+                System.out.println(e+"\nFeeDepositFindActionPerformed 1\nQuery is "+sql);
             }
         }
         } catch (Exception ex) {
@@ -5851,19 +5912,10 @@ public class Base extends javax.swing.JFrame {
         //FeeFindUser();
     }//GEN-LAST:event_feePayPaidPayPaidActionPerformed
 
-    private void feeFindUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feeFindUserActionPerformed
-        // TODO add your handling code here:
-        if (feePayReg.getText().toString().trim().equals("")) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid Registration number", "Unexpected Input",JOptionPane.ERROR_MESSAGE); 
-        } else {
-            FeeFindUser(Integer.parseInt(feePayReg.getText()));
-        }
-    }//GEN-LAST:event_feeFindUserActionPerformed
-
     private void feeDepositPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feeDepositPayActionPerformed
         // TODO add your handling code here:
         if (feePayReg.getText().toString().trim().equals("") || feePayNew.getText().toString().trim().equals("")) {
-            JOptionPane.showMessageDialog(this, "Missing a Registration number or Amount to pay", "Unexpected Input",JOptionPane.ERROR_MESSAGE); 
+            JOptionPane.showMessageDialog(this, "Missing a Registration number or an Amount to pay", "Unexpected Input",JOptionPane.ERROR_MESSAGE); 
         } else {
             FeePay(Integer.parseInt(feePayReg.getText()), Integer.parseInt(feePayNew.getText()));
             FeeFindUser(Integer.parseInt(feePayReg.getText()));
@@ -5887,6 +5939,60 @@ public class Base extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_feePayNewKeyTyped
+
+    private void feePayRegKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_feePayRegKeyPressed
+        // TODO add your handling code here
+    }//GEN-LAST:event_feePayRegKeyPressed
+
+    private void feePayRegKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_feePayRegKeyReleased
+        // TODO add your handling code here:
+        //int me=Integer.parseInt(feePayReg.getText().toString().trim());
+        if (feePayReg.getText().toString().trim().equals("")) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid Registration number", "Unexpected Input",JOptionPane.ERROR_MESSAGE); 
+        } else {
+            FeeFindUser(Integer.parseInt(feePayReg.getText()));
+        }
+    }//GEN-LAST:event_feePayRegKeyReleased
+
+    private void FinanceArrearsfindbynameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FinanceArrearsfindbynameKeyReleased
+        // TODO add your handling code here:
+        int reg;
+        if (FinanceArrearsfindbyreg.getText().toString().trim().equals("")) {
+            reg=0;
+        }else{
+            reg=Integer.parseInt(FinanceArrearsfindbyreg.getText());
+        }
+        System.out.println("Name. Reg no "+reg+""+FinanceArrearsfindbyname.getText().toString());
+        FeeBalFindBy(FinanceArrearsfindbyname.getText().toString(), reg);
+    }//GEN-LAST:event_FinanceArrearsfindbynameKeyReleased
+
+    private void FinanceArrearsfindbyregKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FinanceArrearsfindbyregKeyReleased
+        // TODO add your handling code here:
+        int reg;
+        if (FinanceArrearsfindbyreg.getText().toString().trim().equals("")) {
+            reg=0;
+        }else{
+            reg=Integer.parseInt(FinanceArrearsfindbyreg.getText());
+        }
+        System.out.println("Reg. Reg no "+reg+""+FinanceArrearsfindbyname.getText().toString());
+        FeeBalFindBy(FinanceArrearsfindbyname.getText().toString(), reg);
+    }//GEN-LAST:event_FinanceArrearsfindbyregKeyReleased
+
+    private void FinanceArrearsfindbynameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FinanceArrearsfindbynameKeyTyped
+        // TODO add your handling code here:
+        FinanceArrearsfindbyreg.setText(null);
+    }//GEN-LAST:event_FinanceArrearsfindbynameKeyTyped
+
+    private void FinanceArrearsfindbyregKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FinanceArrearsfindbyregKeyTyped
+        // TODO add your handling code here:
+        char cc=evt.getKeyChar();
+        if(!(Character.isDigit(cc) || cc==KeyEvent.VK_BACK_SPACE || cc==KeyEvent.VK_DELETE )){
+            getToolkit().beep();
+            evt.consume();
+        }
+        
+        FinanceArrearsfindbyname.setText(null);
+    }//GEN-LAST:event_FinanceArrearsfindbyregKeyTyped
 
     /**
      * @param args the command line arguments
@@ -5967,6 +6073,8 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JButton FeeObjectDelete;
     private javax.swing.JButton FeeObjectEdit;
     private javax.swing.JTextField FeePaidAbove;
+    private javax.swing.JTextField FinanceArrearsfindbyname;
+    private javax.swing.JTextField FinanceArrearsfindbyreg;
     private javax.swing.JRadioButton FinanceF1;
     private javax.swing.JRadioButton FinanceF2;
     private javax.swing.JRadioButton FinanceF3;
@@ -6066,7 +6174,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTextField eXA;
     private javax.swing.JPanel feeArrears;
     private javax.swing.JButton feeDepositPay;
-    private javax.swing.JButton feeFindUser;
     private javax.swing.JTextField feePayAmount;
     private javax.swing.JTextField feePayBal;
     private javax.swing.JTextField feePayClass;
@@ -6227,8 +6334,6 @@ public class Base extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane5;
     private javax.swing.JTabbedPane jTabbedPane6;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JMenu mnHelp;
     private javax.swing.JMenu mnMisc;
