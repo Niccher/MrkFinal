@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bce4a68a-ad14-428a-a755-61bb4789635e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     *
+FROM
+     `tbl_Students` tbl_Students INNER JOIN `2020_Mid_Term_Term1` _Mid_Term_Term1 ON tbl_Students.`Reg_No` = _Mid_Term_Term1.`Reg_No`]]>
+	</queryString>
+	<field name="Count" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Surname" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Reg_No" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="KCPE" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Birth" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Parent" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Contact" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Residence" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Class" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Avatar" class="java.io.InputStream">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Mathematics" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="English" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Kiswahili" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Chemistry" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Biology" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Physics" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Geography" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="History" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CRE" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Business" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Agriculture" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="235" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="139" y="59" width="152" height="20" backcolor="#CCCCCC" uuid="ce7da080-9c73-4bef-b809-1a1eb2d34eae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Surname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="139" y="95" width="152" height="20" backcolor="#CCCCCC" uuid="a43d7914-8d94-4241-b1a1-6282d4196c98"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Reg_No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="139" y="128" width="152" height="20" backcolor="#CCCCCC" uuid="02b5c1b7-7e8a-4252-a171-dbec5bfb265b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Mathematics}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="139" y="196" width="152" height="20" backcolor="#CCCCCC" uuid="8742366b-1c87-40bc-a816-8fb02f2a703b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Kiswahili}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="139" y="163" width="152" height="20" backcolor="#CCCCCC" uuid="c0171c2b-fa1b-43a3-984d-e0517d83bb13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="139" y="25" width="152" height="20" backcolor="#CCCCCC" uuid="b88bfc47-77de-46d1-963f-12707944ab70"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="334" y="25" width="220" height="171" uuid="9f642aa0-b137-4d9e-a114-2ec617812ea4"/>
+				<imageExpression><![CDATA[$F{Avatar}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="163" width="127" height="20" backcolor="#CCCCFF" uuid="6ee13f08-b110-457a-bb29-973352145012"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[English]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="59" width="127" height="20" backcolor="#CCCCFF" uuid="b4b1cfdf-5c21-4f47-bf37-d3083a9d79bd"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Surname]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="95" width="127" height="20" backcolor="#CCCCFF" uuid="d4c586e3-e37c-48ff-a370-119cf9566cce"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Reg No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="196" width="127" height="20" backcolor="#CCCCFF" uuid="bba27c42-27a9-484c-a157-f463a5e9fe51"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Kiswahili]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="128" width="127" height="20" backcolor="#CCCCFF" uuid="28bc5a24-8967-4efa-ad3b-f9cdf84bcd89"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Mathematics]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="25" width="127" height="20" backcolor="#CCCCFF" uuid="91b793cb-cb3f-4525-87b5-c6c6a8e54019"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<topPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<leftPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<bottomPen lineWidth="0.25" lineColor="#FFCCCC"/>
+					<rightPen lineWidth="0.25" lineColor="#FFCCCC"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -76,10 +76,10 @@ import org.jfree.ui.TextAnchor;
  */
 public class Base extends javax.swing.JFrame {
     
-    ResultSet rs=null;
-    Connection Conn=null;
-    PreparedStatement pst=null;
-    Statement smt;
+    public ResultSet rs=null;
+    public Connection Conn=null;
+    public PreparedStatement pst=null;
+    public Statement smt;
     
     String lvv,Mats,Tem,cs;
     String fn,Sn,FmrS,Hob,AsCla,AsDom,Patt,Phot,cLA,dRM,mrt;
@@ -4807,33 +4807,8 @@ public class Base extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel tts=(DefaultTableModel) RepoTbl.getModel();
         int reg=Integer.parseInt(RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 1).toString()) ;
-        String nam=RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 0).toString() ;
-        try {
-            String Etha="SELECT `Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Business`,`Agriculture` FROM "+lst+" WHERE `Reg_No`='"+reg+"' ";
-            JDBCCategoryDataset jcd=new JDBCCategoryDataset(Recorda.InitDb(),Etha);
-            JFreeChart cht=ChartFactory.createBarChart("Performance for "+nam+" , Reg "+reg, "Subjects","Marks", jcd, PlotOrientation.VERTICAL, false, true, true);
-            BarRenderer rndr=new BarRenderer();
-            CategoryPlot cp=null;
-            rndr=new BarRenderer();
-            ChartFrame cf=new ChartFrame("Testing F High School", cht);
-            cf.setVisible(true);
-            cf.pack();
-            
-            final CategoryPlot catplot= cht.getCategoryPlot();
-            rndr= (BarRenderer)catplot.getRenderer();
-            DecimalFormat dcfm=new DecimalFormat("#.#");
-            rndr.setItemLabelGenerator(new StandardCategoryItemLabelGenerator("{2}",dcfm));
-            catplot.setRenderer(rndr);
-            rndr.setBasePositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.HALF_ASCENT_CENTER));
-            rndr.setItemLabelsVisible(Boolean.TRUE);
-            cht.getCategoryPlot().setRenderer(rndr);
-
-            final ChartRenderingInfo cri=new ChartRenderingInfo(new StandardEntityCollection());
-            final File chtfile= new File(lst+"Bar-Std Name.png");
-            ChartUtilities.saveChartAsPNG(chtfile, cht, cf.getWidth(), cf.getHeight());
-        } catch (Exception e) {
-            System.out.println(e+" GraphBarActionPerformed");
-        }
+        Gen_Charts genc= new Gen_Charts();
+        genc.MakeBar(reg);
     }//GEN-LAST:event_GraphBarActionPerformed
 
     private void GraphLineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GraphLineActionPerformed
@@ -4841,35 +4816,8 @@ public class Base extends javax.swing.JFrame {
         Nm();
         DefaultTableModel tts=(DefaultTableModel) RepoTbl.getModel();
         int reg=Integer.parseInt(RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 1).toString()) ;
-        String nam=RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 0).toString() ;
-        try {
-            String Etha="SELECT `Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Business`,`Agriculture` FROM "+lst+" WHERE `Reg_No`='"+reg+"' ";
-            String Etha1="SELECT `Name`,`Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Agriculture`,`Business` FROM "+lst+" WHERE `Class`='Form1' ";
-            JDBCCategoryDataset jcd=new JDBCCategoryDataset(Recorda.InitDb(),Etha);
-            JFreeChart cht=ChartFactory.createLineChart("Performance for "+nam+" , Reg "+reg, "Subjects","Marks", jcd, PlotOrientation.VERTICAL, false, true, true);     
-            BarRenderer rndr=null;
-            CategoryPlot cp=null;
-            rndr=new BarRenderer();
-            ChartFrame cf=new ChartFrame("High School", cht);
-            cf.setVisible(true);
-            cf.pack();
-
-            /*final CategoryPlot catplot= cht.getCategoryPlot();
-            rndr= (BarRenderer)catplot.getRenderer();
-            DecimalFormat dcfm=new DecimalFormat("#.#");
-            rndr.setItemLabelGenerator(new StandardCategoryItemLabelGenerator("{2}",dcfm));
-            catplot.setRenderer(rndr);
-            rndr.setBasePositiveItemLabelPosition(new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.HALF_ASCENT_CENTER));
-            rndr.setItemLabelsVisible(Boolean.TRUE);
-            cht.getCategoryPlot().setRenderer(rndr);*/
-
-            final ChartRenderingInfo cri=new ChartRenderingInfo(new StandardEntityCollection());
-            final File chtfile= new File(lst+"Line-Std Name.png");
-            ChartUtilities.saveChartAsPNG(chtfile, cht, cf.getWidth(), cf.getHeight());
-            
-        } catch (Exception e) {
-            System.out.println(e+" GraphLineActionPerformed");
-        }
+        Gen_Charts genc= new Gen_Charts();
+        genc.MakeLine(reg);
     }//GEN-LAST:event_GraphLineActionPerformed
 
     private void VwCredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VwCredActionPerformed
@@ -4958,10 +4906,11 @@ public class Base extends javax.swing.JFrame {
         int reg=Integer.parseInt(RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 1).toString()) ;
         String stfnam=(RepoTbl.getValueAt(RepoTbl.getSelectedRow(), 0).toString()) ;
         try {
-            String locc="/media/niccher/Bookies/Ap/Coding Theory/3/MrkFinal/src/mrkfinal/Wannabe.jrxml";
+            String locc="/media/niccher/Bookies/Ap/Coding Theory/3/MrkFinal/src/mrkfinal/StudentSlip.jrxml";
             JasperDesign jd=JRXmlLoader.load(locc);
             //lst="Name,Class,Reg_No,Mathematics,English,Kiswahili,Chemistry,Biology,Physics,Geography,History,CRE,Business,Agriculture";
-            String sq="SELECT * FROM "+lst+" WHERE `Reg_No`="+reg+" ";
+            String sq="SELECT * FROM "+lst+", tbl_Students, tbl_Tests WHERE "+lst+".`Reg_No`="+reg+" AND tbl_Students.`Reg_No`="+reg+" AND tbl_Tests.`Count` = ( SELECT MAX(`Count`) FROM `tbl_Tests`) ";
+            //System.out.println(" Query "+ sq);
             JRDesignQuery nq=new JRDesignQuery();
             nq.setText(sq);
             jd.setQuery(nq);//

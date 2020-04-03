@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab4dd385-adbc-4d74-b858-b77105fc464a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     tbl_Students.`Reg_No` AS tbl_Students_Reg_No,
+     tbl_Students.`Avatar` AS tbl_Students_Avatar,
+     _Mid_Term_Term1.`Count` AS Counts,
+     _Mid_Term_Term1.`Name` AS Name,
+     _Mid_Term_Term1.`Class` AS Class,
+     _Mid_Term_Term1.`Reg_No` AS Reg_No,
+     _Mid_Term_Term1.`Mathematics` AS Mathematics,
+     _Mid_Term_Term1.`English` AS English,
+     _Mid_Term_Term1.`Kiswahili` AS Kiswahili,
+     _Mid_Term_Term1.`Chemistry` AS Chemistry,
+     _Mid_Term_Term1.`Biology` AS Biology,
+     _Mid_Term_Term1.`Geography` AS Geography,
+     _Mid_Term_Term1.`History` AS History,
+     _Mid_Term_Term1.`CRE` AS CRE,
+     _Mid_Term_Term1.`Agriculture` AS Agriculture,
+     _Mid_Term_Term1.`Business` AS Business,
+     _Mid_Term_Term1.`Physics` AS Physics
+FROM
+     `tbl_Students` tbl_Students,
+     `2020_Mid_Term_Term1` _Mid_Term_Term1
+
+WHERE
+    Class= 'Form 1' ]]>
+	</queryString>
+	<field name="tbl_Students_Reg_No" class="java.lang.Integer"/>
+	<field name="tbl_Students_Avatar" class="java.lang.Object"/>
+	<field name="Counts" class="java.lang.Integer"/>
+	<field name="Name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Class" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Reg_No" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Mathematics" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="English" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Kiswahili" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Chemistry" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Biology" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Geography" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="History" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CRE" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Agriculture" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Business" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Physics" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="tbl_Students_Reg_No">
+		<groupExpression><![CDATA[$F{tbl_Students_Reg_No}]]></groupExpression>
+	</group>
+	<group name="Counts">
+		<groupExpression><![CDATA[$F{Counts}]]></groupExpression>
+	</group>
+	<group name="Class">
+		<groupExpression><![CDATA[$F{Class}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="236" splitType="Stretch">
+			<image>
+				<reportElement x="308" y="12" width="235" height="209" uuid="6116c79c-0249-4b9d-97f3-93878cadb673"/>
+				<imageExpression><![CDATA[$F{tbl_Students_Avatar}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="45" y="12" width="152" height="20" uuid="e0ed5768-e307-495e-9b51-5bb8f4c06ddd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="42" width="152" height="20" uuid="4cd0547c-e01c-4685-9fbe-62dd408e0d7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Class}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="74" width="152" height="20" uuid="ddcd7fb3-600c-4ca2-b397-f3eedb6fa47e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Reg_No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="104" width="152" height="20" uuid="7d6fe4cf-ca05-4efb-8888-6d4fc9f59239"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Mathematics}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="167" width="152" height="20" uuid="e10c3b6f-e2b3-43c2-b885-2b67baaeda65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Kiswahili}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="135" width="152" height="20" uuid="923310db-2dbe-4353-ba94-0ad950b28fc9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{English}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="201" width="152" height="20" uuid="3583bdd5-a804-4911-b3c4-5d0b30d2765c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isStrikeThrough="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Chemistry}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
