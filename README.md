@@ -1,6 +1,18 @@
+[TOC]
+
 ## **Work Description**
 
 This is a simple project formerly designed for my secondary school.
+
+```
+This work is incomplete and much work is yet to be done. I'm not the best programmer and your ideas are highly appreciated.
+
+The system auto makes the database and all the required table.
+
+Default credentials are not applicable for now
+```
+
+
 
 ## Aims
 
@@ -24,7 +36,7 @@ To set up this program you'll need to have the following requirements ready in y
 To execute this first clone this repository
 
 ```
-git clone 
+git clone https://github.com/Niccher/MrkFinal.git
 ```
 
 then run 
