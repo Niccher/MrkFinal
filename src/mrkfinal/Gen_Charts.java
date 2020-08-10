@@ -74,8 +74,7 @@ public class Gen_Charts {
         }
         
         try {
-            //String Etha="SELECT `Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Business`,`Agriculture` FROM "+table_name+" WHERE `Reg_No`='"+std_reg+"' ";
-            String Etha="SELECT `Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Business`,`Agriculture` FROM "+table_name+" WHERE `Reg_No`='"+std_reg+"' ";
+            String Etha="SELECT `Mathematics`,`English`,`Kiswahili`,`Chemistry`,`Biology`,`Physics`,`Geography`,`CRE`,`History`,`Business`,`Agriculture` FROM "+table_name+" WHERE `Reg_No`='"+std_reg+"' ";
             JDBCCategoryDataset jcd=new JDBCCategoryDataset(Recorda.InitDb(),Etha);
             JFreeChart cht=ChartFactory.createBarChart("Performance for "+std_name+" , Reg "+String.valueOf(std_reg), "Subjects","Marks", jcd, PlotOrientation.VERTICAL, true, true, true);
             
@@ -134,18 +133,18 @@ public class Gen_Charts {
             cf.setSize(800, 500);
             
 
-//            final ChartRenderingInfo cri=new ChartRenderingInfo(new StandardEntityCollection());
-//            final File chtfile= new File(table_name+"Line-Std Name.png");
-//            ChartUtilities.saveChartAsPNG(chtfile, cht, cf.getWidth(), cf.getHeight());
+            final ChartRenderingInfo cri=new ChartRenderingInfo(new StandardEntityCollection());
+            final File chtfile= new File(table_name+"Line-Std Name.png");
+            ChartUtilities.saveChartAsPNG(chtfile, cht, cf.getWidth(), cf.getHeight());
             
         } catch (Exception e) {
             System.out.println(e+" GraphLineActionPerformed");
         }
     }
     
-    public static void main(String[] args) {
-        Gen_Charts genc = new Gen_Charts();
-        //genc.MakeLine(2);
-        genc.MakeBar(2);
-    }
+//    public static void main(String[] args) {
+//        Gen_Charts genc = new Gen_Charts();
+//        genc.MakeLine(2);
+//        genc.MakeBar(2);
+//    }
 }
